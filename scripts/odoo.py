@@ -4,13 +4,22 @@ import os, sys, xmlrpc.client
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def load_env(path=os.path.join(REPO, ".env")):
+    """Creds from repo .env, falling back to environment variables (CI secrets)."""
     env = {}
-    for line in open(path):
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        k, v = line.split("=", 1)
-        env[k.strip()] = v.strip().strip('"').strip("'")
+    if os.path.exists(path):
+        for line in open(path):
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            env[k.strip()] = v.strip().strip('"').strip("'")
+    for k in ("ODOO_URL", "ODOO_DB", "ODOO_USER", "ODOO_KEY"):
+        if not env.get(k) and os.environ.get(k):
+            env[k] = os.environ[k]
+    missing = [k for k in ("ODOO_URL", "ODOO_DB", "ODOO_USER", "ODOO_KEY") if not env.get(k)]
+    if missing:
+        print("missing credentials: %s (need .env or env vars)" % ", ".join(missing), file=sys.stderr)
+        sys.exit(1)
     return env
 
 def connect():

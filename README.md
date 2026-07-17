@@ -23,6 +23,15 @@ All scripts load creds from `.env` and talk to Odoo over XML-RPC (`/xmlrpc/2/com
 - `wire_fonts.py` — theme fonts (Anton / Source Serif 4) + `google-fonts` → att 1087
 - `apply_nav_styles.py` — menu-driven header (view 2035) + brand CSS cascade in `custom_code_head`
 
+## Deploying (GitOps)
+
+`snapshot/` is the **source of truth**. To change the live site: edit the files in `snapshot/`, commit, push to `main`. The [Deploy to Odoo](.github/workflows/deploy.yml) action pushes only the files changed in that push, via `scripts/deploy.py`:
+
+- **Drift guard** — before writing, live state must match the previous commit's snapshot. If someone edited in the Odoo builder since the last deploy, the action fails with `DRIFT` instead of clobbering: run `snapshot.py`, commit the drift, push again.
+- Dry-run locally first: `python3 scripts/deploy.py --base HEAD snapshot/<file>` (writes need `--apply`).
+- Guards: site-2 ownership assert, XML validation, readback verify. `records.json` / `_index.json` are informational and never deployed.
+- Needs repo secrets `ODOO_URL`, `ODOO_DB`, `ODOO_USER`, `ODOO_KEY` (Actions → secrets).
+
 ## Rules for writing to Odoo
 
 1. Scope every write to `website_id=2`. Site 1 has its own COW views/attachments — never touch.

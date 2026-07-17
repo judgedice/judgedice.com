@@ -1,0 +1,44 @@
+name: Deploy to Odoo
+
+on:
+  push:
+    branches: [main]
+    paths: ['snapshot/**']
+
+# never run two deploys at once; a queued deploy supersedes an unstarted one
+concurrency:
+  group: odoo-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # deploy.py needs the base commit for the drift guard
+
+      - name: Compute changed snapshot files
+        id: diff
+        run: |
+          BASE="${{ github.event.before }}"
+          # first push / force push: event.before is unusable — fall back to parent
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "$BASE" 2>/dev/null; then
+            BASE=$(git rev-parse HEAD^ 2>/dev/null || git rev-parse HEAD)
+          fi
+          FILES=$(git diff --name-only "$BASE" "${{ github.sha }}" -- snapshot/ | tr '\n' ' ')
+          echo "base=$BASE" >> "$GITHUB_OUTPUT"
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "base=$BASE files=$FILES"
+
+      - name: Deploy changed files
+        if: steps.diff.outputs.files != ''
+        env:
+          ODOO_URL: ${{ secrets.ODOO_URL }}
+          ODOO_DB: ${{ secrets.ODOO_DB }}
+          ODOO_USER: ${{ secrets.ODOO_USER }}
+          ODOO_KEY: ${{ secrets.ODOO_KEY }}
+        run: |
+          python3 scripts/deploy.py --base "${{ steps.diff.outputs.base }}" --apply \
+            ${{ steps.diff.outputs.files }}
