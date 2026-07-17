@@ -1,0 +1,23 @@
+<!-- @dsCard group="Brand" viewport="700x150" name="Nav Labels — Oblique on Purpose" subtitle="Oblique enough that you want to know what's inside. Don't normalize them." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 0; height: 150px; display: flex; align-items: center; }
+  nav { display: flex; gap: 40px; padding: 0 32px; }
+  .item { font-family: var(--font-sans); font-size: 14px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink); display: flex; flex-direction: column; gap: 6px; }
+  .item .idx { font-size: 10px; color: var(--vermilion); letter-spacing: .1em; }
+  .item.active { color: var(--vermilion); }
+</style>
+</head>
+<body>
+  <nav>
+    <span class="item active"><span class="idx">01</span>Work Life</span>
+    <span class="item"><span class="idx">02</span>Home Life</span>
+    <span class="item"><span class="idx">03</span>The Exciting Stuff</span>
+    <span class="item"><span class="idx">04</span>Connect</span>
+  </nav>
+</body>
+</html>

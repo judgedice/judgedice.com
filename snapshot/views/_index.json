@@ -1,0 +1,64 @@
+[
+  {
+    "id": 2034,
+    "name": "Home",
+    "key": "website.homepage",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2035,
+    "name": "Template Header Default",
+    "key": "website.template_header_default",
+    "inherit_id": [
+      1260,
+      "Main layout"
+    ],
+    "mode": "extension",
+    "active": true
+  },
+  {
+    "id": 2038,
+    "name": "Default",
+    "key": "website.footer_custom",
+    "inherit_id": [
+      1260,
+      "Main layout"
+    ],
+    "mode": "extension",
+    "active": true
+  },
+  {
+    "id": 2039,
+    "name": "Work Life",
+    "key": "website.judge_work",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2040,
+    "name": "Home Life",
+    "key": "website.judge_home",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2041,
+    "name": "The Exciting Stuff",
+    "key": "website.judge_exciting",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2042,
+    "name": "Connect",
+    "key": "website.judge_connect",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  }
+]

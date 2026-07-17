@@ -1,0 +1,32 @@
+<!-- @dsCard group="Spacing" viewport="700x210" name="Rules & Radius" subtitle="Hairline rules instead of shadows; near-sharp corners" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 22px 28px; display: flex; gap: 28px; align-items: center; }
+  .stack { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+  .hair { border-top: 1px solid var(--line); }
+  .rule { border-top: 1px solid var(--ink); }
+  .strong { border-top: 1.5px solid var(--line-strong); }
+  .lab { font-family: var(--font-sans); font-size: 11px; color: var(--ink-faint); margin-bottom: 4px; display: block; }
+  .boxes { display: flex; gap: 12px; }
+  .box { width: 64px; height: 64px; background: var(--paper-raised); border: 1px solid var(--line); display: flex; align-items: flex-end; padding: 6px; }
+  .box span { font-family: var(--font-sans); font-size: 10px; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+  <div class="stack">
+    <div><span class="lab">hairline · --line</span><div class="hair"></div></div>
+    <div><span class="lab">editorial rule · --ink</span><div class="rule"></div></div>
+    <div><span class="lab">strong · --line-strong</span><div class="strong"></div></div>
+  </div>
+  <div class="boxes">
+    <div class="box" style="border-radius:0"><span>0</span></div>
+    <div class="box" style="border-radius:2px"><span>2</span></div>
+    <div class="box" style="border-radius:3px"><span>3</span></div>
+    <div class="box" style="border-radius:4px"><span>4</span></div>
+  </div>
+</body>
+</html>

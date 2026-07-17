@@ -1,0 +1,13 @@
+
+$o-user-theme-color-palette: map-merge($o-user-theme-color-palette, o-map-omit((
+    'success': null,
+    'info': null,
+    'warning': null,
+    'danger': null,
+    'o-color-1': #CB4127,
+    'o-color-2': #274654,
+    'o-color-3': #F2ECDF,
+    'o-color-4': #F8F3E8,
+    'o-color-5': #1C1712,
+    // -- hook --
+)));

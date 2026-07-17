@@ -1,0 +1,123 @@
+{
+  "website": {
+    "name": "judgedice.com",
+    "domain": "https://www.judgedice.com",
+    "homepage_url": false
+  },
+  "pages": [
+    {
+      "id": 5,
+      "name": "Home",
+      "url": "/",
+      "view_id": [
+        2034,
+        "Home"
+      ],
+      "is_published": true,
+      "website_indexed": true
+    },
+    {
+      "id": 6,
+      "name": "Work Life",
+      "url": "/work",
+      "view_id": [
+        2039,
+        "Work Life"
+      ],
+      "is_published": true,
+      "website_indexed": true
+    },
+    {
+      "id": 7,
+      "name": "Home Life",
+      "url": "/home",
+      "view_id": [
+        2040,
+        "Home Life"
+      ],
+      "is_published": true,
+      "website_indexed": true
+    },
+    {
+      "id": 8,
+      "name": "The Exciting Stuff",
+      "url": "/offerings",
+      "view_id": [
+        2041,
+        "The Exciting Stuff"
+      ],
+      "is_published": true,
+      "website_indexed": true
+    },
+    {
+      "id": 9,
+      "name": "Connect",
+      "url": "/connect",
+      "view_id": [
+        2042,
+        "Connect"
+      ],
+      "is_published": true,
+      "website_indexed": true
+    }
+  ],
+  "menus": [
+    {
+      "id": 7,
+      "name": "Top Menu for Website 2",
+      "url": "#",
+      "parent_id": false,
+      "sequence": 0
+    },
+    {
+      "id": 8,
+      "name": "Work",
+      "url": "/work",
+      "parent_id": [
+        7,
+        "Top Menu for Website 2 [judgedice.com]"
+      ],
+      "sequence": 0
+    },
+    {
+      "id": 9,
+      "name": "It's on Random",
+      "url": "/home",
+      "parent_id": [
+        7,
+        "Top Menu for Website 2 [judgedice.com]"
+      ],
+      "sequence": 1
+    },
+    {
+      "id": 10,
+      "name": "Offerings",
+      "url": "/offerings",
+      "parent_id": [
+        7,
+        "Top Menu for Website 2 [judgedice.com]"
+      ],
+      "sequence": 2
+    },
+    {
+      "id": 16,
+      "name": "Entries",
+      "url": "/blog",
+      "parent_id": [
+        7,
+        "Top Menu for Website 2 [judgedice.com]"
+      ],
+      "sequence": 3
+    },
+    {
+      "id": 13,
+      "name": "Let's Talk",
+      "url": "/appointment",
+      "parent_id": [
+        7,
+        "Top Menu for Website 2 [judgedice.com]"
+      ],
+      "sequence": 4
+    }
+  ]
+}

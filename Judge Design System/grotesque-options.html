@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAV / Judge — Grotesque display + serif body</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Anton&family=Archivo:wdth,wght@100..125,400;100..125,700;100..125,900&family=Syne:wght@400;700;800&family=Schibsted+Grotesk:wght@400;700;900&family=Newsreader:ital,opsz,wght@0,18..72,400;0,18..72,500;1,18..72,400&family=Spectral:ital,wght@0,400;0,500;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { margin: 0; background: var(--paper); color: var(--ink); padding: clamp(2rem,5vw,4rem) clamp(1.5rem,6vw,6rem) 6rem; }
+  a { color: var(--link); }
+  a:hover { color: var(--link-hover); }
+  .wrap { max-width: 64rem; margin: 0 auto; }
+  .head { margin: 0 0 2.5rem; }
+  .k { font-family: 'Space Grotesk', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: .16em; color: var(--vermilion); font-weight: 500; margin: 0; }
+  .head h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(2rem,5vw,3rem); letter-spacing: -0.03em; margin: 14px 0 12px; }
+  .head p { font-family: 'Newsreader', serif; font-size: 18px; line-height: 1.55; color: var(--ink-soft); max-width: 42rem; margin: 0; }
+
+  .section-label { font-family: 'Space Grotesk', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: .18em; color: var(--ink-faint); font-weight: 500; margin: 3.5rem 0 0; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+
+  .opt { padding: clamp(1.75rem,4vw,2.75rem) 0; border-top: 1px solid var(--line); }
+  .opt:first-of-type { border-top: none; }
+  .meta { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+  .badge { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px; color: var(--paper); background: var(--ink); width: 30px; height: 30px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .01em; color: var(--ink); }
+  .vibe { font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--ink-faint); }
+
+  .tag { font-size: clamp(2.4rem, 7.5vw, 5.4rem); line-height: 1.0; letter-spacing: -0.03em; margin: 0; font-weight: 700; }
+  .sub { margin: 14px 0 0; font-size: clamp(1.15rem,2.6vw,1.7rem); line-height: 1.15; color: var(--ink-soft); font-weight: 400; }
+
+  /* grotesque display faces */
+  .f-space   .tag, .f-space   .sub { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+  .f-bricolage .tag, .f-bricolage .sub { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.035em; }
+  .f-anton   .tag { font-family: 'Anton', sans-serif; font-weight: 400; letter-spacing: -0.01em; text-transform: uppercase; line-height: .95; }
+  .f-anton   .sub { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: .01em; }
+  .f-archivo .tag, .f-archivo .sub { font-family: 'Archivo', sans-serif; font-weight: 900; font-stretch: 125%; letter-spacing: -0.04em; }
+  .f-syne    .tag, .f-syne    .sub { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+  .f-schibsted .tag, .f-schibsted .sub { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 900; letter-spacing: -0.03em; }
+
+  /* body copy specimens */
+  .body-opt { padding: clamp(1.5rem,3.5vw,2.25rem) 0; border-top: 1px solid var(--line); }
+  .body-opt .bmeta { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .body-opt .bname { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); }
+  .body-opt .bvibe { font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--ink-faint); }
+  .body-copy { font-size: 18px; line-height: 1.62; color: var(--ink); max-width: 40rem; margin: 0; }
+  .body-copy + .body-copy { margin-top: 14px; }
+  .body-copy em { font-style: italic; }
+  .body-copy .lead { color: var(--vermilion); font-weight: 600; }
+
+  .b-newsreader .body-copy { font-family: 'Newsreader', serif; }
+  .b-spectral   .body-copy { font-family: 'Spectral', serif; }
+  .b-source     .body-copy { font-family: 'Source Serif 4', serif; }
+  .b-lora       .body-copy { font-family: 'Lora', serif; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <p class="k">NAV / Judge — Type exploration</p>
+    <h1>Grotesque display, serif body.</h1>
+    <p>You picked <strong>F</strong> — the all-sans direction. Here it is pushed further: six modern grotesques for the headline, ranging from clean-Swiss to poster-loud. Below, four serif faces shown as real body copy, since the sans display wants a warm serif underneath it. Tell me one display letter and one body letter and I'll wire the pair through the system.</p>
+  </div>
+
+  <p class="section-label">Display faces — the headline</p>
+
+  <div class="opt f-space">
+    <div class="meta"><span class="badge">A</span><span class="name">Space Grotesk</span><span class="vibe">modern grotesque · techy-editorial, even, level-headed</span></div>
+    <p class="tag">Delivering Joy since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-bricolage">
+    <div class="meta"><span class="badge">B</span><span class="name">Bricolage Grotesque</span><span class="vibe">contemporary, characterful · the of-the-moment pick</span></div>
+    <p class="tag">Delivering Joy since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-anton">
+    <div class="meta"><span class="badge">C</span><span class="name">Anton</span><span class="vibe">poster-weight condensed · loudest, headline-only, all caps</span></div>
+    <p class="tag">Delivering Joy since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-archivo">
+    <div class="meta"><span class="badge">D</span><span class="name">Archivo Expanded Black</span><span class="vibe">wide industrial grotesque · your F, pushed to max width</span></div>
+    <p class="tag">Delivering Joy since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-syne">
+    <div class="meta"><span class="badge">E</span><span class="name">Syne</span><span class="vibe">arty display grotesque · gallery / culture, slightly odd</span></div>
+    <p class="tag">Delivering Joy since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-schibsted">
+    <div class="meta"><span class="badge">F</span><span class="name">Schibsted Grotesk</span><span class="vibe">clean Swiss neo-grotesque · confident, no-nonsense</span></div>
+    <p class="tag">Delivering Joy since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <p class="section-label">Serif body copy — the paragraphs</p>
+
+  <div class="body-opt b-newsreader">
+    <div class="bmeta"><span class="bname">1 · Newsreader</span><span class="bvibe">warm literary serif · current, understated, editorial</span></div>
+    <p class="body-copy"><span class="lead">We started NAV / Judge</span> because the tools we relied on treated evaluation as an afterthought — a checkbox at the end of a build, never the thing that shaped it. So we built the opposite: a place where judgment is <em>first-class</em>, legible, and fast enough to run on every change.</p>
+    <p class="body-copy">The result is a system that reads like a page and moves like software. Nothing hidden, nothing decorative — just the exciting stuff, delivered since the turn of the century.</p>
+  </div>
+
+  <div class="body-opt b-spectral">
+    <div class="bmeta"><span class="bname">2 · Spectral</span><span class="bvibe">screen-native serif · crisp, a touch cooler and tighter</span></div>
+    <p class="body-copy"><span class="lead">We started NAV / Judge</span> because the tools we relied on treated evaluation as an afterthought — a checkbox at the end of a build, never the thing that shaped it. So we built the opposite: a place where judgment is <em>first-class</em>, legible, and fast enough to run on every change.</p>
+    <p class="body-copy">The result is a system that reads like a page and moves like software. Nothing hidden, nothing decorative — just the exciting stuff, delivered since the turn of the century.</p>
+  </div>
+
+  <div class="body-opt b-source">
+    <div class="bmeta"><span class="bname">3 · Source Serif 4</span><span class="bvibe">neutral workhorse serif · sturdy, tech-documentation clean</span></div>
+    <p class="body-copy"><span class="lead">We started NAV / Judge</span> because the tools we relied on treated evaluation as an afterthought — a checkbox at the end of a build, never the thing that shaped it. So we built the opposite: a place where judgment is <em>first-class</em>, legible, and fast enough to run on every change.</p>
+    <p class="body-copy">The result is a system that reads like a page and moves like software. Nothing hidden, nothing decorative — just the exciting stuff, delivered since the turn of the century.</p>
+  </div>
+
+  <div class="body-opt b-lora">
+    <div class="bmeta"><span class="bname">4 · Lora</span><span class="bvibe">rounded contemporary serif · friendly, calm, humanist</span></div>
+    <p class="body-copy"><span class="lead">We started NAV / Judge</span> because the tools we relied on treated evaluation as an afterthought — a checkbox at the end of a build, never the thing that shaped it. So we built the opposite: a place where judgment is <em>first-class</em>, legible, and fast enough to run on every change.</p>
+    <p class="body-copy">The result is a system that reads like a page and moves like software. Nothing hidden, nothing decorative — just the exciting stuff, delivered since the turn of the century.</p>
+  </div>
+</div>
+</body>
+</html>

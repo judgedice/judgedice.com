@@ -1,0 +1,16 @@
+<data inherit_id="website.layout" name="Template Header Default" active="True">
+    <xpath expr="//header//nav" position="replace">
+        <nav class="jd-nav d-none d-lg-flex">
+            <a href="/" class="jd-brand">Judge<span class="jd-dot">.</span></a>
+            <span class="jd-links">
+                <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                    <a t-att-href="submenu.url" class="jd-link">
+                        <span class="jd-row"><span class="jd-num"/><span class="jd-label" t-esc="submenu.name"/></span>
+                        <span class="jd-underline"/>
+                    </a>
+                </t>
+            </span>
+        </nav>
+        <t t-call="website.template_header_mobile"/>
+    </xpath>
+</data>

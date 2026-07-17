@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAV / Judge — Article layout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  :root { --body-serif: 'Source Serif 4', serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--link-hover); }
+
+  /* --- font toggle --- */
+  .fontbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 12px; padding: 12px clamp(1.25rem,5vw,3rem); background: color-mix(in srgb, var(--paper) 86%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .fontbar .fb-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: var(--ink-faint); font-weight: 500; }
+  .fontbar .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; }
+  .fontbar button { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 16px; border: none; background: transparent; color: var(--ink-soft); cursor: pointer; white-space: nowrap; }
+  .fontbar button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+  /* --- masthead --- */
+  .masthead { max-width: 46rem; margin: 0 auto; padding: clamp(2rem,5vw,3.5rem) clamp(1.25rem,5vw,3rem) 0; }
+  .kicker { font-family: 'Source Serif 4', serif; font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--vermilion); font-weight: 300; margin: 0 0 16px; display: flex; align-items: center; gap: 10px; }
+  .kicker::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  h1.headline { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(2.6rem, 8vw, 5.25rem); line-height: 1.02; letter-spacing: -0.005em; margin: 0; }
+  .subhead { font-family: var(--body-serif); font-style: italic; font-weight: 400; font-size: clamp(1.05rem, 2.1vw, 1.32rem); line-height: 1.35; color: var(--ink-soft); margin: 20px 0 0; max-width: 38rem; }
+
+  .byline { display: flex; align-items: center; gap: 12px; margin: 22px 0 0; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .avatar { width: 34px; height: 34px; border-radius: 999px; background: var(--vermilion-tint); flex: none; display: flex; align-items: center; justify-content: center; font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 13px; color: var(--vermilion-deep); }
+  .byline .who { font-family: 'Source Serif 4', serif; font-size: 15px; font-weight: 600; letter-spacing: 0; color: var(--ink); }
+  .byline .meta { font-family: 'Source Serif 4', serif; font-size: 13px; letter-spacing: 0; color: var(--ink-faint); margin-top: 1px; }
+  .byline .spacer { flex: 1; }
+  .byline .read { font-family: 'Source Serif 4', serif; font-size: 13px; letter-spacing: 0; color: var(--ink-faint); }
+
+  /* --- hero --- */
+  .hero { max-width: 68rem; margin: clamp(1.75rem,4vw,2.75rem) auto 0; padding: 0 clamp(1.25rem,5vw,3rem); }
+  .hero-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background:
+      repeating-linear-gradient(135deg, var(--paper-sunk) 0 14px, var(--paper-raised) 14px 28px);
+      border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; }
+  .hero-frame .plabel { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper); padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line-strong); }
+  .caption { font-family: 'Space Grotesk', sans-serif; font-size: 12.5px; color: var(--ink-faint); margin: 10px 2px 0; display: flex; gap: 8px; }
+  .caption .credit { color: var(--ink-soft); font-weight: 500; }
+
+  /* --- body --- */
+  article { max-width: 40rem; margin: clamp(2rem,5vw,3.25rem) auto 0; padding: 0 clamp(1.25rem,5vw,3rem) 6rem; }
+  article p { font-family: var(--body-serif); font-size: 19px; line-height: 1.66; color: var(--ink); margin: 0 0 1.35em; }
+  article p em { font-style: italic; }
+  article p strong { font-weight: 600; }
+  article .dropcap { line-height: 26.84px; letter-spacing: -0.8px; }
+  article .dropcap::first-letter { font-family: 'Anton', sans-serif; text-transform: uppercase; float: left; font-size: 4.6em; line-height: .78; padding: 6px 12px 0 0; color: var(--vermilion); }
+  article h2 { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(1.5rem,4vw,2.1rem); line-height: 1.0; letter-spacing: 0; margin: 2.2em 0 .55em; }
+  article blockquote { margin: 1.8em 0; padding: 0 0 0 22px; border-left: 3px solid var(--vermilion); }
+  article blockquote p { font-family: var(--body-serif); font-style: italic; font-size: clamp(1.3rem,3vw,1.6rem); line-height: 1.35; color: var(--ink); margin: 0; }
+  article blockquote cite { display: block; font-family: 'Space Grotesk', sans-serif; font-style: normal; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint); margin-top: 12px; }
+  .endmark { font-family: 'Anton', sans-serif; color: var(--vermilion); }
+</style>
+</head>
+<body>
+  <div class="fontbar">
+    <span class="fb-label">Body copy</span>
+    <div class="seg">
+      <button id="btn-spectral" aria-pressed="false" onclick="setBody('spectral')">Spectral</button>
+      <button id="btn-source" aria-pressed="true" onclick="setBody('source')">Source Serif</button>
+    </div>
+    <span class="fb-label" id="cur" style="margin-left:auto">Headline: Anton</span>
+  </div>
+
+  <div class="masthead">
+    <p class="kicker">Field Notes · Issue 07</p>
+    <h1 class="headline">The Slow Craft of Judging Fast</h1>
+    <p class="subhead">Evaluation used to be the checkbox at the end. We rebuilt it as the thing that shapes the work — legible, first-class, and quick enough to run on every change.</p>
+    <div class="byline">
+      <div class="avatar">MR</div>
+      <div>
+        <div class="who">Mara Reyes</div>
+        <div class="meta">Editor-at-large · July 9, 2026</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="read">7 min read</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-frame">
+      <span class="plabel">stock hero — drop 16:9 image</span>
+    </div>
+    <p class="caption"><span class="credit">Hero image</span><span>Replace with a wide editorial photograph. Credit line sits here.</span></p>
+  </div>
+
+  <article>
+    <p class="dropcap">For most of the last decade, the teams we admired treated evaluation as hygiene — something you did once the interesting work was finished, a gate rather than a lens. It kept the lights on and told you almost nothing about how the thing was actually made.</p>
+
+    <p>The premise of NAV / Judge is stubbornly simple: <strong>judgment should come first, and it should be legible.</strong> Not a score buried in a dashboard, but a page you can read — one that moves at the speed of the work it describes. When the evaluation is the artifact, everything downstream gets sharper.</p>
+
+    <h2>Reading Like a Page</h2>
+
+    <p>We kept coming back to print. A well-set article does something software rarely bothers with: it establishes a hierarchy so clear you can skim it or sink into it, and either way you know exactly where you are. <em>Type is the interface.</em> The headline sets the stakes, the subhead makes the promise, the body keeps it.</p>
+
+    <blockquote>
+      <p>Nothing hidden, nothing decorative — just the exciting stuff, delivered since the turn of the century.</p>
+      <cite>— NAV / Judge, founding note</cite>
+    </blockquote>
+
+    <p>That constraint turned out to be liberating. Once the evaluation had to <em>read</em>, we stopped adding chrome and started removing it. The condensed, all-caps display face does the shouting; the serif body does the thinking. Between them there's very little left to decorate, which is exactly the point.</p>
+
+    <h2>Fast Enough to Matter</h2>
+
+    <p>Speed is what makes judgment first-class rather than ceremonial. If a review takes a day, it happens once. If it takes seconds, it happens on every change — and a system you consult constantly is one you actually trust. That's the whole wager, and so far it's paying out. <span class="endmark">■</span></p>
+  </article>
+
+  <script>
+    function setBody(which) {
+      var map = { spectral: "'Spectral', serif", source: "'Source Serif 4', serif" };
+      document.documentElement.style.setProperty('--body-serif', map[which]);
+      document.getElementById('btn-spectral').setAttribute('aria-pressed', which === 'spectral');
+      document.getElementById('btn-source').setAttribute('aria-pressed', which === 'source');
+    }
+  </script>
+</body>
+</html>

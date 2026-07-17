@@ -1,0 +1,49 @@
+/* ------------------------------------------------------------------
+   SPACING, LAYOUT, RADIUS, BORDERS, SHADOW, MOTION — NAV / Judge
+   Editorial print system: generous negative space, hairline rules
+   instead of shadows, near-sharp corners.
+------------------------------------------------------------------ */
+
+:root {
+  /* --- Spacing scale (8px base, editorial extremes at top) --- */
+  --space-1: 0.25rem;   /* 4  */
+  --space-2: 0.5rem;    /* 8  */
+  --space-3: 0.75rem;   /* 12 */
+  --space-4: 1rem;      /* 16 */
+  --space-5: 1.5rem;    /* 24 */
+  --space-6: 2rem;      /* 32 */
+  --space-7: 3rem;      /* 48 */
+  --space-8: 4rem;      /* 64 */
+  --space-9: 6rem;      /* 96 */
+  --space-10: 8rem;     /* 128 */
+  --space-11: 12rem;    /* 192 — hero breathing room */
+
+  /* --- Layout --- */
+  --measure: 38rem;         /* ideal reading column ~608px */
+  --content-max: 72rem;     /* main content width */
+  --page-gutter: clamp(1.5rem, 6vw, 6rem); /* @kind spacing */
+
+  /* --- Radius (near-sharp; print sensibility) --- */
+  --radius-none: 0;
+  --radius-sm: 2px;     /* buttons, inputs, tags */
+  --radius-md: 4px;
+  --radius-card: 3px;
+
+  /* --- Borders --- */
+  --border-hair: 1px solid var(--line);
+  --border-rule: 1px solid var(--ink);        /* editorial black rule */
+  --border-strong: 1.5px solid var(--line-strong);
+
+  /* --- Shadow (used sparingly — print rarely casts shadow) --- */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(28, 23, 18, 0.06);
+  --shadow-card: 0 6px 24px -12px rgba(28, 23, 18, 0.22);
+  --shadow-lift: 0 14px 40px -18px rgba(28, 23, 18, 0.30);
+
+  /* --- Motion (quiet, considered — no bounce) --- */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast: 140ms; /* @kind other */
+  --dur-base: 240ms; /* @kind other */
+  --dur-slow: 520ms; /* @kind other */
+}

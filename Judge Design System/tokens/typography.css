@@ -1,0 +1,51 @@
+/* ------------------------------------------------------------------
+   TYPOGRAPHY — NAV / Judge
+   Two faces. Anton (condensed poster grotesque) is the DISPLAY voice —
+   headlines, hero, section openers — always UPPERCASE. Source Serif 4
+   is the TEXT voice and carries everything that reads: body, subheads,
+   and all micro-type (kickers, bylines, labels, nav, tags). One serif
+   for prose AND structure — the "one-typeface" micro-type discipline.
+   No monospace anywhere.
+------------------------------------------------------------------ */
+
+:root {
+  /* --- Families --- */
+  --font-display: 'Anton', 'Arial Narrow', Impact, sans-serif; /* headline / hero — set UPPERCASE */
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif; /* body, subheads, labels — the text voice */
+  --font-sans: var(--font-serif); /* legacy alias — labels/kickers/bylines now share the serif */
+
+  /* --- Display / headline sizes (serif) --- */
+  --text-hero: 7.5rem;      /* 120px — the tagline moment */
+  --text-display: 4.5rem;   /* 72px  — section openers */
+  --text-h1: 3rem;          /* 48px  */
+  --text-h2: 2.25rem;       /* 36px  */
+  --text-h3: 1.625rem;      /* 26px  */
+  --text-h4: 1.25rem;       /* 20px  */
+
+  /* --- Body (serif) --- */
+  --text-lead: 1.5rem;      /* 24px — lead paragraph, "exhale" copy */
+  --text-body: 1.1875rem;   /* 19px — default reading size */
+  --text-small: 1rem;       /* 16px */
+
+  /* --- Labels / structural sans --- */
+  --text-label: 0.8125rem;  /* 13px — sans kickers, nav */
+  --text-meta: 0.75rem;     /* 12px — captions, tags */
+
+  /* --- Weights --- */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* --- Line heights --- */
+  --leading-tight: 1.02;    /* big display */
+  --leading-snug: 1.15;
+  --leading-body: 1.62;     /* reading prose */
+  --leading-label: 1.3;
+
+  /* --- Letter spacing --- */
+  --tracking-label: 0.1em; /* uppercase serif labels / kickers */
+  --tracking-wide: 0.02em;
+  --tracking-display: -0.02em; /* tighten large serif */
+  --tracking-normal: 0;
+}

@@ -1,0 +1,57 @@
+/* ------------------------------------------------------------------
+   COLORS — NAV / Judge
+   Warm editorial print palette: newsprint paper, warm ink,
+   one confident vermilion accent, a muted ink-blue for variety.
+   Dominant neutrals; the accent is a spice, never the meal.
+------------------------------------------------------------------ */
+
+:root {
+  /* --- Base neutrals (warm paper → ink) --- */
+  --paper: #F2ECDF;        /* main background, newsprint cream */
+  --paper-raised: #F8F3E8; /* cards / raised surfaces */
+  --paper-sunk: #EAE2D2;   /* recessed / hover wash */
+  --ink: #1C1712;          /* primary text, near-black warm */
+  --ink-soft: #57514A;     /* secondary text */
+  --ink-faint: #8B837A;    /* tertiary / captions / disabled */
+  --line: #D8CFBE;         /* hairline rules & borders */
+  --line-strong: #C3B8A3;  /* heavier rule */
+
+  /* --- Accent: editorial vermilion --- */
+  --vermilion: #CB4127;
+  --vermilion-deep: #A6321C;   /* hover / pressed */
+  --vermilion-tint: #F0D8CF;   /* wash behind accented text */
+
+  /* --- Secondary: ink blue --- */
+  --blue: #274654;
+  --blue-deep: #1B333E;
+  --blue-tint: #D3DDE0;
+
+  /* --- Fixed white/black for edges --- */
+  --white: #FFFFFF;
+  --black: #100C08;
+
+  /* ------------------------------------------------------------
+     SEMANTIC ALIASES — reference these in components
+  ------------------------------------------------------------ */
+  --bg: var(--paper);
+  --bg-raised: var(--paper-raised);
+  --bg-hover: var(--paper-sunk);
+
+  --text: var(--ink);
+  --text-muted: var(--ink-soft);
+  --text-faint: var(--ink-faint);
+  --text-accent: var(--vermilion);
+  --text-on-accent: var(--paper);
+
+  --surface-card: var(--paper-raised);
+  --border: var(--line);
+  --border-strong: var(--line-strong);
+
+  --accent: var(--vermilion);
+  --accent-hover: var(--vermilion-deep);
+  --accent-wash: var(--vermilion-tint);
+
+  --link: var(--vermilion);
+  --link-hover: var(--vermilion-deep);
+  --focus-ring: var(--vermilion);
+}

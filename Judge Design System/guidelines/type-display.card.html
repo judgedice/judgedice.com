@@ -1,0 +1,71 @@
+<!-- @dsCard group="Type" viewport="700x260" name="Display Serif — The Tagline Moment" subtitle="Anton display tuned to the article headline. Statements, not descriptions." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 24px 28px; }
+  .disp {
+    font-family: var(--font-display);
+    font-size: 68px;
+    line-height: 1.02;            /* matches .art-headline */
+    letter-spacing: -0.005em;     /* matches .art-headline */
+    color: var(--ink);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .disp em { font-style: normal; }
+  /* accent tweak */
+  [data-accent="vermilion"] .disp em { color: var(--vermilion); }
+  [data-accent="ink"] .disp em { color: var(--ink); }
+  [data-accent="rule"] .disp em { color: var(--ink); box-shadow: inset 0 -0.09em 0 var(--vermilion); }
+  /* case tweak */
+  [data-case="upper"] .disp { text-transform: uppercase; }
+  [data-case="title"] .disp { text-transform: none; }
+
+  .meta { font-family: var(--font-serif); font-size: 11px; color: var(--ink-faint); margin-top: 16px; letter-spacing: .06em; text-transform: uppercase; }
+
+  .tweaks { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .tweaks .grp { display: flex; align-items: center; gap: 8px; }
+  .tweaks .lbl { font-family: var(--font-serif); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-faint); }
+  .tweaks .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; }
+  .tweaks button { font-family: var(--font-serif); font-size: 12px; padding: 4px 12px; border: 0; background: transparent; color: var(--ink-soft); cursor: pointer; }
+  .tweaks button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+</style>
+</head>
+<body data-accent="vermilion" data-case="upper">
+  <div class="disp">Delivering <em>Joy</em> since the<br>turn of the Century.</div>
+  <div class="meta" id="meta">Anton · 400 · 68px · tracking −0.005em · leading 1.02 — matches article headline</div>
+
+  <div class="tweaks">
+    <div class="grp">
+      <span class="lbl">Accent</span>
+      <div class="seg">
+        <button data-k="accent" data-v="vermilion" aria-pressed="true">Vermilion</button>
+        <button data-k="accent" data-v="rule" aria-pressed="false">Underline</button>
+        <button data-k="accent" data-v="ink" aria-pressed="false">None</button>
+      </div>
+    </div>
+    <div class="grp">
+      <span class="lbl">Case</span>
+      <div class="seg">
+        <button data-k="case" data-v="upper" aria-pressed="true">Uppercase</button>
+        <button data-k="case" data-v="title" aria-pressed="false">Title</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.tweaks button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.k, v = b.dataset.v;
+        document.body.setAttribute('data-' + k, v);
+        document.querySelectorAll('.tweaks button[data-k="' + k + '"]').forEach(function (o) {
+          o.setAttribute('aria-pressed', o === b);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAV / Judge — Headline options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,18..72,400;1,18..72,400&family=Libre+Caslon+Display&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { margin: 0; background: var(--paper); color: var(--ink); padding: clamp(2rem,5vw,4rem) clamp(1.5rem,6vw,6rem) 6rem; }
+  .head { max-width: 60rem; margin: 0 auto 3rem; }
+  .head .k { font-family: var(--font-sans); font-size: 13px; text-transform: uppercase; letter-spacing: .16em; color: var(--vermilion); font-weight: 600; }
+  .head h1 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2rem,5vw,3rem); letter-spacing: -0.02em; margin: 14px 0 10px; }
+  .head p { font-family: var(--font-sans); font-size: 16px; line-height: 1.6; color: var(--ink-soft); max-width: 44rem; margin: 0; }
+  .opt { max-width: 60rem; margin: 0 auto; padding: clamp(2rem,4vw,3rem) 0; border-top: 1px solid var(--line); }
+  .meta { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; }
+  .badge { font-family: var(--font-sans); font-weight: 700; font-size: 13px; letter-spacing: .1em; color: var(--paper); background: var(--ink); width: 30px; height: 30px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .name { font-family: var(--font-sans); font-weight: 600; font-size: 15px; letter-spacing: .02em; color: var(--ink); }
+  .vibe { font-family: var(--font-sans); font-size: 13px; color: var(--ink-faint); }
+  .tag { font-size: clamp(2.4rem, 7vw, 5.2rem); line-height: 1.02; letter-spacing: -0.02em; margin: 0; font-weight: 400; }
+  .tag em { font-style: italic; }
+  .sub { margin: 16px 0 0; font-size: clamp(1.25rem,2.6vw,1.75rem); line-height: 1.15; color: var(--ink-soft); font-weight: 400; }
+  /* option faces */
+  .f-newsreader .tag, .f-newsreader .sub { font-family: 'Newsreader', serif; }
+  .f-caslon .tag, .f-caslon .sub { font-family: 'Libre Caslon Display', serif; }
+  .f-playfair .tag, .f-playfair .sub { font-family: 'Playfair Display', serif; }
+  .f-bodoni .tag, .f-bodoni .sub { font-family: 'Bodoni Moda', serif; letter-spacing: -0.01em; }
+  .f-dmserif .tag, .f-dmserif .sub { font-family: 'DM Serif Display', serif; letter-spacing: -0.005em; }
+  .f-archivo .tag, .f-archivo .sub { font-family: 'Archivo', sans-serif; font-weight: 800; letter-spacing: -0.035em; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="k">NAV / Judge — Headline options</div>
+    <h1>Pick the display face.</h1>
+    <p>The tagline set in six candidates. Body copy stays Newsreader; labels are now Archivo (no monospace anywhere). Tell me a letter — I'll wire the winner through the whole system in one pass. Bodoni and Playfair lean high-contrast, big-city editorial; Caslon is classic magazine; DM Serif is punchy; Archivo is the bold modern-sans wildcard.</p>
+  </div>
+
+  <div class="opt f-newsreader">
+    <div class="meta"><span class="badge">A</span><span class="name">Newsreader</span><span class="vibe">current · warm literary serif, understated</span></div>
+    <p class="tag">Delivering <em>Joy</em> since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-caslon">
+    <div class="meta"><span class="badge">B</span><span class="name">Libre Caslon Display</span><span class="vibe">classic magazine masthead · timeless, authoritative</span></div>
+    <p class="tag">Delivering <em>Joy</em> since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-playfair">
+    <div class="meta"><span class="badge">C</span><span class="name">Playfair Display</span><span class="vibe">high-contrast, elegant · refined big-city editorial</span></div>
+    <p class="tag">Delivering <em>Joy</em> since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-bodoni">
+    <div class="meta"><span class="badge">D</span><span class="name">Bodoni Moda</span><span class="vibe">dramatic fashion contrast · Vogue / gallery, most "city"</span></div>
+    <p class="tag">Delivering <em>Joy</em> since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-dmserif">
+    <div class="meta"><span class="badge">E</span><span class="name">DM Serif Display</span><span class="vibe">punchy high-contrast · confident, a touch louder</span></div>
+    <p class="tag">Delivering <em>Joy</em> since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+
+  <div class="opt f-archivo">
+    <div class="meta"><span class="badge">F</span><span class="name">Archivo (Black)</span><span class="vibe">bold modern grotesque · wildcard, all-sans direction</span></div>
+    <p class="tag">Delivering Joy since the turn of the Century.</p>
+    <p class="sub">The Exciting Stuff</p>
+  </div>
+</body>
+</html>

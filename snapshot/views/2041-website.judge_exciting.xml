@@ -1,0 +1,55 @@
+<t name="The Exciting Stuff" t-name="website.judge_exciting">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure">
+        <header style="padding:clamp(3.5rem,9vw,6.5rem) clamp(1.5rem,6vw,6rem) clamp(1.75rem,4vw,2.75rem);">
+            <div style="display:flex;align-items:center;gap:14px;font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);color:var(--vermilion);margin-bottom:20px;">
+                <span style="color:var(--ink-faint);font-weight:var(--weight-regular);">03</span>
+                <span>The Exciting Stuff</span>
+                <span style="flex:1;height:1px;background:var(--line);min-width:24px;"/>
+            </div>
+            <h1 style="font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;font-size:clamp(2.75rem,8vw,6rem);line-height:var(--leading-tight);letter-spacing:-0.005em;color:var(--ink);margin:0;max-width:18ch;">Here's what I actually do.</h1>
+            <p style="font-family:var(--font-serif);font-style:italic;font-size:clamp(1.125rem,2.4vw,1.5rem);line-height:1.4;color:var(--ink-soft);margin:22px 0 0;max-width:40rem;">In plain English — no icons, no three-word headlines with three bullets.</p>
+        </header>
+        <section style="padding:clamp(4rem,10vw,8rem) clamp(1.5rem,6vw,6rem);border-top:1px solid var(--line);">
+            <div style="max-width:72rem;margin:0 auto;">
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:clamp(1rem,2vw,1.5rem);">
+                <div style="background:var(--surface-card);border:none;border-top:2px solid var(--ink);border-radius:0;padding:var(--space-6);">
+                    <div style="display:flex;align-items:baseline;gap:12px;"><span style="font-family:var(--font-serif);font-size:12px;color:var(--vermilion);">01</span><h3 style="font-family:var(--font-serif);font-size:clamp(1.375rem,2.4vw,1.625rem);font-weight:400;letter-spacing:-0.01em;line-height:1.15;margin:0;color:var(--ink);">Marketing Technology Architecture</h3></div>
+                    <p style="font-family:var(--font-serif);font-size:1.0625rem;line-height:1.6;color:var(--ink-soft);margin:14px 0 0;">Designing end-to-end digital marketing systems that hold together under real conditions — across strategy, platform selection, integration design, and build. The kind of architecture that doesn't collapse when a stakeholder changes their mind in month three.</p>
+                </div>
+                <div style="background:var(--surface-card);border:none;border-top:2px solid var(--ink);border-radius:0;padding:var(--space-6);">
+                    <div style="display:flex;align-items:baseline;gap:12px;"><span style="font-family:var(--font-serif);font-size:12px;color:var(--vermilion);">02</span><h3 style="font-family:var(--font-serif);font-size:clamp(1.375rem,2.4vw,1.625rem);font-weight:400;letter-spacing:-0.01em;line-height:1.15;margin:0;color:var(--ink);">Adobe Experience Cloud</h3></div>
+                    <p style="font-family:var(--font-serif);font-size:1.0625rem;line-height:1.6;color:var(--ink-soft);margin:14px 0 0;">AEM, Adobe Journey Optimizer, Workfront, Target, AEP. I've shipped all of it, across industries and client contexts. I know which parts to use, which to skip, and which will require a ticket that becomes a different ticket. I have stories.</p>
+                </div>
+                <div style="background:var(--surface-card);border:none;border-top:2px solid var(--ink);border-radius:0;padding:var(--space-6);">
+                    <div style="display:flex;align-items:baseline;gap:12px;"><span style="font-family:var(--font-serif);font-size:12px;color:var(--vermilion);">03</span><h3 style="font-family:var(--font-serif);font-size:clamp(1.375rem,2.4vw,1.625rem);font-weight:400;letter-spacing:-0.01em;line-height:1.15;margin:0;color:var(--ink);">Marketing Operations &amp; Automation</h3></div>
+                    <p style="font-family:var(--font-serif);font-size:1.0625rem;line-height:1.6;color:var(--ink-soft);margin:14px 0 0;">Building the workflows and integrations that let marketing teams actually use the platforms they've paid for. Approval flows that don't require a PhD. Automations that run without babysitting. The operational layer that makes the strategy real.</p>
+                </div>
+                <div style="background:var(--surface-card);border:none;border-top:2px solid var(--ink);border-radius:0;padding:var(--space-6);">
+                    <div style="display:flex;align-items:baseline;gap:12px;"><span style="font-family:var(--font-serif);font-size:12px;color:var(--vermilion);">04</span><h3 style="font-family:var(--font-serif);font-size:clamp(1.375rem,2.4vw,1.625rem);font-weight:400;letter-spacing:-0.01em;line-height:1.15;margin:0;color:var(--ink);">Workshop Facilitation</h3></div>
+                    <p style="font-family:var(--font-serif);font-size:1.0625rem;line-height:1.6;color:var(--ink-soft);margin:14px 0 0;">I've run a lot of them. Discovery, architecture, stakeholder alignment. I know how to get a room full of people with competing priorities to walk out with decisions made and next steps owned. This is harder than it sounds.</p>
+                </div>
+                <div style="background:var(--surface-card);border:none;border-top:2px solid var(--ink);border-radius:0;padding:var(--space-6);">
+                    <div style="display:flex;align-items:baseline;gap:12px;"><span style="font-family:var(--font-serif);font-size:12px;color:var(--vermilion);">05</span><h3 style="font-family:var(--font-serif);font-size:clamp(1.375rem,2.4vw,1.625rem);font-weight:400;letter-spacing:-0.01em;line-height:1.15;margin:0;color:var(--ink);">Strategy &amp; Solutions Architecture</h3></div>
+                    <p style="font-family:var(--font-serif);font-size:1.0625rem;line-height:1.6;color:var(--ink-soft);margin:14px 0 0;">The part before the build. What are we trying to do? What does the ecosystem need to look like? What do we build first and what do we defer? This is where 25 years of pattern-matching earns its keep.</p>
+                </div>
+                <div style="background:var(--surface-card);border:none;border-top:2px solid var(--ink);border-radius:0;padding:var(--space-6);">
+                    <div style="display:flex;align-items:baseline;gap:12px;"><span style="font-family:var(--font-serif);font-size:12px;color:var(--vermilion);">06</span><h3 style="font-family:var(--font-serif);font-size:clamp(1.375rem,2.4vw,1.625rem);font-weight:400;letter-spacing:-0.01em;line-height:1.15;margin:0;color:var(--ink);">Teaching &amp; Consulting</h3></div>
+                    <p style="font-family:var(--font-serif);font-size:1.0625rem;line-height:1.6;color:var(--ink-soft);margin:14px 0 0;">Search Engine Marketing at the Chicago Portfolio School. Digital consulting for educational programs. If you're building a curriculum or a team, I can help.</p>
+                </div>
+                </div>
+            </div>
+        </section>
+        <nav style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:clamp(2rem,5vw,3rem) clamp(1.5rem,6vw,6rem);border-top:1px solid var(--line);">
+            <div><a href="/home" style="display:inline-flex;flex-direction:column;gap:8px;text-decoration:none;align-items:flex-start;">
+                <span style="font-family:var(--font-serif);font-size:var(--text-meta);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--ink-faint);">Previous</span>
+                <span style="display:inline-flex;align-items:baseline;gap:10px;font-family:var(--font-display);text-transform:uppercase;font-size:clamp(1.375rem,3vw,2rem);line-height:1.0;letter-spacing:-0.005em;color:var(--ink);"><span style="color:var(--vermilion);">←</span><span>Home Life</span></span>
+            </a></div>
+            <div><a href="/connect" style="display:inline-flex;flex-direction:column;gap:8px;text-decoration:none;align-items:flex-end;">
+                <span style="font-family:var(--font-serif);font-size:var(--text-meta);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--ink-faint);">Next</span>
+                <span style="display:inline-flex;align-items:baseline;gap:10px;font-family:var(--font-display);text-transform:uppercase;font-size:clamp(1.375rem,3vw,2rem);line-height:1.0;letter-spacing:-0.005em;color:var(--ink);"><span>Connect</span><span style="color:var(--vermilion);">→</span></span>
+            </a></div>
+        </nav>
+        </div>
+    </t>
+</t>

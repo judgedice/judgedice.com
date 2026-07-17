@@ -1,0 +1,81 @@
+/* ------------------------------------------------------------------
+   BASE — light element defaults so specimens & kits inherit the brand.
+   Kept minimal; components own their own styling via tokens.
+------------------------------------------------------------------ */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-weight: var(--weight-regular);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display headings — Anton, condensed, UPPERCASE */
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-normal);
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Sub-headings — the serif text voice */
+h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-display);
+  color: var(--text);
+  margin: 0;
+}
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+/* Links — always defined so user-added links aren't browser-blue */
+a {
+  color: var(--link);
+  text-decoration: none;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent);
+  transition: color var(--dur-fast) var(--ease-out),
+              text-decoration-color var(--dur-fast) var(--ease-out);
+}
+a:hover {
+  color: var(--link-hover);
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-hover);
+}
+
+/* Label utility — serif, the structural voice */
+.label {
+  font-family: var(--font-serif);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Uppercase serif kicker */
+.kicker {
+  font-family: var(--font-serif);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--text-accent);
+  font-weight: var(--weight-light);
+}
+
+::selection {
+  background: var(--accent-wash);
+  color: var(--ink);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}

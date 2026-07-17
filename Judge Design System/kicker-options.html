@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAV / Judge — Kicker & author line options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Schibsted+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); padding: clamp(2rem,5vw,4rem) clamp(1.5rem,6vw,5rem) 6rem; }
+  a { color: var(--link); } a:hover { color: var(--link-hover); }
+  .wrap { max-width: 52rem; margin: 0 auto; }
+  .head { margin: 0 0 1rem; }
+  .head .k { font-family: 'Schibsted Grotesk', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; color: var(--vermilion); font-weight: 600; margin: 0; }
+  .head h1 { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(2rem,5vw,3rem); line-height: 1.02; letter-spacing: 0; margin: 12px 0 12px; }
+  .head p { font-family: 'Source Serif 4', serif; font-size: 18px; line-height: 1.6; color: var(--ink-soft); max-width: 40rem; margin: 0; }
+
+  .opt { padding: clamp(1.75rem,4vw,2.5rem) 0; border-top: 1px solid var(--line); }
+  .badge-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+  .badge { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 700; font-size: 13px; color: var(--paper); background: var(--ink); width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .oname { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 700; font-size: 15px; color: var(--ink); }
+  .ovibe { font-family: 'Schibsted Grotesk', sans-serif; font-size: 13px; color: var(--ink-faint); }
+
+  /* the specimen: kicker + headline + byline, as in the article */
+  .spec { border: 1px solid var(--line); border-radius: 6px; padding: clamp(1.5rem,3.5vw,2.25rem); background: var(--paper-raised); }
+  .kicker { font-size: 13px; text-transform: uppercase; letter-spacing: .14em; color: var(--vermilion); margin: 0 0 14px; display: flex; align-items: center; gap: 10px; }
+  .kicker::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .sp-head { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(1.6rem,4vw,2.4rem); line-height: 1.02; margin: 0 0 20px; letter-spacing: 0; }
+  .byline { display: flex; align-items: center; gap: 13px; padding: 15px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .avatar { width: 38px; height: 38px; border-radius: 999px; background: var(--vermilion-tint); flex: none; display: flex; align-items: center; justify-content: center; font-family: 'Schibsted Grotesk', sans-serif; font-weight: 700; font-size: 14px; color: var(--vermilion-deep); }
+  .who { font-size: 15px; color: var(--ink); }
+  .metaline { font-size: 13px; color: var(--ink-faint); margin-top: 2px; }
+  .spacer { flex: 1; }
+  .read { font-size: 13px; color: var(--ink-faint); }
+
+  /* --- face variants applied to kicker + byline text --- */
+  .v-schibsted .kicker { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 600; }
+  .v-schibsted .who { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 600; }
+  .v-schibsted .metaline, .v-schibsted .read { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 400; }
+
+  .v-source .kicker { font-family: 'Source Serif 4', serif; font-weight: 600; letter-spacing: .1em; }
+  .v-source .who { font-family: 'Source Serif 4', serif; font-weight: 600; }
+  .v-source .metaline, .v-source .read { font-family: 'Source Serif 4', serif; font-weight: 400; }
+
+  .v-spectral .kicker { font-family: 'Spectral', serif; font-weight: 600; letter-spacing: .1em; }
+  .v-spectral .who { font-family: 'Spectral', serif; font-weight: 600; }
+  .v-spectral .metaline, .v-spectral .read { font-family: 'Spectral', serif; font-style: italic; font-weight: 400; }
+
+  .v-anton .kicker { font-family: 'Anton', sans-serif; font-weight: 400; letter-spacing: .08em; }
+  .v-anton .who { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: .03em; font-size: 16px; }
+  .v-anton .metaline, .v-anton .read { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <p class="k">NAV / Judge — Micro-type</p>
+    <h1>Kicker & author line</h1>
+    <p>Headline stays Anton, body is Source Serif 4 — locked. This is only about the small label type: the kicker and the byline. Four faces for that role, each shown on the real masthead unit. Schibsted is your pick to beat.</p>
+  </div>
+
+  <div class="opt v-schibsted">
+    <div class="badge-row"><span class="badge">A</span><span class="oname">Schibsted Grotesk</span><span class="ovibe">clean Swiss grotesque · crisp, neutral, modern label voice</span></div>
+    <div class="spec">
+      <p class="kicker">Field Notes · Issue 07</p>
+      <h2 class="sp-head">The Slow Craft of Judging Fast</h2>
+      <div class="byline">
+        <div class="avatar">MR</div>
+        <div><div class="who">Mara Reyes</div><div class="metaline">Editor-at-large · July 9, 2026</div></div>
+        <div class="spacer"></div><div class="read">7 min read</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="opt v-source">
+    <div class="badge-row"><span class="badge">B</span><span class="oname">Source Serif 4</span><span class="ovibe">matches body · seamless, quiet, one-typeface discipline</span></div>
+    <div class="spec">
+      <p class="kicker" style="font-weight: 300; letter-spacing: 1px; font-size: 12px;">Field Notes · Issue 07</p>
+      <h2 class="sp-head">The Slow Craft of Judging Fast</h2>
+      <div class="byline">
+        <div class="avatar">MR</div>
+        <div><div class="who">Mara Reyes</div><div class="metaline">Editor-at-large · July 9, 2026</div></div>
+        <div class="spacer"></div><div class="read">7 min read</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="opt v-spectral">
+    <div class="badge-row"><span class="badge">C</span><span class="oname">Spectral</span><span class="ovibe">serif contrast · italic meta line, warmer editorial texture</span></div>
+    <div class="spec">
+      <p class="kicker">Field Notes · Issue 07</p>
+      <h2 class="sp-head">The Slow Craft of Judging Fast</h2>
+      <div class="byline">
+        <div class="avatar">MR</div>
+        <div><div class="who">Mara Reyes</div><div class="metaline">Editor-at-large · July 9, 2026</div></div>
+        <div class="spacer"></div><div class="read">7 min read</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="opt v-anton">
+    <div class="badge-row"><span class="badge">D</span><span class="oname">Anton</span><span class="ovibe">current · display face doing double duty, loudest option</span></div>
+    <div class="spec">
+      <p class="kicker">Field Notes · Issue 07</p>
+      <h2 class="sp-head">The Slow Craft of Judging Fast</h2>
+      <div class="byline">
+        <div class="avatar">MR</div>
+        <div><div class="who">Mara Reyes</div><div class="metaline">Editor-at-large · July 9, 2026</div></div>
+        <div class="spacer"></div><div class="read">7 min read</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
