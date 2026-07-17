@@ -46,4 +46,4 @@ Views: home 2034 · header 2035 · footer 2038 · work 2039 · home-life 2040 ·
 
 ## Roadmap
 
-Tracked in the **judgedice.com Roadmap** GitHub Project on the `judgedice` account.
+Phases in [ROADMAP.md](ROADMAP.md); detailed items tracked in the private **judgedice.com Roadmap** GitHub Project on the `judgedice` account.
