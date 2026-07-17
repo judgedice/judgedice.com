@@ -40,11 +40,11 @@
     },
     {
       "id": 8,
-      "name": "The Exciting Stuff",
+      "name": "Offerings",
       "url": "/offerings",
       "view_id": [
         2041,
-        "The Exciting Stuff"
+        "Offerings"
       ],
       "is_published": true,
       "website_indexed": true
