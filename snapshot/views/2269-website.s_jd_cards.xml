@@ -1,0 +1,11 @@
+<t name="Judge Cards" t-name="website.s_jd_cards">
+    <section class="s_jd_cards pt32 pb32">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 pb16"><div class="s_jd_card_item"><h3>Card Title</h3><p>Restrained content container on a raised paper surface. Swap in your own copy.</p></div></div>
+                <div class="col-lg-4 pb16"><div class="s_jd_card_item"><h3>Card Title</h3><p>Hairline border, near-sharp corners, no shadows — print doesn’t cast them.</p></div></div>
+                <div class="col-lg-4 pb16"><div class="s_jd_card_item"><h3>Card Title</h3><p>Duplicate or delete cards from the column options after dropping the block.</p></div></div>
+            </div>
+        </div>
+    </section>
+</t>

@@ -1,0 +1,7 @@
+<t name="Judge Rule" t-name="website.s_jd_rule">
+    <section class="s_jd_rule pt16 pb16">
+        <div class="container">
+            <div class="s_jd_rule_row"><span class="s_jd_rule_label">Label</span><span class="s_jd_rule_fill"/></div>
+        </div>
+    </section>
+</t>

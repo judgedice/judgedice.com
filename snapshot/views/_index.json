@@ -60,5 +60,56 @@
     "inherit_id": false,
     "mode": "primary",
     "active": true
+  },
+  {
+    "id": 2266,
+    "name": "Judge Page Header",
+    "key": "website.s_jd_page_header",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2267,
+    "name": "Judge Section Label",
+    "key": "website.s_jd_section_label",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2268,
+    "name": "Judge Callout",
+    "key": "website.s_jd_callout",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2269,
+    "name": "Judge Cards",
+    "key": "website.s_jd_cards",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2270,
+    "name": "Judge Rule",
+    "key": "website.s_jd_rule",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2271,
+    "name": "Judge Blocks",
+    "key": "website.snippets_judge",
+    "inherit_id": [
+      1397,
+      "snippets"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]

@@ -40,5 +40,9 @@ jobs:
           ODOO_USER: ${{ secrets.ODOO_USER }}
           ODOO_KEY: ${{ secrets.ODOO_KEY }}
         run: |
+          if [ -z "$ODOO_URL" ]; then
+            echo "::warning::Odoo secrets not configured (Settings > Secrets > Actions) — skipping deploy"
+            exit 0
+          fi
           python3 scripts/deploy.py --base "${{ steps.diff.outputs.base }}" --apply \
             ${{ steps.diff.outputs.files }}

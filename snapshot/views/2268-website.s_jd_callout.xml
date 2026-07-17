@@ -1,0 +1,10 @@
+<t name="Judge Callout" t-name="website.s_jd_callout">
+    <section class="s_jd_callout pt24 pb24">
+        <div class="container">
+            <div class="s_jd_callout_inner">
+                <p class="s_jd_quote">Add the aside or pull quote here — the line worth pulling out of the story.</p>
+                <p class="s_jd_cite">— Attribution</p>
+            </div>
+        </div>
+    </section>
+</t>

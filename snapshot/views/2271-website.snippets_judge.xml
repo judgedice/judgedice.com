@@ -1,0 +1,12 @@
+<data inherit_id="website.snippets" name="Judge Blocks" active="True">
+    <xpath expr="//snippets[@id='snippet_groups']" position="inside">
+        <t snippet-group="judge" t-snippet="website.s_snippet_group" string="Judge" t-thumbnail="/website/static/src/img/snippets_thumbs/s_text_image.svg"/>
+    </xpath>
+    <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+        <t t-snippet="website.s_jd_page_header" string="Page Header" group="judge"/>
+        <t t-snippet="website.s_jd_section_label" string="Section Label" group="judge"/>
+        <t t-snippet="website.s_jd_callout" string="Callout" group="judge"/>
+        <t t-snippet="website.s_jd_cards" string="Cards" group="judge"/>
+        <t t-snippet="website.s_jd_rule" string="Rule" group="judge"/>
+    </xpath>
+</data>

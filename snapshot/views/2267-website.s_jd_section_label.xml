@@ -1,0 +1,7 @@
+<t name="Judge Section Label" t-name="website.s_jd_section_label">
+    <section class="s_jd_section_label_wrap pt24 pb0">
+        <div class="container">
+            <div class="s_jd_section_label"><span class="s_jd_index">01</span><span>Section Label</span><span class="s_jd_rule_fill"/></div>
+        </div>
+    </section>
+</t>
