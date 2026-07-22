@@ -111,5 +111,27 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2272,
+    "name": "Hide staff email (appointment.appointment_meeting_user)",
+    "key": "appointment.jd_meeting_user_no_email",
+    "inherit_id": [
+      2112,
+      "Meeting user"
+    ],
+    "mode": "extension",
+    "active": true
+  },
+  {
+    "id": 2273,
+    "name": "Hide staff email (appointment.appointment_validated_card)",
+    "key": "appointment.jd_validated_card_no_email",
+    "inherit_id": [
+      2116,
+      "Appointment Validated: User / Resource Card"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]

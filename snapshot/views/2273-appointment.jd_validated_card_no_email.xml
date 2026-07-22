@@ -1,0 +1,3 @@
+<data inherit_id="appointment.appointment_validated_card" name="appointment.appointment_validated_card (no staff email, judgedice)" active="True">
+    <xpath expr="//div[@t-if='staff_user.email']" position="replace"/>
+</data>
