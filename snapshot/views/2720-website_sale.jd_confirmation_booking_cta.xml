@@ -1,0 +1,15 @@
+<data inherit_id="website_sale.confirmation" name="Booking CTA (judgedice)" active="True">
+    <xpath expr="//div[@id='oe_structure_website_sale_confirmation_2']" position="after">
+        <section style="padding:clamp(2.5rem,6vw,4rem) clamp(1.5rem,6vw,6rem);border-top:1px solid var(--line);">
+            <div style="max-width:72rem;margin:0 auto;">
+                <div style="display:flex;align-items:center;gap:14px;font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);color:var(--vermilion);margin-bottom:18px;">
+                    <span>One more step</span>
+                    <span style="flex:1;height:1px;background:var(--line);min-width:24px;"/>
+                </div>
+                <h2 style="font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;font-size:clamp(1.75rem,4.5vw,3rem);line-height:var(--leading-tight);color:var(--ink);margin:0;">Pick your time.</h2>
+                <p style="font-family:var(--font-serif);font-size:1.0625rem;line-height:1.6;color:var(--ink-soft);margin:14px 0 0;max-width:44rem;">Your consultation is paid for — now grab the slot that suits you. You’ll get a calendar invite and a video link.</p>
+                <a href="/appointment/1" style="display:inline-block;margin-top:24px;background:var(--vermilion);color:var(--paper);font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);text-decoration:none;padding:16px 28px;border-radius:2px;">Book my consultation →</a>
+            </div>
+        </section>
+    </xpath>
+</data>

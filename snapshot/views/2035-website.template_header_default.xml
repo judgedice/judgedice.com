@@ -10,6 +10,13 @@
                     </a>
                 </t>
             </span>
+        <span class="jd-header-plugs d-none">
+                <t t-call="website.placeholder_header_search_box"/>
+                <t t-call="website.placeholder_header_text_element"/>
+                <t t-call="website.placeholder_header_social_links"/>
+                <t t-call="website.placeholder_header_language_selector"/>
+                <t t-call="website.placeholder_header_call_to_action"/>
+            </span>
         </nav>
         <t t-call="website.template_header_mobile"/>
     </xpath>

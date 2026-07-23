@@ -133,5 +133,16 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2720,
+    "name": "Booking CTA after checkout",
+    "key": "website_sale.jd_confirmation_booking_cta",
+    "inherit_id": [
+      2575,
+      "confirmation"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]
