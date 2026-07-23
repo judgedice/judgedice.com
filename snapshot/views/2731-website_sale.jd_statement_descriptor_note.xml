@@ -1,0 +1,5 @@
+<data inherit_id="website_sale.payment" name="Statement descriptor note (judgedice)" active="True">
+    <xpath expr="//div[@id='payment_method']" position="after">
+        <div style="margin-top:14px;padding:12px 16px;background:var(--paper-raised);border-left:2px solid var(--vermilion);font-family:var(--font-serif);font-size:0.9375rem;line-height:1.5;color:var(--ink-soft);">Heads up: your card statement will read <b>HALF A GLASS</b> — that’s my consulting company, and it’s still just me.</div>
+    </xpath>
+</data>

@@ -144,5 +144,16 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2731,
+    "name": "Statement descriptor note",
+    "key": "website_sale.jd_statement_descriptor_note",
+    "inherit_id": [
+      2570,
+      "Payment"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]
