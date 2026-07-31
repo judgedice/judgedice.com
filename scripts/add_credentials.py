@@ -38,6 +38,17 @@ CREDENTIALS = [
 
 TIER_LABEL = {"expert": "Adobe Certified Expert", "professional": "Adobe Certified Professional"}
 
+# Course completions — listed a tier below the proctored certifications above.
+# (course title, issuer, completed, skilljar verify code)
+TRAINING = [
+    ("AI Fluency: Framework &#38; Foundations", "Anthropic Education", "July 2026", "7mh7fppdqdow"),
+    ("AI Fluency for Small Businesses", "Anthropic Education", "July 2026", "cxqc583fw4u5"),
+    ("Claude Code in Action", "Anthropic Education", "June 2026", "fudyoadeoxzg"),
+    ("Introduction to Subagents", "Anthropic Education", "July 2026", "2ajb4hoskj6u"),
+    ("Introduction to Agent Skills", "Anthropic Education", "June 2026", "wq2jzbwf73cp"),
+    ("Claude 101", "Anthropic Education", "June 2026", "f7nek24278qr"),
+]
+
 SERIF = "font-family:var(--font-serif);"
 CARD = ("background:var(--surface-card);border:none;border-top:2px solid var(--ink);"
         "border-radius:0;padding:var(--space-6);display:flex;flex-direction:column;gap:12px;")
@@ -70,6 +81,37 @@ def card(att_id, tier, name, issued, valid, uuid):
     )
 
 
+def training_row(title, issuer, done, code):
+    return (
+        '<li style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;'
+        'padding:10px 0;border-top:1px solid var(--line);">'
+        '<a href="https://verify.skilljar.com/c/%s" target="_blank" rel="noopener noreferrer" '
+        'style="%sfont-size:1rem;color:var(--ink);text-decoration:none;'
+        'border-bottom:1px solid var(--line);">%s</a>'
+        '<span style="%sfont-size:var(--text-meta);text-transform:uppercase;'
+        'letter-spacing:var(--tracking-label);color:var(--ink-faint);margin-left:auto;">%s</span>'
+        '</li>' % (code, SERIF, title, SERIF, done)
+    )
+
+
+def training_block():
+    if not TRAINING:
+        return ""
+    issuers = sorted({t[1] for t in TRAINING})
+    rows = "".join(training_row(t, i, d, c) for t, i, d, c in TRAINING)
+    return (
+        '<div style="margin-top:clamp(2.5rem,5vw,3.5rem);">'
+        '<div style="display:flex;align-items:center;gap:14px;%sfont-size:var(--text-label);'
+        'text-transform:uppercase;letter-spacing:var(--tracking-label);'
+        'font-weight:var(--weight-medium);color:var(--ink-faint);margin-bottom:4px;">'
+        '<span>Coursework &#183; %s</span>'
+        '<span style="flex:1;height:1px;background:var(--line);min-width:24px;"/>'
+        '</div>'
+        '<ul style="list-style:none;margin:0;padding:0;columns:2;column-gap:clamp(1.5rem,4vw,3rem);">'
+        '%s</ul></div>' % (SERIF, " &#38; ".join(issuers), rows)
+    )
+
+
 def section(att_ids):
     cards = "".join(card(att_ids[t], t, n, i, v, u) for t, n, i, v, u in CREDENTIALS)
     return (
@@ -84,7 +126,8 @@ def section(att_ids):
         '</div>'
         '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));'
         'gap:clamp(1rem,2vw,1.5rem);">%s</div>'
-        '</div></section>' % (SENTINEL, SERIF, cards)
+        '%s'
+        '</div></section>' % (SENTINEL, SERIF, cards, training_block())
     )
 
 
@@ -115,16 +158,29 @@ def main(apply_):
 
     arch = call("ir.ui.view", "read", [VIEW], ["arch_db", "website_id"])[0]
     assert arch["website_id"][0] == SITE, "view %d is not site %d" % (VIEW, SITE)
-    if SENTINEL in arch["arch_db"]:
-        print("  credentials section already present — nothing to do")
-        return 0
-
     body = arch["arch_db"]
-    marker = '</section><section class="s_text_image'
-    assert marker in body, "expected hero/text-image boundary not found"
-    new = body.replace(marker, "</section>" + section(att_ids) + '<section class="s_text_image', 1)
+    fresh = section(att_ids)
+
+    open_tag = '<section class="%s"' % SENTINEL
+    if open_tag in body:
+        # rebuild in place so re-runs pick up new credentials
+        start = body.index(open_tag)
+        end = body.index("</section>", start) + len("</section>")
+        assert open_tag not in body[start + 1:end], "unexpected nested section"
+        new = body[:start] + fresh + body[end:]
+        print("  replacing existing section (%d -> %d chars)" % (end - start, len(fresh)))
+    else:
+        marker = '</section><section class="s_text_image'
+        assert marker in body, "expected hero/text-image boundary not found"
+        new = body.replace(marker, "</section>" + fresh + '<section class="s_text_image', 1)
+        print("  inserting new section (%d chars)" % len(fresh))
+
     ET.fromstring(new)
-    print("  section built (%d chars), XML valid" % (len(new) - len(body)))
+    if new.strip() == body.strip():
+        print("  live already matches — nothing to do")
+        return 0
+    print("  XML valid; %d credential cards, %d coursework rows"
+          % (len(CREDENTIALS), len(TRAINING)))
 
     if not apply_:
         print("  would-write view %d" % VIEW)
