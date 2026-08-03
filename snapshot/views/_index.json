@@ -155,5 +155,13 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2732,
+    "name": "Judge Quotes",
+    "key": "website.s_jd_quotes",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
   }
 ]

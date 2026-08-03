@@ -68,4 +68,26 @@ header#top .jd-nav a{text-decoration:none;}
 #wrap #o_wblog_post_content blockquote{border-left:2px solid var(--vermilion);margin:2rem 0;padding:0 0 0 1.5rem;}
 #wrap #o_wblog_post_content blockquote p{font-style:italic;font-size:1.25rem;line-height:1.5;color:var(--ink);margin:0;}
 #wrap .o_searchbar_form input{background:var(--paper-raised);border:1px solid var(--line);border-radius:2px;font-family:var(--font-serif);}
+
+/* ---- Judge quotes carousel ---- */
+.s_jd_quotes_wrapper{padding:clamp(3rem,8vw,6rem) clamp(1.5rem,6vw,6rem);border-top:1px solid var(--line);}
+.s_jd_quotes_inner{max-width:72rem;margin:0 auto;}
+.s_jd_quotes_label{display:flex;align-items:center;gap:14px;font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);color:var(--vermilion);margin-bottom:clamp(1.5rem,4vw,2.5rem);}
+.s_jd_quotes .carousel-inner{min-height:clamp(10rem,17vw,14rem);}
+.s_jd_quotes .s_jd_quote_block{margin:0;border-left:2px solid var(--vermilion);padding:0 0 0 clamp(1.25rem,3vw,2.25rem);background:none;}
+.s_jd_quotes .s_jd_quote_text{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.25rem,3.2vw,2.25rem);line-height:1.32;color:var(--ink);margin:0;max-width:34ch;}
+.s_jd_quotes .s_jd_quote_cite{font-family:var(--font-serif);font-style:normal;font-size:var(--text-meta);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--ink-faint);margin:clamp(1rem,2.5vw,1.5rem) 0 0;}
+.s_jd_quotes .s_jd_quote_cite strong{color:var(--ink-soft);font-weight:var(--weight-medium);}
+.s_jd_quotes_controls{display:flex;align-items:center;gap:clamp(1rem,3vw,2rem);margin-top:clamp(1.75rem,4vw,2.75rem);padding-top:18px;border-top:1px solid var(--line);}
+.s_jd_quotes .carousel-indicators{position:static;margin:0;padding:0;display:flex;gap:18px;counter-reset:jdq;}
+.s_jd_quotes .carousel-indicators button{width:auto;height:auto;text-indent:0;background:none;border:none;border-bottom:1px solid transparent;opacity:1;flex:0 0 auto;padding:4px 0;font-family:var(--font-serif);font-size:var(--text-meta);letter-spacing:var(--tracking-label);color:var(--ink-faint);font-variant-numeric:tabular-nums;}
+.s_jd_quotes .carousel-indicators button::before{counter-increment:jdq;content:counter(jdq,decimal-leading-zero);}
+.s_jd_quotes .carousel-indicators button:hover{color:var(--ink);}
+.s_jd_quotes .carousel-indicators button.active{color:var(--vermilion);border-bottom-color:var(--vermilion);}
+.s_jd_quotes_arrows{display:flex;gap:10px;margin-left:auto;}
+.s_jd_quotes .carousel-control-prev,.s_jd_quotes .carousel-control-next{position:static;width:44px;height:44px;opacity:1;background:none;border:1px solid var(--line);color:var(--ink);font-size:1rem;transition:background .2s ease,border-color .2s ease,color .2s ease;}
+.s_jd_quotes .carousel-control-prev:hover,.s_jd_quotes .carousel-control-next:hover{background:var(--surface-card);border-color:var(--vermilion);color:var(--vermilion);}
+.s_jd_quotes .carousel-control-prev:focus-visible,.s_jd_quotes .carousel-control-next:focus-visible,.s_jd_quotes .carousel-indicators button:focus-visible{outline:2px solid var(--vermilion);outline-offset:3px;}
+@media (prefers-reduced-motion:reduce){.s_jd_quotes .carousel-item{transition:none;}}
+@media (max-width:640px){.s_jd_quotes_controls{flex-wrap:wrap;gap:14px;}.s_jd_quotes_arrows{margin-left:0;}}
 </style>
