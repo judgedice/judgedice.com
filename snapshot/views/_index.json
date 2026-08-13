@@ -163,5 +163,13 @@
     "inherit_id": false,
     "mode": "primary",
     "active": true
+  },
+  {
+    "id": 2733,
+    "name": "Judge Swath",
+    "key": "website.s_jd_swath",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
   }
 ]
