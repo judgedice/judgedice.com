@@ -137,4 +137,15 @@ section#top > .reveal,section#top > h1{position:relative;z-index:2;}
 @media (max-width:900px){
   .jd-hero-portrait{--portrait-w:72vw;--portrait-shift:6vw;--portrait-opacity:.18;}
 }
+
+/* ---- Entries banner (blog index) ---- */
+/* Odoo ships this banner assuming a dark cover image sits behind it, so the
+   wrapper carries Bootstrap's .text-white (a !important utility) and the
+   subtitle renders muddy over paper. Scoped to .text-white so individual post
+   headers, which use the same classes without it, are untouched. */
+/* a dark cover photo sits behind this banner, so the brand colours here are the
+   light end of the palette: vermilion headline, paper subhead. */
+#wrap .o_wblog_post_title .text-white{color:var(--paper)!important;}
+#wrap .o_wblog_post_title .text-white h1.o_wblog_post_name{color:var(--vermilion)!important;opacity:1;text-shadow:0 2px 18px rgba(0,0,0,.45);}
+#wrap .o_wblog_post_title .text-white .o_wblog_post_subtitle{color:var(--paper)!important;opacity:.95;font-style:italic;text-shadow:0 1px 12px rgba(0,0,0,.5);}
 </style>

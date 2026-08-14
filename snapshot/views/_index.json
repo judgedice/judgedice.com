@@ -171,5 +171,13 @@
     "inherit_id": false,
     "mode": "primary",
     "active": true
+  },
+  {
+    "id": 2734,
+    "name": "record_cover",
+    "key": "website.record_cover",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
   }
 ]
