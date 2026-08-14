@@ -112,4 +112,29 @@ header#top .jd-nav a{text-decoration:none;}
 #wrap .jd-entry-cta{margin-top:2.75rem;padding-top:1.25rem;border-top:1px solid var(--line);font-family:var(--font-serif);font-size:1rem;color:var(--ink-soft);}
 #wrap .jd-entry-cta a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--vermilion);padding-bottom:2px;}
 #wrap .jd-entry-cta a:hover{color:var(--vermilion);}
+
+/* ---- Hero portrait ---- */
+/* two elements share id="top" on this page (Odoo's wrapper + the hero section),
+   and the hero carries an inline max-width, so scope tightly and force the
+   full-bleed with !important — otherwise the band stops at 78rem. */
+section#top{position:relative;max-width:none !important;overflow:hidden;}
+section#top > .reveal,section#top > h1{position:relative;z-index:2;}
+.jd-hero-portrait{
+  --portrait-w:min(62vw,940px);
+  --portrait-shift:16vw;   /* pushes the frame right so the near shoulder runs off the page */
+  --portrait-fade:92%;     /* dissolves off the right edge from here */
+  --portrait-opacity:.85;
+  position:absolute;top:0;right:0;bottom:0;width:var(--portrait-w);
+  background-image:url(/web/image/1343);background-repeat:no-repeat;background-size:cover;
+  background-position:calc(100% + var(--portrait-shift)) center;
+  mix-blend-mode:multiply;opacity:var(--portrait-opacity);
+  pointer-events:none;z-index:1;
+  /* the fade-in must begin exactly where the shifted image begins, or its left
+     edge shows as a hard seam; both are driven by --portrait-shift */
+  -webkit-mask-image:linear-gradient(to right,transparent var(--portrait-shift),#000 calc(var(--portrait-shift) + 15vw),#000 var(--portrait-fade),transparent 100%);
+  mask-image:linear-gradient(to right,transparent var(--portrait-shift),#000 calc(var(--portrait-shift) + 15vw),#000 var(--portrait-fade),transparent 100%);
+}
+@media (max-width:900px){
+  .jd-hero-portrait{--portrait-w:72vw;--portrait-shift:6vw;--portrait-opacity:.18;}
+}
 </style>
