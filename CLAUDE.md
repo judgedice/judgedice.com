@@ -10,7 +10,8 @@ Personal-brand site + tribute-writing business for Judge DiCesaro, running as **
 4. View arches must be well-formed XML (validate with ElementTree before writing; numeric entities, `&amp;`). Write field `arch`, read `arch_db` — Odoo normalizes on save, so verify by parsed-content comparison, not string equality.
 5. Verify CSS/SCSS changes via the newest `web.assets_frontend` attachment in the DB — Odoo serves stale cached bundles over HTTP, so curl flip-flops.
 6. After any Odoo write: run `python3 scripts/snapshot.py`, review `git diff snapshot/`, commit, push.
-7. The header view (2035) contains a hidden `jd-header-plugs` span with six `website.placeholder_header_*` t-calls — **never remove it**; module installs fail validation without those anchors.
+7. **Never alter Judge's writing.** Anything he authored — entries, tributes, page copy, quotes — publishes **verbatim**. Do not trim, truncate, reorder, rewrite, condense, "clean up", or drop lines, and do not treat something as an artifact, a duplicate, stale logistics, or a privacy issue and remove it on your own judgment. If a change genuinely seems needed, **show him the exact lines and ask** — the decision is always his. Editorial additions (standfirsts, CTAs, captions) are allowed only as clearly separate elements, never merged into or substituted for his text. This applies to his content already live, too: never overwrite it.
+8. The header view (2035) contains a hidden `jd-header-plugs` span with six `website.placeholder_header_*` t-calls — **never remove it**; module installs fail validation without those anchors.
 
 ## Workflow
 
