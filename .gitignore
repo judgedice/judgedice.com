@@ -5,3 +5,4 @@ __pycache__/
 reports/
 facebook data/
 .venv/
+processed_images/
