@@ -73,18 +73,30 @@ Judge, 2026-09-03: **nothing older than 2020.**
 
 | window | frames | result |
 |---|---|---|
+| father's last summer, May-Oct 2021 | 14 real | **empty** — manga pages, eggs in a pan, kid selfies. No Michael. |
 | Chad's 50th, Apr-Jun 2023 | 11 | **empty** — school concert, a kid in a suit. No Chad, no golf. |
 | Emily campaign, Jan-May 2022 | 34 | **empty** — anime drawings, the dog, a sofa, screenshots. |
 | for Doug, Oct-Dec 2022 | 1 | negligible |
-| father's last summer, May-Oct 2021 | 248 | running |
-| mother's 80th, Nov 2025-Feb 2026 | 389 | queued |
-| Duolingo, Oct-Dec 2025 | 307 | low priority (opinion piece; oblique is fine) |
-| OTTO / Andover, Sep-Nov 2025 | 201 | queued |
-| Chicago, 2013 | 203 | **out of scope** under the 2020 floor |
+| Chicago, 2013 | — | **out of scope** under the 2020 floor |
 
-The library is a phone camera roll, not an archive of the events Judge wrote
-about — two of three tested windows held nothing related to their entry.
-Entries 2, 3, 5, 7, 8 should be assumed oblique unless a window proves otherwise.
+**Verified conclusion:** the 2020+ library does not contain the events the
+entries describe. All eight entries go oblique. Remaining windows (mother's
+80th, Duolingo, OTTO) were not harvested — the three tested windows all came
+back unrelated, so the ~2h cost was not worth spending on the same hypothesis.
+
+## Two method bugs found and fixed
+
+1. **Positions are unstable.** Photos reorders `media items` between calls, so
+   index-addressed exports returned different photos than the index recorded.
+   Everything reported from the first pass at the date windows was wrong.
+   Fixed by addressing photos by `id of media item` (see `harvest_win.py`).
+2. **`date of media item` is not the capture date for imported files.** The
+   May-Oct 2021 window returned 158 frames of which only 14 were actually from
+   2021; the other 144 were old scans bulk-imported in 2021 and dated by import
+   time. Filter on filename pattern (IMG_*.HEIC) as a sanity check.
+
+Also: partly-downloaded iCloud originals come back as valid JPEGs padded with
+flat grey. `thumbs.py` now detects and drops them.
 
 ## Constraints hit
 - Photos is set to optimise Mac storage: many originals must download from
