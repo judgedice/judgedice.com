@@ -2,6 +2,34 @@
 
 Output is near-white ground with near-black ink so the page can lay it on
 paper (#F2ECDF) with mix-blend-mode:multiply, the way the hero portrait works.
+
+Usage
+-----
+    .venv/bin/python scripts/halftone.py <src> <dst> [options]
+
+Reads JPEG, PNG, HEIC (straight off an iPhone). Writes JPEG.
+
+    # an entry cover
+    .venv/bin/python scripts/halftone.py shot.HEIC out.jpg --w 1600 --h 900
+
+Sizes used on the site: entries 1600x900, product 1200x1200,
+offerings 1600x1000, social/OG 1200x630.
+
+Options
+-------
+    --w, --h        output size; the source is centre-cropped to this aspect
+    --cell   5      dot pitch in px. 4 = finer, 7 = coarser and more poster-like
+    --fx/--fy 0.5   move the crop. --fy 0.35 keeps the top third of a tall photo
+    --seed   0      changes the paper creases; use a different one per image so
+                    no two covers share a texture
+    --contrast 1.10 raise for more punch; too high fills shadows into black slabs
+    --gamma  1.20   raise to brighten midtones
+    --floor  0.10   darkest ink level. Lower = denser blacks, but past ~0.05 the
+                    dots merge and the screen disappears
+    --gain   1.30   dot size multiplier
+
+Fill the frame when shooting: the screen eats fine detail, so one object edge
+to edge beats a wide shot every time.
 """
 import sys, os, math, argparse
 import numpy as np
