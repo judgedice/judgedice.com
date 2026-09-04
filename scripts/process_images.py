@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 """Run every print effect over a batch of images.
 
-    python3 scripts/process_images.py <file-or-folder> [...]
+Drop images into ./incoming and run it with no arguments:
+
+    python3 scripts/process_images.py
 
 Each input goes through all four effects and lands in ./processed_images as
 <name>__<effect>.jpg, so one shot comes back as four options side by side.
-Reads JPEG, PNG, HEIC straight off a phone.
+Originals in ./incoming are left alone. Reads JPEG, PNG, HEIC straight off a
+phone.
 
-    python3 scripts/process_images.py ~/Desktop/shoot
-    python3 scripts/process_images.py ~/Desktop/shoot --size social
-    python3 scripts/process_images.py a.HEIC b.HEIC --effects halftone,riso
+    python3 scripts/process_images.py                      # everything in incoming/
+    python3 scripts/process_images.py --size social
+    python3 scripts/process_images.py ~/Desktop/shoot      # some other folder
+    python3 scripts/process_images.py a.HEIC --effects halftone,riso
 
     --size    entry (1600x900, default) | product (1200x1200)
               | offering (1600x1000) | social (1200x630)
@@ -32,28 +36,42 @@ DEPS = ["Pillow", "numpy", "pillow-heif"]
 
 
 def bootstrap():
-    """Make sure we are running under an interpreter that has the deps."""
+    """Re-exec under an interpreter that has the deps, installing them once."""
     try:
         import numpy, PIL  # noqa: F401
         return
     except ImportError:
         pass
-    if os.environ.get("_EFFECTS_BOOTSTRAPPED"):
+
+    stage = os.environ.get("_EFFECTS_BOOTSTRAPPED")
+    me = os.path.abspath(__file__)
+
+    if stage == "installed":
         sys.exit("could not install dependencies: " + ", ".join(DEPS))
+
+    if stage == "venv":
+        # already inside .venv but the deps aren't there yet — install them
+        print("installing " + ", ".join(DEPS) + " ...", flush=True)
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q"] + DEPS,
+                       check=True)
+        os.environ["_EFFECTS_BOOTSTRAPPED"] = "installed"
+        os.execv(sys.executable, [sys.executable, me] + sys.argv[1:])
+
     if not os.path.exists(VENV_PY):
         print("first run: creating .venv ...", flush=True)
         subprocess.run([sys.executable, "-m", "venv", os.path.join(ROOT, ".venv")],
                        check=True)
-    print("installing " + ", ".join(DEPS) + " ...", flush=True)
-    subprocess.run([VENV_PY, "-m", "pip", "install", "-q"] + DEPS, check=True)
-    os.environ["_EFFECTS_BOOTSTRAPPED"] = "1"
-    os.execv(VENV_PY, [VENV_PY, os.path.abspath(__file__)] + sys.argv[1:])
+    # hop into the venv first and only install if it turns out to be bare,
+    # so repeat runs cost nothing
+    os.environ["_EFFECTS_BOOTSTRAPPED"] = "venv"
+    os.execv(VENV_PY, [VENV_PY, me] + sys.argv[1:])
 
 
 bootstrap()
 
 import argparse  # noqa: E402
 
+DROP = os.path.join(ROOT, "incoming")
 EFFECTS = ["halftone", "duotone", "riso", "stencil"]
 SIZES = {"entry": (1600, 900), "product": (1200, 1200),
          "offering": (1600, 1000), "social": (1200, 630)}
@@ -77,7 +95,7 @@ def collect(paths):
 
 def main():
     ap = argparse.ArgumentParser(add_help=True)
-    ap.add_argument("inputs", nargs="+")
+    ap.add_argument("inputs", nargs="*", default=[DROP])
     ap.add_argument("--out", default="processed_images")
     ap.add_argument("--size", choices=sorted(SIZES), default="entry")
     ap.add_argument("--w", type=int); ap.add_argument("--h", type=int)
@@ -94,8 +112,11 @@ def main():
     if unknown:
         sys.exit(f"unknown effect(s): {', '.join(unknown)}\nchoose from: {', '.join(EFFECTS)}")
 
-    files = collect(a.inputs)
+    files = collect(a.inputs or [DROP])
     if not files:
+        if not a.inputs or a.inputs == [DROP]:
+            os.makedirs(DROP, exist_ok=True)
+            sys.exit(f"nothing to do — drop images into {DROP}/ and run this again")
         sys.exit("no images found")
     os.makedirs(a.out, exist_ok=True)
 

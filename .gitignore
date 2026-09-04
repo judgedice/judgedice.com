@@ -6,3 +6,5 @@ reports/
 facebook data/
 .venv/
 processed_images/
+incoming/*
+!incoming/README.md
