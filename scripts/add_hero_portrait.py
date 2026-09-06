@@ -57,7 +57,8 @@ section#top > .reveal,section#top > h1{position:relative;z-index:2;}
 
 """
 
-DIV = '<div class="%s" aria-hidden="true" role="presentation"/>' % SENTINEL
+DIV = ('<div class="%s"><img src="__URL__" alt="Judge DiCesaro" '
+       'class="jd-hero-portrait-img" loading="eager" fetchpriority="high"/></div>') % SENTINEL
 
 
 def main(argv):
