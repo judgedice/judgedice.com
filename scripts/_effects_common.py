@@ -72,6 +72,30 @@ def ink_on(base, coverage, colour):
     return base * (1.0 - coverage[:, :, None] * (1.0 - c[None, None, :]))
 
 
+def save_ink(coverage, dst, colour=INK, clear=0.07):
+    """Write ink coverage as a transparent PNG: flat colour, image in alpha.
+
+    Compositing this over a background gives what baking that background in
+    used to give, but the page now chooses it. `clear` drops the faintest ink
+    to fully transparent so paper grain does not print as a wash over the whole
+    frame, then rescales what is left so the darks keep their weight.
+    """
+    import os
+    a = np.clip(coverage, 0, 1)
+    if clear > 0:
+        a = np.clip((a - clear) / (1.0 - clear), 0, 1)
+    h, w = a.shape
+    rgba = np.zeros((h, w, 4), np.uint8)
+    rgba[:, :, 0], rgba[:, :, 1], rgba[:, :, 2] = colour
+    rgba[:, :, 3] = np.clip(a * 255, 0, 255).astype(np.uint8)
+    dst = os.path.splitext(dst)[0] + ".png"
+    d = os.path.dirname(dst)
+    if d:
+        os.makedirs(d, exist_ok=True)
+    Image.fromarray(rgba, "RGBA").save(dst, optimize=True)
+    return dst
+
+
 def save(rgb, dst):
     import os
     d = os.path.dirname(dst)

@@ -7,8 +7,9 @@ Drop images into ./incoming and run it with no arguments:
 
 Each input goes through all four effects and lands in ./processed_images as
 <name>__<effect>.jpg, so one shot comes back as four options side by side.
-Originals in ./incoming are left alone. Reads JPEG, PNG, HEIC straight off a
-phone.
+halftone and duotone write .png instead: they print ink on a transparent
+background, light parts clear, so the page can supply its own. Originals in ./incoming are left
+alone. Reads JPEG, PNG, HEIC straight off a phone.
 
     python3 scripts/process_images.py                      # everything in incoming/
     python3 scripts/process_images.py --size social
@@ -73,6 +74,8 @@ import argparse  # noqa: E402
 
 DROP = os.path.join(ROOT, "incoming")
 EFFECTS = ["halftone", "duotone", "riso", "stencil"]
+# halftone and duotone print ink on transparency, so they have to be PNGs
+EXT = {"halftone": ".png", "duotone": ".png"}
 SIZES = {"entry": (1600, 900), "product": (1200, 1200),
          "offering": (1600, 1000), "social": (1200, 630)}
 READABLE = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".tif", ".tiff", ".webp"}
@@ -126,7 +129,7 @@ def main():
         stem = os.path.splitext(os.path.basename(src))[0]
         print(f"[{i}/{len(files)}] {stem}")
         for effect in chosen:
-            dst = os.path.join(a.out, f"{stem}__{effect}.jpg")
+            dst = os.path.join(a.out, f"{stem}__{effect}{EXT.get(effect, '.jpg')}")
             # seed off the filename so paper texture differs per image but the
             # same input always reproduces the same sheet
             seed = zlib.crc32(stem.encode()) % 9973

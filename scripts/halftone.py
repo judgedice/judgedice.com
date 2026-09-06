@@ -1,13 +1,19 @@
 """Screenprint/halftone treatment matching assets/judge-portrait.jpg.
 
-Output is near-white ground with near-black ink so the page can lay it on
-paper (#F2ECDF) with mix-blend-mode:multiply, the way the hero portrait works.
+Writes a PNG of ink on a transparent background: the dots carry the image in
+the alpha channel and nothing else is painted, so whatever the page puts behind
+it shows through directly. No mix-blend-mode needed — drop it on the paper
+colour (#F2ECDF), on a photo, on anything.
+
+The paper's creases and mottle survive as very faint ink, which is what keeps
+it looking printed rather than cut out.
 
 Usage
 -----
     .venv/bin/python scripts/halftone.py <src> <dst> [options]
 
-Reads JPEG, PNG, HEIC (straight off an iPhone). Writes JPEG.
+Reads JPEG, PNG, HEIC (straight off an iPhone). Always writes PNG —
+the extension on <dst> is corrected to .png if it isn't already.
 
     # an entry cover
     .venv/bin/python scripts/halftone.py shot.HEIC out.jpg --w 1600 --h 900
@@ -27,6 +33,9 @@ Options
     --floor  0.10   darkest ink level. Lower = denser blacks, but past ~0.05 the
                     dots merge and the screen disappears
     --gain   1.30   dot size multiplier
+    --clear  0.07   alpha below this goes fully transparent, so the paper grain
+                    does not print as a wash across the whole frame. Raise it
+                    for a cleaner knock-out, set 0 to keep every speck
 
 Fill the frame when shooting: the screen eats fine detail, so one object edge
 to edge beats a wide shot every time.
@@ -115,21 +124,33 @@ def paper(size, seed=0):
 
 
 def render(src, dst, size, cell=5, contrast=1.10, gamma=1.20, focus=None,
-           seed=0, gain=1.30, floor=0.10, ceil=0.99):
+           seed=0, gain=1.30, floor=0.10, ceil=0.99, clear=0.07):
     im = Image.open(src)
     gray = prep(im, size, focus=focus, contrast=contrast, gamma=gamma,
                 floor=floor, ceil=ceil)
     gray = gray.filter(ImageFilter.UnsharpMask(radius=2, percent=90, threshold=3))
     dots = np.asarray(halftone(gray, cell=cell, gain=gain)).astype(np.float32) / 255.0
     sheet = np.asarray(paper(size, seed=seed)).astype(np.float32) / 255.0
-    plate = dots * sheet                                 # ink multiplied onto paper
+    plate = dots * sheet                                 # 1 = bare, 0 = solid ink
 
-    ink = np.array(INK, np.float32) / 255.0
-    pap = np.array(PAPER, np.float32) / 255.0
-    rgb = ink[None, None, :] + (pap - ink)[None, None, :] * plate[:, :, None]
-    out = Image.fromarray(np.clip(rgb * 255, 0, 255).astype(np.uint8), "RGB")
-    os.makedirs(os.path.dirname(dst), exist_ok=True)
-    out.save(dst, quality=92, subsampling=1)
+    # the plate becomes alpha rather than a painted background: compositing
+    # ink at alpha=(1-plate) over a colour gives exactly what baking that
+    # colour in used to give, but now the page chooses the colour
+    alpha = np.clip(1.0 - plate, 0, 1)
+    # the paper's mottle and grain would otherwise print as a faint wash over
+    # the entire frame; below `clear` the sheet goes properly transparent, and
+    # what is left is rescaled so the dots keep their weight
+    if clear > 0:
+        alpha = np.clip((alpha - clear) / (1.0 - clear), 0, 1)
+    rgba = np.zeros((size[1], size[0], 4), np.uint8)
+    rgba[:, :, 0], rgba[:, :, 1], rgba[:, :, 2] = INK
+    rgba[:, :, 3] = np.clip(alpha * 255, 0, 255).astype(np.uint8)
+
+    dst = os.path.splitext(dst)[0] + ".png"
+    d = os.path.dirname(dst)
+    if d:
+        os.makedirs(d, exist_ok=True)
+    Image.fromarray(rgba, "RGBA").save(dst, optimize=True)
     return dst
 
 
@@ -147,7 +168,8 @@ if __name__ == "__main__":
     p.add_argument("--fy", type=float, default=0.5)
     p.add_argument("--floor", type=float, default=0.10)
     p.add_argument("--ceil", type=float, default=0.99)
+    p.add_argument("--clear", type=float, default=0.07)
     a = p.parse_args()
     print(render(a.src, a.dst, (a.w, a.h), cell=a.cell, contrast=a.contrast,
                  gamma=a.gamma, focus=(a.fx, a.fy), seed=a.seed, gain=a.gain,
-                 floor=a.floor, ceil=a.ceil))
+                 floor=a.floor, ceil=a.ceil, clear=a.clear))
