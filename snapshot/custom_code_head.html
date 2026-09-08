@@ -147,9 +147,11 @@ section#top > .reveal,section#top > h1{position:relative;z-index:2;}
   max-width:none!important;border-radius:0!important;
 }
 @media (max-width:900px){
-  /* narrower frame, gentler shift, and a much longer feather so the portrait
-     reads as texture behind the headline rather than competing with it */
-  .jd-hero-portrait{--portrait-w:78vw;--portrait-shift:4vw;--portrait-pad:3vw;--portrait-feather:38vw;--portrait-opacity:.22;}
+  /* No fade here. The frame goes full-bleed so the image overflows both sides
+     and has no visible edge to hide, which is the only thing the mask was for.
+     Opacity alone keeps the headline readable. */
+  .jd-hero-portrait{--portrait-w:100vw;--portrait-shift:22vw;--portrait-opacity:.55;}
+  .jd-hero-portrait{-webkit-mask-image:none;mask-image:none;}
 }
 
 /* ---- Entries banner (blog index) ---- */
