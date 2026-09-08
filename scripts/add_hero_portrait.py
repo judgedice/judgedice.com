@@ -39,20 +39,34 @@ section#top > .reveal,section#top > h1{position:relative;z-index:2;}
 .jd-hero-portrait{
   --portrait-w:min(62vw,940px);
   --portrait-shift:16vw;   /* pushes the frame right so the near shoulder runs off the page */
-  --portrait-fade:92%;     /* dissolves off the right edge from here */
+  --portrait-feather:20vw; /* how far the left dissolve runs before it is fully opaque */
+  --portrait-lean:95deg;   /* 90deg = vertical edge; 95deg rakes the edge 5° forward */
+  --portrait-pad:5vw;      /* a raked edge travels sideways across the frame's height;
+                              without this pad the fade starts left of the image's own
+                              (vertical) left edge near the bottom and that edge shows */
   --portrait-opacity:.85;
   position:absolute;top:0;right:0;bottom:0;width:var(--portrait-w);
-  background-image:url(__URL__);background-repeat:no-repeat;background-size:cover;
-  background-position:calc(100% + var(--portrait-shift)) center;
-  mix-blend-mode:multiply;opacity:var(--portrait-opacity);
-  pointer-events:none;z-index:1;
-  /* the fade-in must begin exactly where the shifted image begins, or its left
-     edge shows as a hard seam; both are driven by --portrait-shift */
-  -webkit-mask-image:linear-gradient(to right,transparent var(--portrait-shift),#000 calc(var(--portrait-shift) + 15vw),#000 var(--portrait-fade),transparent 100%);
-  mask-image:linear-gradient(to right,transparent var(--portrait-shift),#000 calc(var(--portrait-shift) + 15vw),#000 var(--portrait-fade),transparent 100%);
+  mix-blend-mode:multiply;opacity:var(--portrait-opacity);z-index:1;
+  /* One fade only, on the left: it starts where the shifted image starts (any
+     earlier and the mask wastes its ramp on empty space, any later and the
+     image's own edge shows as a seam). The right side runs hard off the page.
+     The 5° lean makes the dissolve a raked edge rather than a ruled line. */
+  -webkit-mask-image:linear-gradient(var(--portrait-lean),transparent calc(var(--portrait-shift) + var(--portrait-pad)),#000 calc(var(--portrait-shift) + var(--portrait-pad) + var(--portrait-feather)));
+  mask-image:linear-gradient(var(--portrait-lean),transparent calc(var(--portrait-shift) + var(--portrait-pad)),#000 calc(var(--portrait-shift) + var(--portrait-pad) + var(--portrait-feather)));
+}
+/* a real <img> so it can be swapped in the builder (double-click -> Replace).
+   !important guards against the classes Odoo's editor adds on replace
+   (img-fluid sets height:auto, which would collapse the frame). */
+.jd-hero-portrait img{
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:cover!important;
+  object-position:calc(100% + var(--portrait-shift)) center!important;
+  max-width:none!important;border-radius:0!important;
 }
 @media (max-width:900px){
-  .jd-hero-portrait{--portrait-w:72vw;--portrait-shift:6vw;--portrait-opacity:.18;}
+  /* narrower frame, gentler shift, and a much longer feather so the portrait
+     reads as texture behind the headline rather than competing with it */
+  .jd-hero-portrait{--portrait-w:78vw;--portrait-shift:4vw;--portrait-pad:3vw;--portrait-feather:38vw;--portrait-opacity:.22;}
 }
 
 """
