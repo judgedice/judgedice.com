@@ -61,7 +61,10 @@ def carousel(dom_id, id_expr=None):
         % (tgt_attr(), i, ' class="active" aria-current="true"' if i == 0 else "", i + 1)
         for i in range(len(SLIDES)))
     return (
-        '<div %s class="s_jd_quotes carousel carousel-fade slide" data-bs-ride="true" '
+        # s_quotes_carousel is REQUIRED: Odoo's carouselItemOptionSelector is
+        # '.s_carousel .carousel-item, .s_quotes_carousel .carousel-item, ...'
+        # and without a match the add/remove-slide buttons never attach
+        '<div %s class="s_jd_quotes s_quotes_carousel carousel carousel-fade slide" data-bs-ride="true" '
         'data-bs-interval="7000" data-bs-pause="hover">'
         '<div class="carousel-inner">%s</div>'
         # indicators and controls MUST be direct children of .carousel — nested in
@@ -80,12 +83,13 @@ def carousel(dom_id, id_expr=None):
 
 def wrapper(inner, extra_class=""):
     return (
+        # no inner wrapper: CarouselOption uses applyTo ":scope > .carousel",
+        # so the carousel has to be a direct child of the <section>
         '<section class="s_jd_quotes_wrapper %s" data-snippet="s_jd_quotes" '
         'data-name="Judge Quotes">'
-        '<div class="s_jd_quotes_inner">'
         '<div class="s_jd_quotes_label"><span>In their words</span>'
         '<span class="s_jd_rule_fill"/></div>'
-        '%s</div></section>' % (extra_class, inner)
+        '%s</section>' % (extra_class, inner)
     )
 
 

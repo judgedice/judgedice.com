@@ -75,7 +75,13 @@ header#top .jd-nav a{text-decoration:none;}
 .s_jd_quotes_label{display:flex;align-items:center;gap:14px;font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);color:var(--vermilion);margin-bottom:clamp(1.5rem,4vw,2.5rem);}
 .s_jd_quotes .carousel-inner{min-height:clamp(10rem,17vw,14rem);}
 .s_jd_quotes .s_jd_quote_block{margin:0;border-left:2px solid var(--vermilion);padding:0 0 0 clamp(1.25rem,3vw,2.25rem);background:none;}
-.s_jd_quotes .s_jd_quote_text{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.25rem,3.2vw,2.25rem);line-height:1.32;color:var(--ink);margin:0;max-width:34ch;}
+/* style every paragraph in the blockquote, not just .s_jd_quote_text: the
+   editor re-nests text into sibling <p>s when a link is applied, and the quote
+   must not silently drop to body type when that happens */
+.s_jd_quotes .s_jd_quote_block p,
+.s_jd_quotes .s_jd_quote_block p a{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.25rem,3.2vw,2.25rem);line-height:1.32;color:var(--ink);margin:0;max-width:34ch;}
+.s_jd_quotes .s_jd_quote_block p a{text-decoration:none;border-bottom:1px solid var(--line);}
+.s_jd_quotes .s_jd_quote_block p:empty{display:none;}
 .s_jd_quotes .s_jd_quote_cite{font-family:var(--font-serif);font-style:normal;font-size:var(--text-meta);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--ink-faint);margin:clamp(1rem,2.5vw,1.5rem) 0 0;}
 .s_jd_quotes .s_jd_quote_cite strong{color:var(--ink-soft);font-weight:var(--weight-medium);}
 /* Indicators and controls must be DIRECT children of .carousel or Odoo's
