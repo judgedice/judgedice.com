@@ -64,14 +64,16 @@ def carousel(dom_id, id_expr=None):
         '<div %s class="s_jd_quotes carousel carousel-fade slide" data-bs-ride="true" '
         'data-bs-interval="7000" data-bs-pause="hover">'
         '<div class="carousel-inner">%s</div>'
-        '<div class="s_jd_quotes_controls o_not_editable" contenteditable="false">'
-        '<div class="carousel-indicators s_jd_quotes_dots">%s</div>'
-        '<div class="s_jd_quotes_arrows">'
-        '<button class="carousel-control-prev" type="button" %s data-bs-slide="prev" '
+        # indicators and controls MUST be direct children of .carousel — nested in
+        # a wrapper, Odoo's add/remove-slide options cannot find them and no-op
+        '<div class="carousel-indicators s_jd_quotes_dots o_not_editable">%s</div>'
+        '<button class="carousel-control-prev o_not_editable" contenteditable="false" '
+        'type="button" %s data-bs-slide="prev" '
         'aria-label="Previous quote"><span aria-hidden="true">&#8592;</span></button>'
-        '<button class="carousel-control-next" type="button" %s data-bs-slide="next" '
+        '<button class="carousel-control-next o_not_editable" contenteditable="false" '
+        'type="button" %s data-bs-slide="next" '
         'aria-label="Next quote"><span aria-hidden="true">&#8594;</span></button>'
-        '</div></div></div>'
+        '</div>'
         % (id_attr, slides, dots, tgt_attr(), tgt_attr())
     )
 
