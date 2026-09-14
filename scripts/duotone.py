@@ -14,17 +14,20 @@ and the page's own background shows through them.
     --lift  0.06    veils the shadows the way ink sinks into uncoated paper
     --clear 0.07    alpha below this goes fully transparent, so grain does not
                     print as a wash. Raise for a cleaner knock-out, 0 keeps all
+    --vignette 0.35 where the corners start fading to clear, as a fraction of
+                    the corner distance. Lower bites further in; 1.0 disables
+    --vstrength 1.0 how far that fade goes; 1.0 is fully transparent corners
 """
 import argparse
 import numpy as np
 from PIL import ImageFilter, Image
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from _effects_common import tone, sheet, save_ink, base_args, INK
+from _effects_common import tone, sheet, save_ink, fade_corners, base_args, INK
 
 
 def render(src, dst, size, focus=(.5, .5), seed=0, contrast=1.10, gamma=1.20,
-           grain=0.045, lift=0.06, clear=0.07):
+           grain=0.045, lift=0.06, clear=0.07, vignette=0.35, vstrength=1.0):
     t = tone(src, size, focus=focus, contrast=contrast, gamma=gamma,
              floor=0.04, ceil=1.0)
     rng = np.random.default_rng(seed + 991)
@@ -38,6 +41,11 @@ def render(src, dst, size, focus=(.5, .5), seed=0, contrast=1.10, gamma=1.20,
     # the sheet's creases and mottle stay in, as faint ink rather than as a
     # painted background, so it still reads as printed
     cov = np.clip(cov + (1.0 - sheet(size, seed=seed)), 0, 1)
+
+    # last, so the grain and creases above cannot re-ink what this clears: a
+    # source that is dark at the edges would otherwise print a black vignette
+    if vignette < 1.0 and vstrength > 0:
+        cov = fade_corners(cov, start=vignette, strength=vstrength)
     return save_ink(cov, dst, INK, clear=clear)
 
 
@@ -46,7 +54,9 @@ if __name__ == "__main__":
     p.add_argument("--grain", type=float, default=0.045)
     p.add_argument("--lift", type=float, default=0.06)
     p.add_argument("--clear", type=float, default=0.07)
+    p.add_argument("--vignette", type=float, default=0.35)
+    p.add_argument("--vstrength", type=float, default=1.0)
     a = p.parse_args()
     print(render(a.src, a.dst, (a.w, a.h), focus=(a.fx, a.fy), seed=a.seed,
                  contrast=a.contrast, gamma=a.gamma, grain=a.grain, lift=a.lift,
-                 clear=a.clear))
+                 clear=a.clear, vignette=a.vignette, vstrength=a.vstrength))

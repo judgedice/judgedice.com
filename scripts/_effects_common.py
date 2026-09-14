@@ -63,6 +63,29 @@ def sheet(size, seed=0, folds=True):
     return np.asarray(img).astype(np.float32) / 255.0
 
 
+def fade_corners(coverage, start=0.35, strength=1.0):
+    """Fade ink away toward the corners so they knock out to transparent.
+
+    Photos carry their own dark edges — lens vignetting, a shadowed background —
+    and the tone stretch turns those into near-solid ink once the plate is a
+    coverage map. That reads as a black-cornered vignette. This does the
+    opposite: coverage falls off on an ellipse that reaches the corners, so the
+    frame dissolves into the page instead of sealing itself in.
+
+    `start` is where the fade begins as a fraction of the corner distance
+    (0.35 gives a long, gradual dissolve); `strength` 1.0 takes the corners to
+    fully clear, lower values leave a ghost. Apply LAST, after every ink
+    contribution, or paper texture will re-ink what this cleared.
+    """
+    h, w = coverage.shape
+    y = np.linspace(-1, 1, h, dtype=np.float32)[:, None]
+    x = np.linspace(-1, 1, w, dtype=np.float32)[None, :]
+    r = np.sqrt(x * x + y * y) / np.sqrt(2.0)      # 0 at centre, 1 at corners
+    f = np.clip((r - start) / max(1e-6, 1.0 - start), 0, 1)
+    f = f * f * (3.0 - 2.0 * f)                    # smoothstep, no hard ring
+    return np.clip(coverage * (1.0 - strength * f), 0, 1)
+
+
 def ink_on(base, coverage, colour):
     """Multiply one ink plate onto whatever is already there.
 
