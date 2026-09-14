@@ -9,6 +9,7 @@
         <t t-snippet="website.s_jd_cards" string="Cards" group="judge"/>
         <t t-snippet="website.s_jd_quotes" string="Quotes" group="judge"/>
         <t t-snippet="website.s_jd_swath" string="Swath" group="judge"/>
+        <t t-snippet="website.s_jd_quote_page" string="Quote Page" group="judge"/>
         <t t-snippet="website.s_jd_rule" string="Rule" group="judge"/>
     </xpath>
 </data>

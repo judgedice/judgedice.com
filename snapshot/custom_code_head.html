@@ -176,4 +176,54 @@ section#top > .reveal,section#top > h1{position:relative;z-index:2;}
 /* paper at 72% so Judge's cover photo reads through the letterforms */
 #wrap .o_wblog_post_title .text-white h1.o_wblog_post_name{color:rgba(242,236,223,.72)!important;opacity:1;text-shadow:0 2px 22px rgba(0,0,0,.35);}
 #wrap .o_wblog_post_title .text-white .o_wblog_post_subtitle{color:var(--paper)!important;opacity:.95;font-style:italic;text-shadow:0 1px 12px rgba(0,0,0,.5);}
+
+/* ---- Judge Quote Page (s_jd_quote_page) ---- */
+/* Odoo paints the builder-chosen background image onto the <section> itself, and
+   a background-image covers that element's own background-color — so the veil
+   has to be a separate child, and the colour-combination class on the section is
+   what decides whether that veil is paper or ink. */
+.s_jd_quotepage{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;min-height:60vh;padding:clamp(6rem,18vh,12rem) var(--page-gutter);background-size:cover;background-position:center;}
+.s_jd_quotepage_scrim{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.s_jd_quotepage_inner{position:relative;z-index:1;width:100%;max-width:var(--content-max);margin:0 auto;text-align:center;}
+.s_jd_quotepage_block{margin:0;border:none;padding:0;background:none;}
+
+/* Light presets veil the photo with paper and set ink type; dark presets invert
+   it. Picking a preset in the builder's Background panel IS the light/dark
+   switch — presets 1 and 5 are the two ends, 2-4 are intermediate. */
+.s_jd_quotepage.o_cc1 .s_jd_quotepage_scrim,
+.s_jd_quotepage.o_cc2 .s_jd_quotepage_scrim,
+.s_jd_quotepage.o_cc3 .s_jd_quotepage_scrim{background:rgba(242,236,223,.72);}
+.s_jd_quotepage.o_cc4 .s_jd_quotepage_scrim,
+.s_jd_quotepage.o_cc5 .s_jd_quotepage_scrim{background:rgba(16,12,8,.62);}
+
+/* every <p> in the blockquote, not just .s_jd_quotepage_text: the editor
+   re-nests text into sibling <p>s when a link is applied, and the quote would
+   silently drop to body type if only the first were styled (see .s_jd_quotes) */
+.s_jd_quotepage .s_jd_quotepage_block p,
+.s_jd_quotepage .s_jd_quotepage_block p a{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.75rem,5vw,3.5rem);line-height:1.18;letter-spacing:-0.01em;margin:0 auto;max-width:26ch;text-wrap:balance;}
+.s_jd_quotepage .s_jd_quotepage_block p a{text-decoration:none;border-bottom:1px solid currentColor;}
+.s_jd_quotepage .s_jd_quotepage_block p:empty{display:none;}
+.s_jd_quotepage .s_jd_quotepage_cite{font-family:var(--font-serif);font-style:normal;font-size:var(--text-meta);text-transform:uppercase;letter-spacing:var(--tracking-label);margin:clamp(1.25rem,3vw,2rem) 0 0;}
+.s_jd_quotepage .s_jd_quotepage_cite strong{font-weight:var(--weight-medium);}
+
+.s_jd_quotepage.o_cc1 .s_jd_quotepage_block p,
+.s_jd_quotepage.o_cc2 .s_jd_quotepage_block p,
+.s_jd_quotepage.o_cc3 .s_jd_quotepage_block p{color:var(--ink);}
+.s_jd_quotepage.o_cc1 .s_jd_quotepage_cite,
+.s_jd_quotepage.o_cc2 .s_jd_quotepage_cite,
+.s_jd_quotepage.o_cc3 .s_jd_quotepage_cite{color:var(--ink-faint);}
+.s_jd_quotepage.o_cc1 .s_jd_quotepage_cite strong,
+.s_jd_quotepage.o_cc2 .s_jd_quotepage_cite strong,
+.s_jd_quotepage.o_cc3 .s_jd_quotepage_cite strong{color:var(--ink-soft);}
+.s_jd_quotepage.o_cc4 .s_jd_quotepage_block p,
+.s_jd_quotepage.o_cc5 .s_jd_quotepage_block p{color:var(--paper);}
+.s_jd_quotepage.o_cc4 .s_jd_quotepage_cite,
+.s_jd_quotepage.o_cc5 .s_jd_quotepage_cite{color:rgba(242,236,223,.62);}
+.s_jd_quotepage.o_cc4 .s_jd_quotepage_cite strong,
+.s_jd_quotepage.o_cc5 .s_jd_quotepage_cite strong{color:var(--paper);}
+
+@media (max-width:767.98px){
+.s_jd_quotepage{min-height:50vh;padding:clamp(4rem,12vh,7rem) var(--page-gutter);}
+.s_jd_quotepage .s_jd_quotepage_block p{max-width:none;}
+}
 </style>
