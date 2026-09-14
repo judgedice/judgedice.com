@@ -1,0 +1,8 @@
+<data inherit_id="website_blog.post_cover_image" name="Entries card: title + date reversed into the cover" active="True">
+    <xpath expr="//t[@t-call='website_blog.post_author']" position="replace">
+        <div class="jd-cover-meta o_list_cover o_not_editable position-relative d-flex align-items-baseline flex-wrap w-100">
+            <span class="jd-cover-title" t-out="blog_post.name"/>
+            <time class="jd-cover-date" t-field="blog_post.post_date" t-options="{'widget': 'datetime', 'date_only': 'true', 'format': 'medium'}"/>
+        </div>
+    </xpath>
+</data>

@@ -226,4 +226,78 @@ section#top > .reveal,section#top > h1{position:relative;z-index:2;}
 .s_jd_quotepage{min-height:50vh;padding:clamp(4rem,12vh,7rem) var(--page-gutter);}
 .s_jd_quotepage .s_jd_quotepage_block p{max-width:none;}
 }
+
+
+/* jd-entries-index:start */
+/* ---- Entries index: title in the cover, search in the hero ---- */
+/* NB these are ID selectors on purpose: the DOM carries o_wblog_posts_loop and
+   o_wblog_blog_top as ids, not classes. */
+
+/* The cover carries no filter layer, so reversed type needs its own ground:
+   a scrim that fades out before it reaches the middle of the picture. */
+#wrap #o_wblog_posts_loop .jd-cover-meta{
+  margin-top:auto;
+  gap:.7rem;
+  padding:3.25rem 1.1rem 1rem;
+  background:linear-gradient(to top,rgba(16,12,8,.74) 0%,rgba(16,12,8,.46) 46%,rgba(16,12,8,0) 100%);
+}
+#wrap #o_wblog_posts_loop .jd-cover-title{
+  font-family:var(--font-display);
+  font-weight:var(--weight-regular);
+  text-transform:uppercase;
+  font-size:clamp(1.25rem,2.1vw,1.625rem);
+  line-height:1.04;
+  letter-spacing:.005em;
+  color:var(--paper);
+  text-shadow:0 1px 14px rgba(0,0,0,.55);
+}
+#wrap #o_wblog_posts_loop .jd-cover-date{
+  font-family:var(--font-serif);
+  font-size:var(--text-meta);
+  text-transform:uppercase;
+  letter-spacing:var(--tracking-label);
+  color:var(--paper);
+  opacity:.72;
+  white-space:nowrap;
+  text-shadow:0 1px 10px rgba(0,0,0,.6);
+}
+
+/* category eyebrow: smaller, and now sitting above the teaser */
+#wrap #o_wblog_posts_loop .o_wblog_post_short_tag_section{padding-top:0;margin-bottom:.3rem;}
+#wrap #o_wblog_posts_loop .o_wblog_post_short_tag_section .o_tag{
+  font-size:.6875rem;
+  letter-spacing:var(--tracking-label);
+  padding:.22rem .5rem;
+}
+
+/* search bar lifted into the hero, just inside its top edge */
+#wrap #o_wblog_blog_top{position:relative;}
+/* Odoo's theme paints .navbar solid white; over the hero it has to be glass. */
+#wrap #o_wblog_blog_top > nav.navbar{
+  position:absolute;top:var(--space-6);left:0;right:0;z-index:3;
+  background:transparent!important;border:0!important;
+  padding-top:0!important;padding-bottom:0!important;
+}
+#wrap #o_wblog_blog_top .o_searchbar_form{max-width:24rem;margin-left:auto;margin-right:0;}
+#wrap #o_wblog_blog_top .oe_search_box,
+#wrap #o_wblog_blog_top .oe_search_button{
+  background:color-mix(in srgb,var(--paper) 90%,transparent)!important;
+  border:1px solid var(--line-strong)!important;
+  border-radius:0;
+  color:var(--ink);
+}
+#wrap #o_wblog_blog_top .oe_search_button{border-left:0!important;}
+#wrap #o_wblog_blog_top .oe_search_box{
+  font-family:var(--font-serif);font-size:var(--text-small);
+}
+#wrap #o_wblog_blog_top .oe_search_box::placeholder{
+  color:var(--ink-soft);opacity:1;font-style:italic;
+}
+/* on a phone the hero is short and the blog title fills it - let the search
+   fall back below the hero instead of sitting on top of the title */
+@media (max-width:767.98px){
+  #wrap #o_wblog_blog_top > nav.navbar{position:static;padding:1rem 0 0!important;background:var(--paper)!important;}
+  #wrap #o_wblog_blog_top .o_searchbar_form{max-width:none;margin-left:0;}
+}
+/* jd-entries-index:end */
 </style>

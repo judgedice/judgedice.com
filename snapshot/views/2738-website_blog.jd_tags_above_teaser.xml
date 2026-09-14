@@ -1,0 +1,5 @@
+<data inherit_id="website_blog.post_teaser" name="Entries card: category eyebrow above the teaser" active="True">
+    <xpath expr="//a[@class='text-reset text-decoration-none']" position="before">
+        <xpath expr="//div[contains(@class, 'o_wblog_post_short_tag_section')]" position="move"/>
+    </xpath>
+</data>

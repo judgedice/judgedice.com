@@ -187,5 +187,49 @@
     "inherit_id": false,
     "mode": "primary",
     "active": true
+  },
+  {
+    "id": 2736,
+    "name": "Entries card: title + date reversed into the cover",
+    "key": "website_blog.jd_cover_title_overlay",
+    "inherit_id": [
+      2208,
+      "post_cover_image"
+    ],
+    "mode": "extension",
+    "active": true
+  },
+  {
+    "id": 2737,
+    "name": "Entries card: drop heading + date footer (both now in the cover)",
+    "key": "website_blog.jd_posts_loop_no_dup_meta",
+    "inherit_id": [
+      2205,
+      "Posts List"
+    ],
+    "mode": "extension",
+    "active": true
+  },
+  {
+    "id": 2738,
+    "name": "Entries card: category eyebrow above the teaser",
+    "key": "website_blog.jd_tags_above_teaser",
+    "inherit_id": [
+      2209,
+      "post_teaser"
+    ],
+    "mode": "extension",
+    "active": true
+  },
+  {
+    "id": 2739,
+    "name": "Entries index: search bar inside the hero",
+    "key": "website_blog.jd_search_in_hero",
+    "inherit_id": [
+      2215,
+      "Blog Posts"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]

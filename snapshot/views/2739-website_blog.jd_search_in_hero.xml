@@ -1,0 +1,9 @@
+<data inherit_id="website_blog.blog_post_short" name="Entries index: search bar inside the hero" active="True">
+    <xpath expr="//div[@id='o_wblog_blog_top']" position="inside">
+        <xpath expr="//t[@t-call='website_blog.blogs_nav']" position="move"/>
+    </xpath>
+    <xpath expr="//t[@t-call='website_blog.blogs_nav']" position="inside">
+        <t t-set="additionnal_classes" t-value="''"/>
+        <t t-set="placeholder">find an entry</t>
+    </xpath>
+</data>

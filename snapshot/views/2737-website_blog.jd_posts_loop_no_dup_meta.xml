@@ -1,0 +1,4 @@
+<data inherit_id="website_blog.posts_loop" name="Entries card: drop heading + date footer (both now in the cover)" active="True">
+    <xpath expr="//div[contains(@t-att-class, 'card-body px-2 py-0 mb-2')]/t[@t-call='website_blog.post_heading']" position="replace"/>
+    <xpath expr="//div[t[@t-call='website_blog.post_info']][contains(@t-attf-class, 'o_wblog_normalize_font')]" position="replace"/>
+</data>
