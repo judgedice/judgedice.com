@@ -1,19 +1,14 @@
 <data inherit_id="website.layout" name="Default" active="True">
     <xpath expr="//div[@id='footer']" position="replace">
-        <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
-            <section class="s_text_block jd-footer" data-snippet="s_text_block" data-name="Footer">
-                <div class="jd-footer-top">
-                    <a class="jd-footer-mark" href="/">Judge<span class="jd-dot">.</span></a>
-                    <a class="jd-footer-cta" href="/offerings">Start with a consult <span class="jd-arrow" aria-hidden="true">→</span></a>
-                </div>
-            </section>
-        </div>
+        <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer"/>
     </xpath>
     <xpath expr="//div[hasclass('o_footer_copyright')]" position="replace">
         <div class="o_footer_copyright o_colored_level o_cc jd-footer-base" data-name="Copyright">
             <div class="jd-footer-baseinner">
+                <a class="jd-footer-mark" href="/">Judge<span class="jd-dot">.</span></a>
                 <span class="jd-footer-tagline">Delivering Joy since the turn of the Century</span>
                 <span class="jd-footer-copy">© <t t-out="datetime.date.today().year"/> Judge DiCesaro</span>
+                <a class="jd-footer-cta" href="/offerings">Start with a consult <span class="jd-arrow" aria-hidden="true">→</span></a>
             </div>
         </div>
     </xpath>
