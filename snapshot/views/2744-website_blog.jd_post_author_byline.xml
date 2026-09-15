@@ -1,0 +1,8 @@
+<data inherit_id="website_blog.post_author" name="Entry byline: just 'Judge'" active="True">
+    <xpath expr="//span[@t-field='blog_post.author_id']" position="replace">
+        <span t-if="editable">Judge</span>
+    </xpath>
+    <xpath expr="//span[@t-out='blog_post.author_name']" position="replace">
+        <span t-else="">Judge</span>
+    </xpath>
+</data>

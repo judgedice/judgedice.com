@@ -16,8 +16,18 @@ Three changes Judge asked for on /blog/entries-1/<post>:
   3. pullquotes gain a left margin, so the whole quote indents, vermilion rule
      included, rather than only its text.
 
-The blog name is left exactly as Judge wrote it ("entries...") and the divider
-is left as Bootstrap's.
+Then a second round: drop the bouncing jump arrow and the clock icon, weight up
+the subtitle and the pullquote, rename the blog to "Entries", and cut the byline
+to "Judge".
+
+That byline is not a name field. Partner 3 is already named "Judge DiCesaro" —
+"Half a Glass, Judge DiCesaro" is Odoo's composed display_name, because the
+contact sits under the Half a Glass parent company. That partner carries a sale
+order, so it is left untouched and the byline is overridden in the template. The
+consequence is that the byline is now fixed text: a guest author would also read
+"Judge".
+
+The divider is left as Bootstrap's.
 
 Idempotent: the view is keyed and skipped if present, the CSS block is
 delimited and refreshed in place. Dry-run by default; pass --apply to write.
@@ -47,6 +57,20 @@ VIEW_ARCH = '''<data inherit_id="website_blog.post_breadcrumbs" name="Entry brea
         </t>
     </xpath>
 </data>'''
+
+BYLINE_KEY = "website_blog.jd_post_author_byline"
+BYLINE_PARENT = "website_blog.post_author"
+BYLINE_NAME = "Entry byline: just 'Judge'"
+BYLINE_ARCH = '''<data inherit_id="website_blog.post_author" name="Entry byline: just 'Judge'" active="True">
+    <xpath expr="//span[@t-field='blog_post.author_id']" position="replace">
+        <span t-if="editable">Judge</span>
+    </xpath>
+    <xpath expr="//span[@t-out='blog_post.author_name']" position="replace">
+        <span t-else="">Judge</span>
+    </xpath>
+</data>'''
+
+BLOG_ID, BLOG_NAME = 1, "Entries"
 
 CSS = '''
 /* jd-post-page:start */
@@ -80,8 +104,36 @@ CSS = '''
 #wrap #o_wblog_post_content .breadcrumb a{text-decoration:none;}
 #wrap #o_wblog_post_content .breadcrumb a:hover{color:var(--vermilion);}
 
-/* pullquote: indent the whole quote, vermilion rule and all, not just the text */
+/* The pull quote on an entry is the standfirst, p.jd-standfirst - there are no
+   <blockquote>s in these posts. It also has to out-specify
+   `#wrap #o_wblog_post_content p` (two ids), which is what actually sets its
+   size today and why the .jd-standfirst rule further up never bites; hence the
+   tag+class on the end. Indented as a whole, rule included, and given size and
+   weight so it reads as a pull quote rather than a faint caption. */
+#wrap #o_wblog_post_content p.jd-standfirst{
+  font-size:1.3125rem;
+  font-weight:var(--weight-regular);
+  line-height:1.5;
+  margin-left:2rem;
+}
+
+/* real <blockquote>s, should an entry ever use one, get the same treatment */
 #wrap #o_wblog_post_content blockquote{margin-left:2rem;}
+#wrap #o_wblog_post_content blockquote p{
+  font-size:1.3125rem;
+  font-weight:var(--weight-regular);
+  line-height:1.5;
+}
+
+/* the subtitle carries a little more weight against the photo behind it */
+#wrap #o_wblog_post_top .o_wblog_post_subtitle{font-weight:var(--weight-medium);}
+
+/* Odoo's bouncing scroll-down arrow, and the clock glyph in front of the date.
+   Hidden rather than removed from the templates: both are stock options Judge
+   may want back, and display:none takes them out of the accessibility tree too,
+   so neither is announced. */
+#wrap #o_wblog_post_content_jump{display:none!important;}
+#wrap #o_wblog_post_info .fa-clock-o{display:none!important;}
 /* jd-post-page:end */
 '''
 
@@ -113,7 +165,43 @@ def main(apply_):
             print("  %-36s would-create (inherits %s=%s)"
                   % (VIEW_KEY, VIEW_PARENT, parent[0]["id"]))
 
-    # 2. css
+    # 2. byline view
+    ET.fromstring(BYLINE_ARCH)
+    existing = call("ir.ui.view", "search_read", [["key", "=", BYLINE_KEY]], fields=["id"])
+    if existing:
+        print("  %-36s exists as view %s" % (BYLINE_KEY, existing[0]["id"]))
+    else:
+        parent = call("ir.ui.view", "search_read",
+                      [["key", "=", BYLINE_PARENT], ["website_id", "=", False]], fields=["id"])
+        assert parent, "parent view not found: %s" % BYLINE_PARENT
+        if apply_:
+            vid = call("ir.ui.view", "create", {
+                "key": BYLINE_KEY, "name": BYLINE_NAME, "type": "qweb", "mode": "extension",
+                "inherit_id": parent[0]["id"], "website_id": SITE,
+                "active": True, "priority": 16, "arch": BYLINE_ARCH,
+            })
+            back = call("ir.ui.view", "read", [vid], fields=["website_id", "arch_db"])[0]
+            assert back["website_id"][0] == SITE, "view %s is not on site 2!" % vid
+            ET.fromstring(back["arch_db"])
+            print("  %-36s created as view %s, verified" % (BYLINE_KEY, vid))
+        else:
+            print("  %-36s would-create (inherits %s=%s)"
+                  % (BYLINE_KEY, BYLINE_PARENT, parent[0]["id"]))
+
+    # 3. blog name. Both spellings slugify to "entries-1", so the URL does not move.
+    blog = call("blog.blog", "read", [BLOG_ID], ["name", "website_id"])[0]
+    assert blog["website_id"][0] == SITE, "blog %s is not on site 2!" % BLOG_ID
+    if blog["name"] == BLOG_NAME:
+        print("  blog %s already named %r" % (BLOG_ID, BLOG_NAME))
+    elif apply_:
+        call("blog.blog", "write", [BLOG_ID], {"name": BLOG_NAME})
+        back = call("blog.blog", "read", [BLOG_ID], ["name"])[0]["name"]
+        assert back == BLOG_NAME, "blog rename readback failed"
+        print("  blog %s renamed %r -> %r, verified" % (BLOG_ID, blog["name"], BLOG_NAME))
+    else:
+        print("  would-rename blog %s %r -> %r" % (BLOG_ID, blog["name"], BLOG_NAME))
+
+    # 4. css
     head = call("website", "read", [SITE], ["custom_code_head"])[0]["custom_code_head"] or ""
     if CSS_START in head:
         assert CSS_END in head, "css start marker without end marker - fix by hand"

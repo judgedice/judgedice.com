@@ -332,7 +332,35 @@ section#top > .reveal,section#top > h1{position:relative;z-index:2;}
 #wrap #o_wblog_post_content .breadcrumb a{text-decoration:none;}
 #wrap #o_wblog_post_content .breadcrumb a:hover{color:var(--vermilion);}
 
-/* pullquote: indent the whole quote, vermilion rule and all, not just the text */
+/* The pull quote on an entry is the standfirst, p.jd-standfirst - there are no
+   <blockquote>s in these posts. It also has to out-specify
+   `#wrap #o_wblog_post_content p` (two ids), which is what actually sets its
+   size today and why the .jd-standfirst rule further up never bites; hence the
+   tag+class on the end. Indented as a whole, rule included, and given size and
+   weight so it reads as a pull quote rather than a faint caption. */
+#wrap #o_wblog_post_content p.jd-standfirst{
+  font-size:1.3125rem;
+  font-weight:var(--weight-regular);
+  line-height:1.5;
+  margin-left:2rem;
+}
+
+/* real <blockquote>s, should an entry ever use one, get the same treatment */
 #wrap #o_wblog_post_content blockquote{margin-left:2rem;}
+#wrap #o_wblog_post_content blockquote p{
+  font-size:1.3125rem;
+  font-weight:var(--weight-regular);
+  line-height:1.5;
+}
+
+/* the subtitle carries a little more weight against the photo behind it */
+#wrap #o_wblog_post_top .o_wblog_post_subtitle{font-weight:var(--weight-medium);}
+
+/* Odoo's bouncing scroll-down arrow, and the clock glyph in front of the date.
+   Hidden rather than removed from the templates: both are stock options Judge
+   may want back, and display:none takes them out of the accessibility tree too,
+   so neither is announced. */
+#wrap #o_wblog_post_content_jump{display:none!important;}
+#wrap #o_wblog_post_info .fa-clock-o{display:none!important;}
 /* jd-post-page:end */
 </style>

@@ -256,5 +256,16 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2744,
+    "name": "Entry byline: just 'Judge'",
+    "key": "website_blog.jd_post_author_byline",
+    "inherit_id": [
+      2192,
+      "post_author"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]
