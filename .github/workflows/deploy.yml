@@ -4,6 +4,18 @@ on:
   push:
     branches: [main]
     paths: ['snapshot/**']
+  # Manual runs exist to verify the pipeline without inventing a commit.
+  # They default to a dry-run over *every* snapshot file, which is the
+  # "is live still in sync with the repo?" check.
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Write to Odoo (leave unchecked for a dry-run check)'
+        type: boolean
+        default: false
+      base:
+        description: 'Commit to drift-check against'
+        default: 'HEAD'
 
 # never run two deploys at once; a queued deploy supersedes an unstarted one
 concurrency:
@@ -18,19 +30,25 @@ jobs:
         with:
           fetch-depth: 0  # deploy.py needs the base commit for the drift guard
 
-      - name: Compute changed snapshot files
+      - name: Compute snapshot files to deploy
         id: diff
         run: |
-          BASE="${{ github.event.before }}"
-          # first push / force push: event.before is unusable — fall back to parent
-          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ] \
-             || ! git cat-file -e "$BASE" 2>/dev/null; then
-            BASE=$(git rev-parse HEAD^ 2>/dev/null || git rev-parse HEAD)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # Manual: check everything the repo tracks against the chosen base.
+            BASE="${{ inputs.base }}"
+            FILES=$(git ls-files -- 'snapshot/**' | tr '\n' ' ')
+          else
+            BASE="${{ github.event.before }}"
+            # first push / force push: event.before is unusable — fall back to parent
+            if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ] \
+               || ! git cat-file -e "$BASE" 2>/dev/null; then
+              BASE=$(git rev-parse HEAD^ 2>/dev/null || git rev-parse HEAD)
+            fi
+            FILES=$(git diff --name-only "$BASE" "${{ github.sha }}" -- snapshot/ | tr '\n' ' ')
           fi
-          FILES=$(git diff --name-only "$BASE" "${{ github.sha }}" -- snapshot/ | tr '\n' ' ')
           echo "base=$BASE" >> "$GITHUB_OUTPUT"
           echo "files=$FILES" >> "$GITHUB_OUTPUT"
-          echo "base=$BASE files=$FILES"
+          echo "event=${{ github.event_name }} base=$BASE files=$FILES"
 
       - name: Deploy changed files
         if: steps.diff.outputs.files != ''
@@ -44,5 +62,11 @@ jobs:
             echo "::warning::Odoo secrets not configured (Settings > Secrets > Actions) — skipping deploy"
             exit 0
           fi
-          python3 scripts/deploy.py --base "${{ steps.diff.outputs.base }}" --apply \
+          # A manual run only writes when 'apply' was ticked; a push always writes.
+          APPLY="--apply"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.apply }}" != "true" ]; then
+            APPLY=""
+            echo "::notice::Dry-run — re-run with 'apply' ticked to write to Odoo"
+          fi
+          python3 scripts/deploy.py --base "${{ steps.diff.outputs.base }}" $APPLY \
             ${{ steps.diff.outputs.files }}
