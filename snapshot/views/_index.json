@@ -173,14 +173,6 @@
     "active": true
   },
   {
-    "id": 2734,
-    "name": "record_cover",
-    "key": "website.record_cover",
-    "inherit_id": false,
-    "mode": "primary",
-    "active": true
-  },
-  {
     "id": 2735,
     "name": "Judge Quote Page",
     "key": "website.s_jd_quote_page",
