@@ -15,7 +15,7 @@ Personal-brand site + tribute-writing business for Judge DiCesaro, running as **
 
 ## Workflow
 
-`snapshot/` mirrors the live site-2 state and is the GitOps source of truth: edit → commit → push deploys via `.github/workflows/deploy.yml` + `scripts/deploy.py` (drift-guarded; recover from DRIFT by running snapshot.py and committing). Direct XML-RPC writes via scripts are the fallback while Actions secrets are unset.
+`snapshot/` mirrors the live site-2 state and is the GitOps source of truth: edit → commit → push deploys via `.github/workflows/deploy.yml` + `scripts/deploy.py` (drift-guarded; recover from DRIFT by running snapshot.py and committing). **Actions secrets are configured and the pipeline is live**: any push to `main` touching `snapshot/**` deploys those files with `--apply`. Direct XML-RPC writes via `deploy.py`/builders are for applying a change immediately; the push that follows then no-ops (`live already matches`). Live is authoritative for content — a builder edit you haven't snapshotted makes the push fail DRIFT rather than overwrite it.
 
 Scripts (all load `.env`, talk XML-RPC): `odoo.py` connector · `snapshot.py` (read-only mirror) · `deploy.py` (push snapshot→live) · `build_blocks.py` (Judge snippet kit) · `morning_check.py` (read-only daily brief → `reports/morning.html`, published as the "Morning Docket" artifact).
 
