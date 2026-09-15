@@ -245,5 +245,16 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2743,
+    "name": "Entry breadcrumb: lead with Home, carry the category",
+    "key": "website_blog.jd_post_breadcrumb",
+    "inherit_id": [
+      2193,
+      "post_breadcrumbs"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]

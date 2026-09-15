@@ -1,0 +1,13 @@
+<data inherit_id="website_blog.post_breadcrumbs" name="Entry breadcrumb: lead with Home, carry the category" active="True">
+    <xpath expr="//li[@class='breadcrumb-item']" position="before">
+        <li class="breadcrumb-item d-none d-lg-inline"><a href="/">Home</a></li>
+    </xpath>
+    <xpath expr="//li[contains(@class, 'active')]" position="before">
+        <t t-if="blog_post.tag_ids">
+            <t t-set="jd_bc_tag" t-value="blog_post.tag_ids[0]"/>
+            <li class="breadcrumb-item d-none d-lg-inline">
+                <a t-attf-href="#{blog_url(tag=slug(jd_bc_tag), date_begin=False, date_end=False)}" t-out="jd_bc_tag.name"/>
+            </li>
+        </t>
+    </xpath>
+</data>

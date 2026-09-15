@@ -300,4 +300,39 @@ section#top > .reveal,section#top > h1{position:relative;z-index:2;}
   #wrap #o_wblog_blog_top .o_searchbar_form{max-width:none;margin-left:0;}
 }
 /* jd-entries-index:end */
+
+/* jd-post-page:start */
+/* ---- Entry (blog post) page ---- */
+/* The title sits on the cover photo, so it has to reverse out of it. The
+   Entries block above paints this h1 with var(--ink); the index banner escapes
+   that via its .text-white rules, the post cover has no such class. Scoped to
+   #o_wblog_post_top, which wraps the post cover and is absent on the index. */
+#wrap #o_wblog_post_top .o_wblog_post_name{
+  color:var(--paper)!important;
+  text-shadow:0 2px 18px rgba(0,0,0,.45);
+}
+#wrap #o_wblog_post_top .o_wblog_post_subtitle{
+  color:var(--paper)!important;
+  opacity:.92;
+  text-shadow:0 1px 12px rgba(0,0,0,.5);
+}
+
+/* breadcrumb: quieter and smaller than the prose it sits above */
+#wrap #o_wblog_post_content .breadcrumb{
+  font-family:var(--font-serif);
+  font-size:var(--text-meta);
+  font-weight:var(--weight-regular);
+  margin-bottom:var(--space-4);
+}
+#wrap #o_wblog_post_content .breadcrumb a,
+#wrap #o_wblog_post_content .breadcrumb .active span,
+#wrap #o_wblog_post_content .breadcrumb .breadcrumb-item::before{
+  color:var(--ink-faint);
+}
+#wrap #o_wblog_post_content .breadcrumb a{text-decoration:none;}
+#wrap #o_wblog_post_content .breadcrumb a:hover{color:var(--vermilion);}
+
+/* pullquote: indent the whole quote, vermilion rule and all, not just the text */
+#wrap #o_wblog_post_content blockquote{margin-left:2rem;}
+/* jd-post-page:end */
 </style>
