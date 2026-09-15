@@ -102,13 +102,22 @@ def main(prune_=True, force_prune=False):
     # --- pages + menus ---
     pids = call("website.page", "search", [["website_id", "=", SITE]])
     pages = call("website.page", "read", pids,
-                 ["id", "name", "url", "view_id", "is_published", "website_indexed"])
+                 ["id", "name", "url", "view_id", "is_published", "website_indexed",
+                  "website_meta_title", "website_meta_description"])
+    # Blogs carry their own SEO meta (posts fall back to Judge's subtitle + cover,
+    # so they need nothing here). Recorded for review; like the rest of
+    # records.json this is informational and is never deployed.
+    bids = call("blog.blog", "search", [["website_id", "=", SITE]])
+    blogs = call("blog.blog", "read", bids,
+                 ["id", "name", "subtitle",
+                  "website_meta_title", "website_meta_description"])
     mids = call("website.menu", "search", [["website_id", "=", SITE]])
     menus = call("website.menu", "read", mids,
                  ["id", "name", "url", "parent_id", "sequence"])
     write("records.json", json.dumps(
         {"website": {k: w[k] for k in ("name", "domain", "homepage_url")},
          "pages": sorted(pages, key=lambda p: p["id"]),
+         "blogs": sorted(blogs, key=lambda b: b["id"]),
          "menus": sorted(menus, key=lambda m: (str(m["parent_id"]), m["sequence"]))},
         indent=2, default=str))
 
