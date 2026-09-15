@@ -149,12 +149,14 @@ CSS = '''
    every line a link wraps onto, not just the first and last.
 
    The text itself is ink, the same colour as the body, so the highlight is the
-   entire signal.
+   entire signal. It rests at .20 and deepens to .38 on hover - the band is what
+   changes, not the type: bolding text on hover reflows the paragraph under the
+   reader's cursor.
 
    The entry CTA keeps its own vermilion-rule treatment, so it is excluded. */
 #wrap #o_wblog_post_content .o_wblog_post_content_field p:not(.jd-entry-cta) a{
   --jd-link-hl:101,67,92;
-  background-image:linear-gradient(rgba(var(--jd-link-hl),.25),rgba(var(--jd-link-hl),.25));
+  background-image:linear-gradient(rgba(var(--jd-link-hl),.20),rgba(var(--jd-link-hl),.20));
   background-repeat:no-repeat;
   color:var(--ink);
   background-size:100% .48em;
@@ -165,7 +167,7 @@ CSS = '''
   -webkit-box-decoration-break:clone;
 }
 #wrap #o_wblog_post_content .o_wblog_post_content_field p:not(.jd-entry-cta) a:hover{
-  background-image:linear-gradient(rgba(var(--jd-link-hl),.42),rgba(var(--jd-link-hl),.42));
+  background-image:linear-gradient(rgba(var(--jd-link-hl),.38),rgba(var(--jd-link-hl),.38));
 }
 /* jd-post-page:end */
 '''
