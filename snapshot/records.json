@@ -70,6 +70,17 @@
       ],
       "is_published": false,
       "website_indexed": true
+    },
+    {
+      "id": 11,
+      "name": "random-2",
+      "url": "/random-2",
+      "view_id": [
+        2746,
+        "random-2"
+      ],
+      "is_published": true,
+      "website_indexed": true
     }
   ],
   "menus": [

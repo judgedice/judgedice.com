@@ -275,5 +275,13 @@
     "inherit_id": false,
     "mode": "primary",
     "active": true
+  },
+  {
+    "id": 2746,
+    "name": "random-2",
+    "key": "website.random-2",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": true
   }
 ]
