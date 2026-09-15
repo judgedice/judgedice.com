@@ -2,12 +2,19 @@
     <xpath expr="//div[@id='footer']" position="replace">
         <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
             <section class="s_text_block jd-footer" data-snippet="s_text_block" data-name="Footer">
-                <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px 40px;padding:32px clamp(1.5rem,6vw,6rem);border-top:1px solid var(--line);background:var(--paper);">
-                    <a href="/" style="font-family:var(--font-serif);font-size:18px;color:var(--ink);text-decoration:none;letter-spacing:-0.01em;">Judge<span style="color:var(--vermilion);">.</span></a>
-                    <span style="display:flex;flex-wrap:wrap;gap:10px 24px;"><a href="/work" style="font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--ink-soft);text-decoration:none;">Work Life</a><a href="/home" style="font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--ink-soft);text-decoration:none;">Home Life</a><a href="/exciting" style="font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--ink-soft);text-decoration:none;">The Exciting Stuff</a><a href="/connect" style="font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--ink-soft);text-decoration:none;">Connect</a></span>
-                    <span style="font-family:var(--font-serif);font-size:var(--text-meta);color:var(--ink-faint);letter-spacing:var(--tracking-wide);text-transform:uppercase;">Delivering Joy since the turn of the Century</span>
+                <div class="jd-footer-top">
+                    <a class="jd-footer-mark" href="/">Judge<span class="jd-dot">.</span></a>
+                    <a class="jd-footer-cta" href="/offerings">Start with a consult <span class="jd-arrow" aria-hidden="true">→</span></a>
                 </div>
             </section>
+        </div>
+    </xpath>
+    <xpath expr="//div[hasclass('o_footer_copyright')]" position="replace">
+        <div class="o_footer_copyright o_colored_level o_cc jd-footer-base" data-name="Copyright">
+            <div class="jd-footer-baseinner">
+                <span class="jd-footer-tagline">Delivering Joy since the turn of the Century</span>
+                <span class="jd-footer-copy">© <t t-out="datetime.date.today().year"/> Judge DiCesaro</span>
+            </div>
         </div>
     </xpath>
 </data>
