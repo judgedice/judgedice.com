@@ -223,5 +223,27 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2740,
+    "name": "Increase Readability",
+    "key": "website_blog.opt_blog_post_readable",
+    "inherit_id": [
+      2222,
+      "Blog Post"
+    ],
+    "mode": "extension",
+    "active": true
+  },
+  {
+    "id": 2742,
+    "name": "Show Breadcrumb",
+    "key": "website_blog.opt_blog_post_breadcrumb",
+    "inherit_id": [
+      2222,
+      "Blog Post"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]
