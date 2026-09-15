@@ -142,17 +142,23 @@ CSS = '''
    the brand vermilion 203,65,39.
 
    The band is a gradient rather than a plain background-color so its height is
-   controllable: a background-color fills the whole inline content box, and the
-   ask was for it to stop short of that. box-decoration-break keeps the padding
-   and the band on every line a link wraps onto, not just the first and last.
+   controllable: a background-color fills the whole inline content box. It runs
+   .52em to 1.0em, which is x-height to baseline, so it clears the ascenders
+   above and stops before the descenders below - the mark sits inside the word
+   rather than boxing it. box-decoration-break keeps the padding and the band on
+   every line a link wraps onto, not just the first and last.
+
+   The text itself is ink, the same colour as the body, so the highlight is the
+   entire signal.
 
    The entry CTA keeps its own vermilion-rule treatment, so it is excluded. */
 #wrap #o_wblog_post_content .o_wblog_post_content_field p:not(.jd-entry-cta) a{
   --jd-link-hl:101,67,92;
   background-image:linear-gradient(rgba(var(--jd-link-hl),.25),rgba(var(--jd-link-hl),.25));
   background-repeat:no-repeat;
-  background-size:100% .82em;
-  background-position:0 .34em;
+  color:var(--ink);
+  background-size:100% .48em;
+  background-position:0 .52em;
   padding:0 .28em;
   border-radius:2px;
   box-decoration-break:clone;
