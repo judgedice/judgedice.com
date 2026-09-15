@@ -149,9 +149,9 @@ CSS = '''
    every line a link wraps onto, not just the first and last.
 
    The text itself is ink, the same colour as the body, so the highlight is the
-   entire signal. It rests at .20 and deepens to .38 on hover - the band is what
-   changes, not the type: bolding text on hover reflows the paragraph under the
-   reader's cursor.
+   entire signal. It rests at .20 and deepens to .38 on hover, and the
+   type thickens by faux bold rather than by font-weight, so the hover costs no
+   reflow.
 
    The entry CTA keeps its own vermilion-rule treatment, so it is excluded. */
 #wrap #o_wblog_post_content .o_wblog_post_content_field p:not(.jd-entry-cta) a{
@@ -168,6 +168,12 @@ CSS = '''
 }
 #wrap #o_wblog_post_content .o_wblog_post_content_field p:not(.jd-entry-cta) a:hover{
   background-image:linear-gradient(rgba(var(--jd-link-hl),.38),rgba(var(--jd-link-hl),.38));
+  /* Faux bold. Painting the glyph's own colour a fraction of an em to either
+     side thickens the stroke while the text metrics stay exactly as they were,
+     so nothing re-measures and the line does not shift under the cursor. A real
+     font-weight change would reflow the paragraph and move the link the reader
+     is already pointing at. */
+  text-shadow:.028em 0 0 currentColor,-.028em 0 0 currentColor;
 }
 /* jd-post-page:end */
 '''
