@@ -363,5 +363,31 @@ section#top > .reveal,section#top > h1{position:relative;z-index:2;}
    so neither is announced. */
 #wrap #o_wblog_post_content_jump{display:none!important;}
 #wrap #o_wblog_post_info .fa-clock-o{display:none!important;}
+
+/* Body links read as highlighter strokes rather than coloured text. The colour
+   is the one links already compute to, #65435C - Odoo's theme link colour, not
+   a design-system token; --jd-link-hl is the single place to change it, e.g. to
+   the brand vermilion 203,65,39.
+
+   The band is a gradient rather than a plain background-color so its height is
+   controllable: a background-color fills the whole inline content box, and the
+   ask was for it to stop short of that. box-decoration-break keeps the padding
+   and the band on every line a link wraps onto, not just the first and last.
+
+   The entry CTA keeps its own vermilion-rule treatment, so it is excluded. */
+#wrap #o_wblog_post_content .o_wblog_post_content_field p:not(.jd-entry-cta) a{
+  --jd-link-hl:101,67,92;
+  background-image:linear-gradient(rgba(var(--jd-link-hl),.25),rgba(var(--jd-link-hl),.25));
+  background-repeat:no-repeat;
+  background-size:100% .82em;
+  background-position:0 .34em;
+  padding:0 .28em;
+  border-radius:2px;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
+#wrap #o_wblog_post_content .o_wblog_post_content_field p:not(.jd-entry-cta) a:hover{
+  background-image:linear-gradient(rgba(var(--jd-link-hl),.42),rgba(var(--jd-link-hl),.42));
+}
 /* jd-post-page:end */
 </style>

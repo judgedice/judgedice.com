@@ -59,6 +59,17 @@
       ],
       "is_published": true,
       "website_indexed": true
+    },
+    {
+      "id": 10,
+      "name": "random-1",
+      "url": "/random-1",
+      "view_id": [
+        2745,
+        "random-1"
+      ],
+      "is_published": false,
+      "website_indexed": true
     }
   ],
   "menus": [
