@@ -115,6 +115,7 @@ CSS = '''
   font-weight:var(--weight-regular);
   line-height:1.5;
   margin-left:2rem;
+  color:var(--ink-soft);
 }
 
 /* real <blockquote>s, should an entry ever use one, get the same treatment */
