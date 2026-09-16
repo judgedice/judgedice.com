@@ -283,5 +283,16 @@
     "inherit_id": false,
     "mode": "primary",
     "active": true
+  },
+  {
+    "id": 2747,
+    "name": "Judge Mobile Header",
+    "key": "website.jd_header_mobile",
+    "inherit_id": [
+      1268,
+      "Template Header Mobile"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]

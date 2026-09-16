@@ -418,4 +418,89 @@ footer#bottom{background:var(--paper);}
 .jd-footer-cta:hover .jd-arrow{transform:translateX(5px);}
 @media (prefers-reduced-motion:reduce){.jd-footer-cta .jd-arrow{transition:none;}}
 @media (max-width:900px){.jd-footer-baseinner{justify-content:flex-start;gap:8px 22px;}}
+
+/* ---- jd-mobile-nav v1 ---- */
+/* Odoo's mobile header (view 1268) is shared with site 1, so the markup lives in
+   the site-2 override website.jd_header_mobile; this is the paint. */
+
+/* --- top bar: match the desktop .jd-nav hairline, drop Bootstrap's shadow --- */
+header#top .o_header_mobile{background:var(--paper);border-bottom:1px solid var(--line);box-shadow:none!important;}
+header#top .o_header_mobile .o_main_nav{padding-top:13px;padding-bottom:13px;}
+.jd-mnav-mark{align-self:center;font-family:var(--font-serif);font-size:22px;line-height:1;color:var(--ink);text-decoration:none;letter-spacing:-0.01em;}
+.jd-mnav-mark .jd-dot{color:var(--vermilion);}
+.jd-mnav-mark:hover{color:var(--vermilion);}
+header#top .o_header_mobile .o_wsale_my_cart .btn{color:var(--ink)!important;}
+
+/* Bootstrap paints the burger and the close X as background SVGs, so the colour
+   is baked into the image and no property can reach it - swap the whole data
+   URI for one stroked in ink. */
+header#top .o_header_mobile .navbar-toggler-icon{
+  width:26px;height:26px;
+  background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231C1712' stroke-width='2' stroke-linecap='round' d='M4 9h22M4 15h22M4 21h22'/%3e%3c/svg%3e");
+}
+.o_navbar_mobile .btn-close{
+  opacity:1;width:1.1em;height:1.1em;
+  background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath stroke='%231C1712' stroke-width='1.6' stroke-linecap='round' d='M3 3l10 10M13 3L3 13'/%3e%3c/svg%3e");
+}
+
+/* --- the drawer --- */
+.o_navbar_mobile{background:var(--paper);border-left:1px solid var(--line);}
+.o_navbar_mobile .offcanvas-header{padding:12px clamp(1.25rem,5vw,1.75rem);}
+.o_navbar_mobile .offcanvas-body{padding-left:clamp(1.25rem,5vw,1.75rem);padding-right:clamp(1.25rem,5vw,1.75rem);}
+
+/* search: strip the pill + grey fill for a hairline rule. The stock classes are
+   Bootstrap utilities (bg-light, text-bg-light, rounded-*-pill), so these need
+   !important to land. */
+.o_navbar_mobile .o_searchbar_form .input-group{border-bottom:1px solid var(--line-strong);margin-bottom:4px!important;}
+.o_navbar_mobile .o_searchbar_form .oe_search_box{
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;padding:11px 2px!important;
+  font-family:var(--font-serif);font-size:var(--text-small);color:var(--ink);
+}
+.o_navbar_mobile .o_searchbar_form .oe_search_box::placeholder{color:var(--ink-faint);font-style:italic;opacity:1;}
+.o_navbar_mobile .o_searchbar_form .oe_search_button{
+  border:0!important;border-radius:0!important;background:transparent!important;
+  color:var(--ink-faint);padding:11px 2px!important;
+}
+.o_navbar_mobile .o_searchbar_form .oe_search_button:hover{color:var(--vermilion);}
+
+/* links: same decimal-leading-zero counter the desktop .jd-nav uses */
+/* mx-n3 is a Bootstrap utility (so, !important) that cancels the offcanvas-body's
+   default 1rem padding to make the rules full-bleed. We set our own gutter on
+   the body, so that negative margin instead pushes the ul 32px WIDER than its
+   container -- and Odoo's autohide reads the overflow and sweeps every link into
+   a "+" dropdown. Cancelling it keeps the links, and aligns the rules with the
+   search box and the CTA. */
+.o_navbar_mobile .top_menu{counter-reset:jdmnav;margin:0!important;}
+.o_navbar_mobile .top_menu .nav-item{border-top:1px solid var(--line)!important;border-bottom:0!important;}
+.o_navbar_mobile .top_menu .nav-item:last-child{border-bottom:1px solid var(--line)!important;}
+.o_navbar_mobile .top_menu .nav-link{
+  display:flex;align-items:baseline;gap:12px;
+  padding:17px 2px!important;counter-increment:jdmnav;
+  font-family:var(--font-serif);font-size:var(--text-label);
+  text-transform:uppercase;letter-spacing:var(--tracking-label);
+  font-weight:var(--weight-medium);color:var(--ink);
+}
+.o_navbar_mobile .top_menu .nav-link::before{
+  content:counter(jdmnav,decimal-leading-zero);
+  color:var(--vermilion);font-size:var(--text-meta);font-weight:var(--weight-regular);
+}
+.o_navbar_mobile .top_menu .nav-link:hover,
+.o_navbar_mobile .top_menu .nav-link:focus{color:var(--vermilion);background:transparent;}
+
+/* CTA: the one filled element in the drawer, so it reads as the exit */
+.jd-mnav-cta{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;
+  padding:15px 18px;border:1px solid var(--vermilion);border-radius:0;
+  background:var(--vermilion);color:var(--paper);text-decoration:none;
+  font-family:var(--font-serif);font-size:var(--text-label);
+  text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);
+}
+.jd-mnav-cta:hover,.jd-mnav-cta:focus{background:var(--vermilion-deep);border-color:var(--vermilion-deep);color:var(--paper);}
+.jd-mnav-cta .jd-arrow{display:inline-block;transition:transform var(--dur-base) var(--ease-out);}
+.jd-mnav-cta:hover .jd-arrow{transform:translateX(5px);}
+@media (prefers-reduced-motion:reduce){.jd-mnav-cta .jd-arrow{transition:none;}}
+/* ---- end jd-mobile-nav ---- */
 </style>
+
+
