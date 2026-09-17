@@ -17,8 +17,10 @@ Four things the stock drawer got wrong, fixed in the override:
   sign-in   - portal.placeholder_user_sign_in exposes /web/login; removed for
               now (portal work is Phase 3). portal.user_dropdown is left alone,
               so an already-signed-in customer keeps their account menu.
-  CTA       - header_call_to_action_large is a generic "Contact Us" button;
-              replaced with the consult CTA, matching the footer.
+  CTA       - header_call_to_action_large is a generic "Contact Us" button
+              pointing at /contactus; removed. The drawer's single action is
+              the "Let's Talk" nav item, promoted to a button by add_nav_cta.py
+              -- a second, filled consult button competed with it.
   autohide  - Odoo's autohide grabs header#top's FIRST .top_menu and folds the
               links that overflow into a "+" dropdown. View 2035 replaced the
               desktop nav with .jd-nav, which has no .top_menu, so the only
@@ -58,14 +60,7 @@ ARCH = '''<data inherit_id="website.template_header_mobile" name="Judge Mobile H
     <xpath expr="//t[@t-call='website.submenu']" position="replace">
         <t t-call="website.submenu" item_class.f="nav-item border-top o_no_autohide_item #{submenu_last and 'border-bottom'}" link_class.f="nav-link p-3 text-wrap" dropdown_toggler_classes.f="d-flex justify-content-between align-items-center" dropdown_menu_classes.f="position-relative rounded-0 o_dropdown_without_offset"/>
     </xpath>
-    <xpath expr="//t[@t-call='website.header_call_to_action_large']" position="replace">
-        <li class="o_no_autohide_item">
-            <a class="jd-mnav-cta" href="/offerings">
-                <span>Start with a consult</span>
-                <span class="jd-arrow" aria-hidden="true">&#8594;</span>
-            </a>
-        </li>
-    </xpath>
+    <xpath expr="//t[@t-call='website.header_call_to_action_large']" position="replace"/>
 </data>
 '''
 
@@ -138,18 +133,6 @@ header#top .o_header_mobile .navbar-toggler-icon{
 .o_navbar_mobile .top_menu .nav-link:hover,
 .o_navbar_mobile .top_menu .nav-link:focus{color:var(--vermilion);background:transparent;}
 
-/* CTA: the one filled element in the drawer, so it reads as the exit */
-.jd-mnav-cta{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;
-  padding:15px 18px;border:1px solid var(--vermilion);border-radius:0;
-  background:var(--vermilion);color:var(--paper);text-decoration:none;
-  font-family:var(--font-serif);font-size:var(--text-label);
-  text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);
-}
-.jd-mnav-cta:hover,.jd-mnav-cta:focus{background:var(--vermilion-deep);border-color:var(--vermilion-deep);color:var(--paper);}
-.jd-mnav-cta .jd-arrow{display:inline-block;transition:transform var(--dur-base) var(--ease-out);}
-.jd-mnav-cta:hover .jd-arrow{transform:translateX(5px);}
-@media (prefers-reduced-motion:reduce){.jd-mnav-cta .jd-arrow{transition:none;}}
 ''' + END
 
 

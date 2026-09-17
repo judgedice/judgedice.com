@@ -7,12 +7,5 @@
     <xpath expr="//t[@t-call='website.submenu']" position="replace">
         <t t-call="website.submenu" item_class.f="nav-item border-top o_no_autohide_item #{submenu_last and 'border-bottom'}" link_class.f="nav-link p-3 text-wrap" dropdown_toggler_classes.f="d-flex justify-content-between align-items-center" dropdown_menu_classes.f="position-relative rounded-0 o_dropdown_without_offset"/>
     </xpath>
-    <xpath expr="//t[@t-call='website.header_call_to_action_large']" position="replace">
-        <li class="o_no_autohide_item">
-            <a class="jd-mnav-cta" href="/offerings">
-                <span>Start with a consult</span>
-                <span class="jd-arrow" aria-hidden="true">→</span>
-            </a>
-        </li>
-    </xpath>
+    <xpath expr="//t[@t-call='website.header_call_to_action_large']" position="replace"/>
 </data>
