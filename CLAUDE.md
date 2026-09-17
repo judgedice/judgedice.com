@@ -11,7 +11,7 @@ Personal-brand site + tribute-writing business for Judge DiCesaro, running as **
 5. Verify CSS changes — SCSS attachments **and** `custom_code_head` — against the newest `web.assets_frontend` attachment in the DB, never over HTTP: Odoo serves stale cached bundles, so curl flip-flops.
 6. After any Odoo write: run `python3 scripts/snapshot.py`, review `git diff snapshot/`, commit, push.
 7. **Never alter Judge's writing.** Anything he authored — entries, tributes, page copy, quotes — publishes **verbatim**. Do not trim, truncate, reorder, rewrite, condense, "clean up", or drop lines, and do not treat something as an artifact, a duplicate, stale logistics, or a privacy issue and remove it on your own judgment. If a change genuinely seems needed, **show him the exact lines and ask** — the decision is always his. Editorial additions (standfirsts, CTAs, captions) are allowed only as clearly separate elements, never merged into or substituted for his text. This applies to his content already live, too: never overwrite it.
-8. The header view (2035) contains a hidden `jd-header-plugs` span with six `website.placeholder_header_*` t-calls — **never remove it**; module installs fail validation without those anchors.
+8. The header view (2035) contains a hidden `jd-header-plugs` span with **five** `website.placeholder_header_*` t-calls — `search_box`, `text_element`, `social_links`, `language_selector`, `call_to_action` — **never remove it**; module installs fail validation without those anchors. (Verify with `grep -o 'website\.placeholder_header_[a-z_]*' snapshot/views/2035-*.xml | sort`.)
 
 ## Workflow
 
@@ -79,7 +79,7 @@ Odoo: they turn photos into ink-on-transparency PNGs for the paper ground. `inco
 
 ## Key live IDs (site 2)
 
-- Pages/views: home 2034 · header **2035** (menu-driven) · footer 2038 · work 2039 · home-life 2040 · **offerings 2041** (page 8, `/offerings`; the view key is still `website.judge_exciting` — the page was renamed, the key wasn't, so grep the id not the word) · connect 2042 (orphaned from nav)
+- Pages/views: home 2034 · header **2035** (menu-driven) · footer 2038 · work 2039 · home-life 2040 · **offerings 2041** (page 8, `/offerings`; the view key is still `website.judge_exciting` — the page was renamed, the key wasn't, so grep the id not the word) · connect 2042 (orphaned from nav) · **mobile header 2747** (`website.jd_header_mobile`, site-2 override of the *shared* `website.template_header_mobile` 1268 — edit 2747, never 1268)
 - Judge block kit: views 2266–2270 (page-header, section-label, callout, cards, rule) + 2732 quotes + 2733 swath, all registered in **2271** (palette). Separately, 2734 overrides Odoo's `website.record_cover` for blog covers.
 - Appointment-page email hiders: 2272/2273 · checkout booking CTA: 2720 · statement-descriptor note: 2731
 - SCSS attachments: palette **1086**, values/fonts **1087** (edit base64 `datas`; insert before `// -- hook --`)
