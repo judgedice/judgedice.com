@@ -4,7 +4,14 @@
             <a href="/" class="jd-brand">Judge<span class="jd-dot">.</span></a>
             <span class="jd-links">
                 <t t-foreach="website.menu_id.child_id" t-as="submenu">
-                    <a t-att-href="submenu.url" class="jd-link">
+                    <!-- The booking link is the nav's call to action, so it leaves the
+                         numbered sequence and renders as a button. Keyed on the URL, not
+                         on position: if the page is ever renamed this quietly falls back
+                         to an ordinary nav link rather than promoting the wrong item. -->
+                    <a t-if="submenu.url == '/appointment'" t-att-href="submenu.url" class="jd-navcta">
+                        <span class="jd-label" t-esc="submenu.name"/>
+                    </a>
+                    <a t-else="" t-att-href="submenu.url" class="jd-link">
                         <span class="jd-row"><span class="jd-num"/><span class="jd-label" t-esc="submenu.name"/></span>
                         <span class="jd-underline"/>
                     </a>

@@ -501,6 +501,46 @@ header#top .o_header_mobile .navbar-toggler-icon{
 .jd-mnav-cta:hover .jd-arrow{transform:translateX(5px);}
 @media (prefers-reduced-motion:reduce){.jd-mnav-cta .jd-arrow{transition:none;}}
 /* ---- end jd-mobile-nav ---- */
+
+/* ---- jd-nav-cta v1 ---- */
+/* The booking link reads as an action, not a destination, so it sits apart from
+   the numbered links: an ink outline that fills vermilion on hover. Restrained
+   on purpose -- the border alone carries the affordance, no arrow. */
+
+/* --- desktop (.jd-nav) --- */
+.jd-nav .jd-navcta{
+  display:inline-flex;align-items:center;
+  margin-left:clamp(6px,1.5vw,20px);
+  padding:11px 20px;border:1px solid var(--ink);border-radius:var(--radius-none);
+  font-family:var(--font-serif);font-size:var(--text-label);
+  text-transform:uppercase;letter-spacing:var(--tracking-label);
+  font-weight:var(--weight-medium);color:var(--ink);text-decoration:none;
+  white-space:nowrap;
+  transition:background var(--dur-base) var(--ease-out),
+             border-color var(--dur-base) var(--ease-out),
+             color var(--dur-base) var(--ease-out);
+}
+.jd-nav .jd-navcta:hover,
+.jd-nav .jd-navcta:focus-visible{background:var(--vermilion);border-color:var(--vermilion);color:var(--paper);}
+@media (prefers-reduced-motion:reduce){.jd-nav .jd-navcta{transition:none;}}
+
+/* --- mobile drawer --- */
+/* Keyed on href so it matches the desktop rule; :has() lifts the treatment to
+   the <li> so the hairline rules stop above the button. */
+.o_navbar_mobile .top_menu .nav-item:has(> .nav-link[href="/appointment"]){
+  border-top:0!important;border-bottom:0!important;margin-top:20px;
+}
+.o_navbar_mobile .top_menu .nav-link[href="/appointment"]{
+  justify-content:center;
+  padding:14px 18px!important;border:1px solid var(--ink);
+  counter-increment:none;
+}
+.o_navbar_mobile .top_menu .nav-link[href="/appointment"]::before{content:none;}
+.o_navbar_mobile .top_menu .nav-link[href="/appointment"]:hover,
+.o_navbar_mobile .top_menu .nav-link[href="/appointment"]:focus{
+  background:var(--vermilion);border-color:var(--vermilion);color:var(--paper);
+}
+/* ---- end jd-nav-cta ---- */
 </style>
 
 
