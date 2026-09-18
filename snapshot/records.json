@@ -32,19 +32,6 @@
       "website_meta_description": "Twenty-five years of digital architecture and marketing technology, mostly inside the Adobe Experience Cloud \u2014 from Flash at McKinsey to WillowTree."
     },
     {
-      "id": 7,
-      "name": "Home Life",
-      "url": "/home",
-      "view_id": [
-        2040,
-        "Home Life"
-      ],
-      "is_published": true,
-      "website_indexed": true,
-      "website_meta_title": "Home Life \u2014 Judge DiCesaro",
-      "website_meta_description": "The exhale. Band practice, New England winters, and a firm belief in the power of a good lunch \u2014 life outside the enterprise tech stack."
-    },
-    {
       "id": 8,
       "name": "Offerings",
       "url": "/offerings",
@@ -138,7 +125,7 @@
       "sequence": 0
     },
     {
-      "id": 9,
+      "id": 23,
       "name": "It's on Random",
       "url": "/random",
       "parent_id": [
@@ -146,16 +133,6 @@
         "Top Menu for Website 2 [judgedice.com]"
       ],
       "sequence": 1
-    },
-    {
-      "id": 21,
-      "name": "Home Life",
-      "url": "/home",
-      "parent_id": [
-        7,
-        "Top Menu for Website 2 [judgedice.com]"
-      ],
-      "sequence": 2
     },
     {
       "id": 10,

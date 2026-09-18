@@ -60,14 +60,6 @@
     "active": true
   },
   {
-    "id": 2040,
-    "name": "Home Life",
-    "key": "website.judge_home",
-    "inherit_id": false,
-    "mode": "primary",
-    "active": true
-  },
-  {
     "id": 2041,
     "name": "Offerings",
     "key": "website.judge_exciting",

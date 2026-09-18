@@ -114,7 +114,12 @@ def main():
     before_menu, before_arch = menu["url"], hdr["arch_db"]
     created = None
     try:
-        call("website.menu", "write", [MENU_ID], {"url": SENTINEL_URL})
+        # page_id must go too. Rewriting only the url leaves the item still
+        # linked to whatever page it used to point at, and Odoo cascades a
+        # page deletion to its menus - deleting that old page would take this
+        # item out of the nav with it.
+        call("website.menu", "write", [MENU_ID],
+             {"url": SENTINEL_URL, "page_id": False})
         if new_arch != before_arch:
             call("ir.ui.view", "write", [2035], {"arch": new_arch})
         if existing:
