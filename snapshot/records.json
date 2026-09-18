@@ -125,9 +125,9 @@
       "sequence": 0
     },
     {
-      "id": 23,
-      "name": "It's on Random",
-      "url": "/random",
+      "id": 16,
+      "name": "Entries",
+      "url": "/blog",
       "parent_id": [
         7,
         "Top Menu for Website 2 [judgedice.com]"
@@ -145,24 +145,14 @@
       "sequence": 3
     },
     {
-      "id": 16,
-      "name": "Entries",
-      "url": "/blog",
+      "id": 23,
+      "name": "It's on Random",
+      "url": "/random",
       "parent_id": [
         7,
         "Top Menu for Website 2 [judgedice.com]"
       ],
       "sequence": 4
-    },
-    {
-      "id": 22,
-      "name": "Connect",
-      "url": "/connect",
-      "parent_id": [
-        7,
-        "Top Menu for Website 2 [judgedice.com]"
-      ],
-      "sequence": 5
     },
     {
       "id": 13,

@@ -8,7 +8,7 @@
                 <a class="jd-footer-mark" href="/">Judge<span class="jd-dot">.</span></a>
                 <span class="jd-footer-tagline">Delivering Joy since the turn of the Century</span>
                 <span class="jd-footer-copy">© <t t-out="datetime.date.today().year"/> Judge DiCesaro</span>
-                <a class="jd-footer-cta" href="/offerings">Start with a consult <span class="jd-arrow" aria-hidden="true">→</span></a>
+                <a class="jd-footer-cta" href="/connect">Connect <span class="jd-arrow" aria-hidden="true">→</span></a>
             </div>
         </div>
     </xpath>

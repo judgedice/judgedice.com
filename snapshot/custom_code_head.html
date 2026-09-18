@@ -650,6 +650,24 @@ header#top .o_header_mobile .navbar-toggler-icon{
   .jd-brand{font-size:23px;}
 }
 /* ---- end jd-nav-fit ---- */
+
+/* ---- jd-dark-page v1 ---- */
+/* A page marked jd-dark-page runs ink from its header down through the footer.
+   /connect's copy is already written in paper, which is why it read as blank
+   on the default ground. No !important on the section background - the builder
+   should still be able to set one and win. */
+#wrapwrap:has(#wrap.jd-dark-page){background:var(--ink);}
+#wrapwrap:has(#wrap.jd-dark-page) #wrap.jd-dark-page > section{background:var(--ink);}
+#wrapwrap:has(#wrap.jd-dark-page) > footer,
+#wrapwrap:has(#wrap.jd-dark-page) #footer{background:transparent;}
+#wrapwrap:has(#wrap.jd-dark-page) .jd-footer-base{background:var(--ink);}
+#wrapwrap:has(#wrap.jd-dark-page) .jd-footer-baseinner{border-top:1px solid rgba(242,236,223,.16);}
+#wrapwrap:has(#wrap.jd-dark-page) .jd-footer-mark,
+#wrapwrap:has(#wrap.jd-dark-page) .jd-footer-cta{color:var(--paper);}
+#wrapwrap:has(#wrap.jd-dark-page) .jd-footer-baseinner>span{color:rgba(242,236,223,.62);}
+#wrapwrap:has(#wrap.jd-dark-page) .jd-footer-mark:hover,
+#wrapwrap:has(#wrap.jd-dark-page) .jd-footer-cta:hover{color:var(--vermilion);}
+/* ---- end jd-dark-page ---- */
 </style>
 
 
