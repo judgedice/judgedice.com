@@ -637,6 +637,19 @@ header#top .o_header_mobile .navbar-toggler-icon{
 }
 
 /* ---- end jd-glass-chrome ---- */
+
+/* ---- jd-nav-fit v1 ---- */
+/* Six links + a button is wider than the lg breakpoint allows. Close the
+   spacing up between 992px and 1200px so the row survives; the 1440px
+   composition is untouched. */
+@media (min-width:992px) and (max-width:1199.98px){
+  .jd-nav{padding-left:clamp(1rem,3vw,2.5rem);padding-right:clamp(1rem,3vw,2.5rem);}
+  .jd-links{gap:clamp(12px,1.7vw,22px);}
+  .jd-nav .jd-link{font-size:0.75rem;}
+  .jd-nav .jd-navcta{margin-left:clamp(4px,1vw,12px);padding:10px 14px;font-size:0.75rem;}
+  .jd-brand{font-size:23px;}
+}
+/* ---- end jd-nav-fit ---- */
 </style>
 
 

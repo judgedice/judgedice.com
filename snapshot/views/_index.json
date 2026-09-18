@@ -313,5 +313,38 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2754,
+    "name": "Header Call to Action - Large",
+    "key": "website.header_call_to_action_large",
+    "inherit_id": [
+      2753,
+      "Header Call to Action"
+    ],
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2755,
+    "name": "Header Call to Action - Sidebar",
+    "key": "website.header_call_to_action_sidebar",
+    "inherit_id": [
+      2754,
+      "Header Call to Action - Large"
+    ],
+    "mode": "primary",
+    "active": true
+  },
+  {
+    "id": 2756,
+    "name": "Header Call to Action - Stretched",
+    "key": "website.header_call_to_action_stretched",
+    "inherit_id": [
+      2753,
+      "Header Call to Action"
+    ],
+    "mode": "primary",
+    "active": true
   }
 ]

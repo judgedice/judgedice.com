@@ -78,10 +78,10 @@
         2745,
         "random-1"
       ],
-      "is_published": false,
+      "is_published": true,
       "website_indexed": true,
-      "website_meta_title": false,
-      "website_meta_description": false
+      "website_meta_title": "Only light can do that \u2014 Judge DiCesaro",
+      "website_meta_description": "\"Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.\" \u2014 Martin Luther King Jr., Strength to Love."
     },
     {
       "id": 11,
@@ -93,8 +93,8 @@
       ],
       "is_published": true,
       "website_indexed": true,
-      "website_meta_title": false,
-      "website_meta_description": false
+      "website_meta_title": "You don't choose your personality \u2014 Judge DiCesaro",
+      "website_meta_description": "\"I've decided I can't hate anyone... because you don't choose your personality.\" \u2014 Oliver DiCesaro. One of the lines kept on rotation at judgedice.com."
     },
     {
       "id": 12,
@@ -106,8 +106,8 @@
       ],
       "is_published": true,
       "website_indexed": true,
-      "website_meta_title": false,
-      "website_meta_description": false
+      "website_meta_title": "We are the ones we've been waiting for \u2014 Judge DiCesaro",
+      "website_meta_description": "\"We are the ones we've been waiting for.\" \u2014 June Jordan, Poem for South African Women. One of the lines kept on rotation at judgedice.com."
     }
   ],
   "blogs": [
@@ -148,6 +148,16 @@
       "sequence": 1
     },
     {
+      "id": 21,
+      "name": "Home Life",
+      "url": "/home",
+      "parent_id": [
+        7,
+        "Top Menu for Website 2 [judgedice.com]"
+      ],
+      "sequence": 2
+    },
+    {
       "id": 10,
       "name": "Offerings",
       "url": "/offerings",
@@ -155,7 +165,7 @@
         7,
         "Top Menu for Website 2 [judgedice.com]"
       ],
-      "sequence": 2
+      "sequence": 3
     },
     {
       "id": 16,
@@ -165,7 +175,17 @@
         7,
         "Top Menu for Website 2 [judgedice.com]"
       ],
-      "sequence": 3
+      "sequence": 4
+    },
+    {
+      "id": 22,
+      "name": "Connect",
+      "url": "/connect",
+      "parent_id": [
+        7,
+        "Top Menu for Website 2 [judgedice.com]"
+      ],
+      "sequence": 5
     },
     {
       "id": 13,
@@ -175,7 +195,7 @@
         7,
         "Top Menu for Website 2 [judgedice.com]"
       ],
-      "sequence": 4
+      "sequence": 6
     }
   ]
 }
