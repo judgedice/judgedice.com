@@ -1,5 +1,21 @@
 <t name="Work Life" t-name="website.judge_work">
     <t t-call="website.layout">
+        <script type="application/ld+json" data-jd-schema="v1">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": "<t t-out="website.get_base_url()"/>/work#page",
+  "url": "<t t-out="website.get_base_url()"/>/work",
+  "name": "Work Life — Judge DiCesaro",
+  "isPartOf": {
+    "@id": "<t t-out="website.get_base_url()"/>/#website"
+  },
+  "about": {
+    "@id": "<t t-out="website.get_base_url()"/>/#judge"
+  },
+  "description": "Twenty-five years of digital architecture and marketing technology, mostly inside the Adobe Experience Cloud."
+}
+        </script>
         <div id="wrap" class="oe_structure">
         <header style="padding:clamp(3.5rem,9vw,6.5rem) clamp(1.5rem,6vw,6rem) clamp(1.75rem,4vw,2.75rem);">
             <div style="display:flex;align-items:center;gap:14px;font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);color:var(--vermilion);margin-bottom:20px;">

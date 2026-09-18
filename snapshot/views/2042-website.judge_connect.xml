@@ -1,5 +1,20 @@
 <t name="Connect" t-name="website.judge_connect">
     <t t-call="website.layout">
+        <script type="application/ld+json" data-jd-schema="v1">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": "<t t-out="website.get_base_url()"/>/connect#page",
+  "url": "<t t-out="website.get_base_url()"/>/connect",
+  "name": "Connect — Judge DiCesaro",
+  "isPartOf": {
+    "@id": "<t t-out="website.get_base_url()"/>/#website"
+  },
+  "mainEntity": {
+    "@id": "<t t-out="website.get_base_url()"/>/#judge"
+  }
+}
+        </script>
         <div id="wrap" class="oe_structure">
         <header style="padding:clamp(3.5rem,9vw,6.5rem) clamp(1.5rem,6vw,6rem) clamp(1.75rem,4vw,2.75rem);background:var(--ink);">
             <div style="display:flex;align-items:center;gap:14px;font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);color:color-mix(in srgb, var(--paper) 82%, transparent);margin-bottom:20px;">

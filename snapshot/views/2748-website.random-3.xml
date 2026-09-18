@@ -1,5 +1,30 @@
 <t t-name="website.random-3">
     <t t-call="website.layout">
+        <script type="application/ld+json" data-jd-schema="v1">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "<t t-out="website.get_base_url()"/>/random-3#page",
+  "url": "<t t-out="website.get_base_url()"/>/random-3",
+  "name": "We are the ones we've been waiting for — Judge DiCesaro",
+  "isPartOf": {
+    "@id": "<t t-out="website.get_base_url()"/>/#website"
+  },
+  "mainEntity": {
+    "@type": "Quotation",
+    "text": "We are the ones we've been waiting for.",
+    "creator": {
+      "@type": "Person",
+      "name": "June Jordan"
+    },
+    "isBasedOn": {
+      "@type": "CreativeWork",
+      "name": "Poem for South African Women",
+      "url": "https://poets.org/poem/poem-south-african-women"
+    }
+  }
+}
+        </script>
         <div id="wrap" class="oe_structure oe_empty"><section class="s_jd_quotepage o_cc o_colored_level oe_img_bg o_bg_img_center o_bg_img_origin_border_box o_cc4" data-snippet="s_jd_quote_page" data-name="Quote Page" data-attachment-id="1515" data-format-mimetype="image/webp" data-resize-width="1913" data-original-id="1515" data-original-src="/web/image/1515-9c270297/01_flowfield.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp" style="background-image: url(&quot;/web/image/1516-d6165eb8/01_flowfield.webp&quot;);"><div class="s_jd_quotepage_scrim o_not_editable" aria-hidden="true"/><div class="s_jd_quotepage_inner"><blockquote class="s_jd_quotepage_block"><p class="s_jd_quotepage_text">We are the ones we've been waiting for.</p><footer class="s_jd_quotepage_cite"><strong>June Jordan</strong> — <a href="https://poets.org/poem/poem-south-african-women" class="o_translate_inline">poem for South African Women</a></footer></blockquote></div></section></div>
     </t>
 </t>

@@ -15,11 +15,29 @@
     <xpath expr="//script[@t-if='res_company and website']" position="replace">
         <script t-if="website" type="application/ld+json">
 {
-    "@context": "http://schema.org",
-    "@type": "Organization",
-    "name": "Judge DiCesaro",
-    "logo": "<t t-out="'%s/web/image/website/%s/logo' % (website.get_base_url(), website.id)"/>",
-    "url": "<t t-out="website.get_base_url()"/>"
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "<t t-out="website.get_base_url()"/>/#judge",
+      "name": "Judge DiCesaro",
+      "url": "<t t-out="website.get_base_url()"/>/",
+      "email": "judge@judgedice.com",
+      "jobTitle": "Tribute writer and digital architect",
+      "description": "Tribute writer and digital architect. Eulogies, toasts, send-offs and keepsakes — plus twenty-five years of work inside the Adobe Experience Cloud.",
+      "image": "<t t-out="website.get_base_url()"/>/web/image/website/2/social_default_image"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "<t t-out="website.get_base_url()"/>/#website",
+      "url": "<t t-out="website.get_base_url()"/>/",
+      "name": "judgedice.com",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "<t t-out="website.get_base_url()"/>/#judge"
+      }
+    }
+  ]
 }
         </script>
     </xpath>

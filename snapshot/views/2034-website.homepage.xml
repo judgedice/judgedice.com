@@ -1,5 +1,21 @@
 <t name="Homepage" t-name="website.homepage">
     <t t-call="website.layout">
+        <script type="application/ld+json" data-jd-schema="v1">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "<t t-out="website.get_base_url()"/>/#page",
+  "url": "<t t-out="website.get_base_url()"/>/",
+  "name": "Judge DiCesaro — Delivering Joy since the turn of the Century",
+  "isPartOf": {
+    "@id": "<t t-out="website.get_base_url()"/>/#website"
+  },
+  "about": {
+    "@id": "<t t-out="website.get_base_url()"/>/#judge"
+  },
+  "primaryImageOfPage": "<t t-out="website.get_base_url()"/>/web/image/website/2/social_default_image"
+}
+        </script>
         <div id="wrap" class="oe_structure">
         <section id="top" style="min-height:calc(100vh - 66px);display:flex;flex-direction:column;justify-content:center;padding:0 clamp(1.5rem,6vw,6rem);max-width:78rem;" class="o_colored_level o_half_screen_height">
             <div class="reveal" style="animation-delay:80ms;">

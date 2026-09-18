@@ -1,5 +1,29 @@
 <t t-name="website.random-1">
     <t t-call="website.layout">
+        <script type="application/ld+json" data-jd-schema="v1">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "<t t-out="website.get_base_url()"/>/random-1#page",
+  "url": "<t t-out="website.get_base_url()"/>/random-1",
+  "name": "Only light can do that — Judge DiCesaro",
+  "isPartOf": {
+    "@id": "<t t-out="website.get_base_url()"/>/#website"
+  },
+  "mainEntity": {
+    "@type": "Quotation",
+    "text": "Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.",
+    "creator": {
+      "@type": "Person",
+      "name": "Martin Luther King Jr."
+    },
+    "isBasedOn": {
+      "@type": "CreativeWork",
+      "name": "Strength to Love"
+    }
+  }
+}
+        </script>
         <div id="wrap" class="oe_structure oe_empty"><section class="s_jd_quotepage o_cc o_colored_level oe_img_bg o_bg_img_center o_bg_img_origin_border_box o_cc4" data-snippet="s_jd_quote_page" data-name="Quote Page" data-attachment-id="1496" data-format-mimetype="image/webp" data-resize-width="1488" data-original-id="1496" data-original-src="/web/image/1496-66409418/Spotlight-selection.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp" style="background-image: url(&quot;/web/image/1497-73dfc27c/Spotlight-selection.webp&quot;);"><div class="s_jd_quotepage_scrim o_not_editable" aria-hidden="true"/><div class="s_jd_quotepage_inner"><blockquote class="s_jd_quotepage_block"><p class="s_jd_quotepage_text">Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.</p><footer class="s_jd_quotepage_cite"><strong>MARTIN LUTHER KING JR. - </strong><em>STRENGTH TO LOVE</em></footer></blockquote></div></section></div>
     </t>
 </t>

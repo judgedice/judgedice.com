@@ -1,0 +1,27 @@
+<data inherit_id="website_blog.blog_post_complete" name="Judge Entry Schema" active="True">
+    <xpath expr="." position="inside">
+        <t t-set="jd_cover" t-value="json.loads(blog_post.cover_properties or '{}').get('background-image','')"/>
+        <t t-set="jd_cover" t-value="jd_cover[5:-2] if jd_cover.startswith('url(') else ''"/>
+        <script type="application/ld+json" data-jd-schema="v1">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": <t t-out="json.dumps(website.get_base_url() + blog_post.website_url + '#post')"/>,
+  "headline": <t t-out="json.dumps(blog_post.name)"/>,
+  "url": <t t-out="json.dumps(website.get_base_url() + blog_post.website_url)"/>,
+  "mainEntityOfPage": <t t-out="json.dumps(website.get_base_url() + blog_post.website_url)"/>,
+  "datePublished": <t t-out="json.dumps(str(blog_post.post_date or '')[:19].replace(' ', 'T') + 'Z')"/>,
+  "dateModified": <t t-out="json.dumps(str(blog_post.write_date or '')[:19].replace(' ', 'T') + 'Z')"/>,
+  "description": <t t-out="json.dumps(blog_post.subtitle or '')"/>,
+  "author": {"@id": <t t-out="json.dumps(website.get_base_url() + '/#judge')"/>},
+  "publisher": {"@id": <t t-out="json.dumps(website.get_base_url() + '/#judge')"/>},
+  "isPartOf": {
+    "@type": "Blog",
+    "@id": <t t-out="json.dumps(website.get_base_url() + blog_post.website_url.rsplit('/', 1)[0] + '#blog')"/>,
+    "name": <t t-out="json.dumps(blog_post.blog_id.name)"/>
+  }<t t-if="jd_cover">,
+  "image": <t t-out="json.dumps(website.get_base_url() + jd_cover)"/></t>
+}
+        </script>
+    </xpath>
+</data>

@@ -1,5 +1,74 @@
 <t name="Offerings" t-name="website.judge_exciting">
     <t t-call="website.layout">
+        <script type="application/ld+json" data-jd-schema="v1">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "<t t-out="website.get_base_url()"/>/offerings#page",
+  "url": "<t t-out="website.get_base_url()"/>/offerings",
+  "name": "Tribute Writing — Judge DiCesaro",
+  "isPartOf": {
+    "@id": "<t t-out="website.get_base_url()"/>/#website"
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "@id": "<t t-out="website.get_base_url()"/>/offerings#service",
+    "name": "Tribute writing",
+    "serviceType": "Tribute writing",
+    "provider": {
+      "@id": "<t t-out="website.get_base_url()"/>/#judge"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
+    },
+    "description": "Eulogies, toasts, send-offs, keepsakes — the right words for the moments that matter.",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Tribute writing",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Eulogies &amp; Memorials"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Celebration Speeches"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Professional Tributes"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Written Keepsakes"
+          }
+        }
+      ]
+    },
+    "offers": {
+      "@type": "Offer",
+      "name": "Tribute Consultation",
+      "price": "50.00",
+      "priceCurrency": "USD",
+      "url": "<t t-out="website.get_base_url()"/>/shop/tribute-consultation-7",
+      "availability": "https://schema.org/InStock",
+      "description": "A 30-minute conversation about the tribute you need. Credited toward your quote if we work together."
+    }
+  }
+}
+        </script>
         <div id="wrap" class="oe_structure">
         <header style="padding:clamp(3.5rem,9vw,6.5rem) clamp(1.5rem,6vw,6rem) clamp(1.75rem,4vw,2.75rem);">
             <div style="display:flex;align-items:center;gap:14px;font-family:var(--font-serif);font-size:var(--text-label);text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);color:var(--vermilion);margin-bottom:20px;">

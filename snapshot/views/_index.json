@@ -412,5 +412,16 @@
     ],
     "mode": "primary",
     "active": true
+  },
+  {
+    "id": 2775,
+    "name": "Judge Entry Schema",
+    "key": "website_blog.jd_post_schema",
+    "inherit_id": [
+      2222,
+      "Blog Post"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]
