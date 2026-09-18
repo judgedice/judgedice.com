@@ -5,9 +5,17 @@ site is version-controlled: run, review `git diff`, commit.
 Captures: all site-2 qweb view arches, theme SCSS sources (palette + values),
 website.custom_code_head/custom_code_footer, and page/menu records.
 
-A mirror that only ever adds is not a mirror: a view that is deleted or
-deactivated leaves its file behind, still looking deployable to deploy.py, which
-maps filename -> record id. So files this run did not write are pruned.
+A mirror that only ever adds is not a mirror: a view that is deleted leaves its
+file behind, still looking deployable to deploy.py, which maps filename ->
+record id. So files this run did not write are pruned.
+
+Deactivated views are captured, not dropped. Odoo's own search hides inactive
+records unless active_test is off, so without that a view switched off in the
+theme editor looked exactly like a deleted one - the file was pruned and the
+fact that it was off lived nowhere. An inactive view is written with an
+`.inactive` marker before the extension, so its state is visible in the
+filename and a `git diff` shows the flip as a rename. deploy.py reads the same
+marker back.
 
 Pruning deletes, so it is guarded. An empty view read aborts outright, and a
 prune that would take more files than it leaves is refused - both look like a
@@ -29,6 +37,8 @@ SITE = 2  # judgedice.com — never touch site 1 (Half a Glass)
 def slug(s):
     return re.sub(r"[^A-Za-z0-9._-]+", "-", s or "").strip("-") or "unnamed"
 
+
+INACTIVE_MARK = ".inactive"  # filename marker; deploy.py reads it back
 
 WRITTEN = set()  # relpaths this run produced; everything else in snapshot/ is stale
 
@@ -70,16 +80,21 @@ def main(prune_=True, force_prune=False):
     uid, call = connect()
 
     # --- qweb views scoped to site 2 ---
-    vids = call("ir.ui.view", "search", [["website_id", "=", SITE], ["type", "=", "qweb"]])
+    # active_test=False or Odoo hides every deactivated view, and a theme option
+    # switched off becomes indistinguishable from one that never existed.
+    vids = call("ir.ui.view", "search", [["website_id", "=", SITE], ["type", "=", "qweb"]],
+                context={"active_test": False})
     views = call("ir.ui.view", "read", vids,
                  ["id", "name", "key", "inherit_id", "mode", "active", "arch_db"])
-    print(f"[views] {len(views)} qweb views on site {SITE}")
+    off = sum(1 for v in views if not v["active"])
+    print(f"[views] {len(views)} qweb views on site {SITE} ({off} deactivated)")
     if not views:
         sys.exit("[views] live returned no qweb views for site %d. Refusing to write "
                  "a snapshot that would read as 'everything was deleted'." % SITE)
     index = []
     for v in sorted(views, key=lambda x: x["id"]):
-        fname = "views/%04d-%s.xml" % (v["id"], slug(v["key"] or v["name"]))
+        fname = "views/%04d-%s%s.xml" % (v["id"], slug(v["key"] or v["name"]),
+                                         "" if v["active"] else INACTIVE_MARK)
         write(fname, v["arch_db"] or "")
         index.append({k: v[k] for k in ("id", "name", "key", "inherit_id", "mode", "active")})
     write("views/_index.json", json.dumps(index, indent=2, default=str))

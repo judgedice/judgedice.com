@@ -19,6 +19,28 @@
     "active": true
   },
   {
+    "id": 2036,
+    "name": "template_header_default_align_center",
+    "key": "website.template_header_default_align_center",
+    "inherit_id": [
+      2035,
+      "Template Header Default"
+    ],
+    "mode": "extension",
+    "active": false
+  },
+  {
+    "id": 2037,
+    "name": "template_header_default_align_right",
+    "key": "website.template_header_default_align_right",
+    "inherit_id": [
+      2035,
+      "Template Header Default"
+    ],
+    "mode": "extension",
+    "active": false
+  },
+  {
     "id": 2038,
     "name": "Default",
     "key": "website.footer_custom",
@@ -60,6 +82,17 @@
     "inherit_id": false,
     "mode": "primary",
     "active": true
+  },
+  {
+    "id": 2180,
+    "name": "Header Brand Logo",
+    "key": "website.option_header_brand_logo",
+    "inherit_id": [
+      1311,
+      "Placeholder Header Brand"
+    ],
+    "mode": "extension",
+    "active": false
   },
   {
     "id": 2266,
@@ -173,6 +206,14 @@
     "active": true
   },
   {
+    "id": 2734,
+    "name": "record_cover",
+    "key": "website.record_cover",
+    "inherit_id": false,
+    "mode": "primary",
+    "active": false
+  },
+  {
     "id": 2735,
     "name": "Judge Quote Page",
     "key": "website.s_jd_quote_page",
@@ -234,6 +275,17 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2741,
+    "name": "Show Sidebar",
+    "key": "website_blog.opt_blog_post_sidebar",
+    "inherit_id": [
+      2222,
+      "Blog Post"
+    ],
+    "mode": "extension",
+    "active": false
   },
   {
     "id": 2742,
@@ -313,6 +365,28 @@
     ],
     "mode": "extension",
     "active": true
+  },
+  {
+    "id": 2752,
+    "name": "Header Text element",
+    "key": "website.header_text_element",
+    "inherit_id": [
+      1395,
+      "Placeholder Header Text element"
+    ],
+    "mode": "extension",
+    "active": false
+  },
+  {
+    "id": 2753,
+    "name": "Header Call to Action",
+    "key": "website.header_call_to_action",
+    "inherit_id": [
+      1357,
+      "Placeholder Header Call to Action"
+    ],
+    "mode": "extension",
+    "active": false
   },
   {
     "id": 2754,

@@ -13,7 +13,8 @@ changed files back to Odoo over XML-RPC. Guardrails:
   - readback verify after each write
 
 File → target mapping (ids are encoded in the snapshot filenames):
-  snapshot/views/<id>-*.xml        -> ir.ui.view(<id>).arch
+  snapshot/views/<id>-*.xml        -> ir.ui.view(<id>).arch + .active
+  snapshot/views/<id>-*.inactive.xml -> same, deployed with active=False
   snapshot/scss/<id>-*.scss        -> ir.attachment(<id>).datas (base64)
   snapshot/custom_code_head.html   -> website(2).custom_code_head
   snapshot/custom_code_footer.html -> website(2).custom_code_footer
@@ -24,6 +25,11 @@ Usage:
 
 Dry-run is the default; nothing is written without --apply.
 --force skips the drift guard (use only after reviewing the drift).
+
+A view file carries its active state in its name: the `.inactive` marker that
+snapshot.py writes. Both the arch and the flag are compared and deployed, so
+switching a view off (or back on) travels through git like any other change,
+and renaming between the two forms is recognised as the same record.
 Exit codes: 0 ok · 1 usage/validation · 2 drift detected · 3 verify failed
 """
 import sys, os, re, base64, subprocess, xml.etree.ElementTree as ET
@@ -46,6 +52,21 @@ def git_show(base, relpath):
     return r.stdout if r.returncode == 0 else None
 
 
+INACTIVE_MARK = ".inactive"
+
+
+def wants_active(relpath):
+    """A view file is deployed inactive when its name carries the marker."""
+    return not relpath.endswith(INACTIVE_MARK + ".xml")
+
+
+def sibling(relpath):
+    """The same view file under the opposite active state."""
+    if relpath.endswith(INACTIVE_MARK + ".xml"):
+        return relpath[: -len(INACTIVE_MARK + ".xml")] + ".xml"
+    return relpath[: -len(".xml")] + INACTIVE_MARK + ".xml"
+
+
 def classify(relpath):
     m = re.match(r"snapshot/views/(\d+)-.*\.xml$", relpath)
     if m:
@@ -61,26 +82,33 @@ def classify(relpath):
 
 
 def read_live(call, kind, rid):
-    """Return (live_content, label). Asserts site-2 ownership."""
+    """Return (live_content, label, live_active). Asserts site-2 ownership.
+
+    live_active is None for anything that is not a view. Reading by id works on
+    inactive records; only search() hides them."""
     if kind == "view":
-        r = call("ir.ui.view", "read", [rid], ["arch_db", "website_id", "key"])[0]
+        r = call("ir.ui.view", "read", [rid],
+                 ["arch_db", "website_id", "key", "active"])[0]
         assert r["website_id"] and r["website_id"][0] == SITE, \
             "view %d is not website %d — refusing" % (rid, SITE)
-        return r["arch_db"] or "", "view %d (%s)" % (rid, r["key"])
+        return r["arch_db"] or "", "view %d (%s)" % (rid, r["key"]), r["active"]
     if kind == "scss":
         r = call("ir.attachment", "read", [rid], ["datas", "website_id", "url"])[0]
         assert r["website_id"] and r["website_id"][0] == SITE, \
             "attachment %d is not website %d — refusing" % (rid, SITE)
         live = base64.b64decode(r["datas"]).decode("utf-8") if r["datas"] else ""
-        return live, "attachment %d (%s)" % (rid, os.path.basename(r["url"] or ""))
+        return live, "attachment %d (%s)" % (rid, os.path.basename(r["url"] or "")), None
     field = "custom_code_head" if kind == "head" else "custom_code_footer"
     r = call("website", "read", [SITE], [field])[0]
-    return r[field] or "", "website(%d).%s" % (SITE, field)
+    return r[field] or "", "website(%d).%s" % (SITE, field), None
 
 
-def write_target(call, kind, rid, content):
+def write_target(call, kind, rid, content, active=None):
     if kind == "view":
-        call("ir.ui.view", "write", [rid], {"arch": content})
+        vals = {"arch": content}
+        if active is not None:
+            vals["active"] = active
+        call("ir.ui.view", "write", [rid], vals)
     elif kind == "scss":
         call("ir.attachment", "write", [rid],
              {"datas": base64.b64encode(content.encode("utf-8")).decode("ascii")})
@@ -129,13 +157,23 @@ def main(argv):
             except ET.ParseError as e:
                 print("  FAIL  %s — invalid XML: %s" % (rel, e)); failures += 1; continue
 
-        live, label = read_live(call, kind, rid)
-        if norm(live) == norm(new):
+        live, label, live_active = read_live(call, kind, rid)
+        want_active = wants_active(rel) if kind == "view" else None
+        arch_same = norm(live) == norm(new)
+        active_same = want_active is None or live_active == want_active
+        if arch_same and active_same:
             print("  noop  %s — live already matches" % rel); continue
 
-        # drift guard: live must equal what the repo last knew was deployed
+        # drift guard: live must equal what the repo last knew was deployed.
+        # A view that was switched on or off is the SAME record under a new
+        # filename, so when this path is absent at base look for its opposite
+        # before calling it unknown - otherwise every toggle reads as drift.
         if not force:
-            prev = git_show(base, rel)
+            prev, prev_active = git_show(base, rel), want_active
+            if prev is None and kind == "view":
+                alt = git_show(base, sibling(rel))
+                if alt is not None:
+                    prev, prev_active = alt, not want_active
             if prev is None:
                 print("  DRIFT %s — no version at base %s to compare against; "
                       "rerun with --force after review" % (rel, base))
@@ -144,16 +182,24 @@ def main(argv):
                 print("  DRIFT %s — live %s differs from base commit (edited in "
                       "Odoo builder?). Run snapshot.py, commit, retry." % (rel, label))
                 drift += 1; continue
+            if prev_active is not None and live_active != prev_active:
+                print("  DRIFT %s — live %s is %s but the base commit says %s "
+                      "(toggled in Odoo?). Run snapshot.py, commit, retry."
+                      % (rel, label, "active" if live_active else "inactive",
+                         "active" if prev_active else "inactive"))
+                drift += 1; continue
 
+        changes = ([] if arch_same else ["arch %d chars" % len(new)]) + \
+                  ([] if active_same else ["active=%s" % want_active])
         if not apply_:
-            print("  would-write  %s -> %s (%d chars)" % (rel, label, len(new))); continue
+            print("  would-write  %s -> %s (%s)" % (rel, label, ", ".join(changes))); continue
 
-        write_target(call, kind, rid, new)
-        back, _ = read_live(call, kind, rid)
-        if norm(back) != norm(new):
+        write_target(call, kind, rid, new, want_active)
+        back, _, back_active = read_live(call, kind, rid)
+        if norm(back) != norm(new) or (want_active is not None and back_active != want_active):
             print("  FAIL  %s — readback mismatch after write!" % rel); failures += 1
         else:
-            print("  wrote %s -> %s (%d chars, verified)" % (rel, label, len(new))); wrote += 1
+            print("  wrote %s -> %s (%s, verified)" % (rel, label, ", ".join(changes))); wrote += 1
 
     print("done: %d written, %d drift, %d failed [%s]" % (wrote, drift, failures, mode))
     if failures:
