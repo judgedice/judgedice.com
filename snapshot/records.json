@@ -125,9 +125,9 @@
       "sequence": 0
     },
     {
-      "id": 16,
-      "name": "Entries",
-      "url": "/blog",
+      "id": 10,
+      "name": "Offerings",
+      "url": "/offerings",
       "parent_id": [
         7,
         "Top Menu for Website 2 [judgedice.com]"
@@ -135,9 +135,9 @@
       "sequence": 1
     },
     {
-      "id": 10,
-      "name": "Offerings",
-      "url": "/offerings",
+      "id": 16,
+      "name": "Entries",
+      "url": "/blog",
       "parent_id": [
         7,
         "Top Menu for Website 2 [judgedice.com]"
