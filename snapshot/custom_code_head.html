@@ -542,11 +542,8 @@ header#top .o_header_mobile .navbar-toggler-icon{
   transition:color var(--dur-base) var(--ease-out),
              border-color var(--dur-base) var(--ease-out);
 }
-.s_jd_quotepage.o_cc1 .s_jd_quotepage_cite a,
-.s_jd_quotepage.o_cc2 .s_jd_quotepage_cite a,
-.s_jd_quotepage.o_cc3 .s_jd_quotepage_cite a{color:var(--ink-soft);border-bottom-color:var(--line-strong);}
-.s_jd_quotepage.o_cc4 .s_jd_quotepage_cite a,
-.s_jd_quotepage.o_cc5 .s_jd_quotepage_cite a{color:var(--paper);border-bottom-color:rgba(242,236,223,.45);}
+.s_jd_quotepage:is(.o_cc1,.o_cc2,.o_cc3) .s_jd_quotepage_cite a{color:var(--ink-soft);border-bottom-color:var(--line-strong);}
+.s_jd_quotepage:is(.o_cc4,.o_cc5) .s_jd_quotepage_cite a{color:var(--paper);border-bottom-color:rgba(242,236,223,.45);}
 .s_jd_quotepage .s_jd_quotepage_cite a:hover,
 .s_jd_quotepage .s_jd_quotepage_cite a:focus-visible{color:var(--vermilion);border-color:var(--vermilion);}
 @media (prefers-reduced-motion:reduce){.s_jd_quotepage .s_jd_quotepage_cite a{transition:none;}}
@@ -567,8 +564,13 @@ header#top .o_header_mobile .navbar-toggler-icon{
 /* keep the quote clear of both bars even on a short viewport */
 #wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) .s_jd_quotepage{padding-top:max(clamp(6rem,18vh,12rem),calc(var(--jd-glass-h) + 2rem));
   padding-bottom:max(clamp(6rem,18vh,12rem),calc(var(--jd-glass-h) + 2rem));}
+/* both wrappers carry an opaque theme background of their own; the glass
+   lives on the bar inside, so it needs something to actually see through */
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child)>header#top,
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child)>footer,
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) #footer{background:transparent;}
 
-/* --- fixed, minimal bar heights --- */
+/* --- (3) fixed, minimal bar heights --- */
 #wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) .jd-nav{height:var(--jd-glass-h);padding-top:0;padding-bottom:0;}
 #wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) .jd-brand{font-size:22px;}
 #wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) header#top .o_header_mobile .o_main_nav{height:var(--jd-glass-h);padding-top:0;padding-bottom:0;}
@@ -579,7 +581,7 @@ header#top .o_header_mobile .navbar-toggler-icon{
 @media (max-width:900px){#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) .jd-footer-tagline{display:none;}}
 @media (max-width:620px){#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) .jd-footer-copy{display:none;}}
 
-/* --- the glass itself --- */
+/* --- (4) the glass itself --- */
 #wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) .jd-nav,
 #wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) header#top .o_header_mobile,
 #wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) .jd-footer-base{
@@ -587,67 +589,51 @@ header#top .o_header_mobile .navbar-toggler-icon{
   backdrop-filter:blur(18px) saturate(150%);
   box-shadow:none;
 }
-/* both wrappers carry an opaque theme background of their own; the glass
-   lives on the bar inside, so it needs something to actually see through */
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child)>header#top,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child)>footer,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child) #footer{background:transparent;}
 
-/* dark artwork (o_cc4/o_cc5): smoked glass, type reversed to paper.
-   Mirrors the scrim split the quote-page block already uses. */
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-nav,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-nav,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) header#top .o_header_mobile,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) header#top .o_header_mobile{
-  background:rgba(16,12,8,.30);border-bottom:1px solid rgba(242,236,223,.16);
-}
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-footer-base,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-footer-base{
-  background:rgba(16,12,8,.30);border-top:1px solid rgba(242,236,223,.16);
-}
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-brand,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-brand,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-mnav-mark,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-mnav-mark,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-nav .jd-link,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-nav .jd-link,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-footer-mark,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-footer-mark,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-footer-cta,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-footer-cta{color:var(--paper);}
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-footer-baseinner>span,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-footer-baseinner>span{color:rgba(242,236,223,.62);}
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-nav .jd-navcta,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-nav .jd-navcta{
-  color:var(--paper);border-color:rgba(242,236,223,.55);padding-top:8px;padding-bottom:8px;
-}
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-nav .jd-navcta:hover,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-nav .jd-navcta:hover,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) .jd-nav .jd-navcta:focus-visible,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) .jd-nav .jd-navcta:focus-visible{
-  background:var(--vermilion);border-color:var(--vermilion);color:var(--paper);
-}
-/* the burger is a background SVG, so the stroke has to be swapped wholesale -
-   same trick as the jd-mobile-nav block, paper instead of ink */
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc4) header#top .o_header_mobile .navbar-toggler-icon,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc5) header#top .o_header_mobile .navbar-toggler-icon{
-  background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23F2ECDF' stroke-width='2' stroke-linecap='round' d='M4 9h22M4 15h22M4 21h22'/%3e%3c/svg%3e");
-}
+/* --- (5) dark artwork: smoked glass, type reversed to paper --- */
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-nav,
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) header#top .o_header_mobile{background:rgba(16,12,8,.30);border-bottom:1px solid rgba(242,236,223,.16);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-footer-base{background:rgba(16,12,8,.30);border-top:1px solid rgba(242,236,223,.16);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-brand,
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-mnav-mark,
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-nav .jd-link,
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-footer-mark,
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-footer-cta{color:var(--paper);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-footer-baseinner>span{color:rgba(242,236,223,.62);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) header#top .o_header_mobile .o_wsale_my_cart .btn{color:var(--paper)!important;}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-nav .jd-navcta{color:var(--paper);border-color:rgba(242,236,223,.55);padding-top:8px;padding-bottom:8px;}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-nav .jd-navcta:hover,
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .jd-nav .jd-navcta:focus-visible{background:var(--vermilion);border-color:var(--vermilion);color:var(--paper);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) header#top .o_header_mobile .navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23F2ECDF' stroke-width='2' stroke-linecap='round' d='M4 9h22M4 15h22M4 21h22'/%3e%3c/svg%3e");}
 
-/* light artwork (o_cc1-o_cc3): frosted paper, type stays ink. Nothing uses
-   this yet - it is here so a light quote page does not come out unreadable. */
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc1) .jd-nav,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc2) .jd-nav,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc3) .jd-nav,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc1) header#top .o_header_mobile,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc2) header#top .o_header_mobile,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc3) header#top .o_header_mobile{
-  background:rgba(242,236,223,.55);border-bottom:1px solid rgba(28,23,18,.12);
+/* the drawer slides out over the artwork too, so it gets the same smoked
+   glass - heavier, because menu text has to stay readable over a photograph -
+   and every ink-coloured part of it reverses. */
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile{
+  background:rgba(16,12,8,.84);
+  -webkit-backdrop-filter:blur(24px) saturate(150%);
+  backdrop-filter:blur(24px) saturate(150%);
+  border-left:1px solid rgba(242,236,223,.16);
 }
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc1) .jd-footer-base,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc2) .jd-footer-base,
-#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage.o_cc3) .jd-footer-base{
-  background:rgba(242,236,223,.55);border-top:1px solid rgba(28,23,18,.12);
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile .btn-close{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath stroke='%23F2ECDF' stroke-width='1.6' stroke-linecap='round' d='M3 3l10 10M13 3L3 13'/%3e%3c/svg%3e");}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile .top_menu .nav-item{border-top-color:rgba(242,236,223,.16)!important;}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile .top_menu .nav-item:last-child{border-bottom-color:rgba(242,236,223,.16)!important;}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile .top_menu .nav-link{color:var(--paper);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile .top_menu .nav-link[href="/appointment"]{border-color:rgba(242,236,223,.55);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile .o_searchbar_form .input-group{border-bottom-color:rgba(242,236,223,.35);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile .o_searchbar_form .oe_search_box{color:var(--paper)!important;}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile .o_searchbar_form .oe_search_box::placeholder{color:rgba(242,236,223,.55);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc4,.o_cc5)) .o_navbar_mobile .o_searchbar_form .oe_search_button{color:rgba(242,236,223,.62);}
+
+/* --- (6) light artwork: frosted paper, type stays ink. Nothing uses this
+   yet - it is here so a light quote page does not come out unreadable. --- */
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc1,.o_cc2,.o_cc3)) .jd-nav,
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc1,.o_cc2,.o_cc3)) header#top .o_header_mobile{background:rgba(242,236,223,.55);border-bottom:1px solid rgba(28,23,18,.12);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc1,.o_cc2,.o_cc3)) .jd-footer-base{background:rgba(242,236,223,.55);border-top:1px solid rgba(28,23,18,.12);}
+#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child):has(.s_jd_quotepage:is(.o_cc1,.o_cc2,.o_cc3)) .o_navbar_mobile{
+  background:rgba(242,236,223,.88);
+  -webkit-backdrop-filter:blur(24px) saturate(150%);
+  backdrop-filter:blur(24px) saturate(150%);
 }
 
 /* ---- end jd-glass-chrome ---- */

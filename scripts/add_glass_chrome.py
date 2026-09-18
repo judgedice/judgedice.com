@@ -34,6 +34,21 @@ END = "/* ---- end jd-glass-chrome ---- */"
 Q = "#wrapwrap:has(>main>#wrap>.s_jd_quotepage:only-child)"
 DARK = ".s_jd_quotepage.o_cc4, .s_jd_quotepage.o_cc5"  # documentation only
 
+# Colour split, matching the one the Judge Quote Page block already uses:
+# o_cc4/o_cc5 are the dark artwork combinations, o_cc1-o_cc3 the light ones.
+DARK = f"{Q}:has(.s_jd_quotepage:is(.o_cc4,.o_cc5))"
+LIGHT = f"{Q}:has(.s_jd_quotepage:is(.o_cc1,.o_cc2,.o_cc3))"
+
+# Bootstrap paints the burger and the close X as background SVGs, so the colour
+# is baked into the image and no property can reach it - the whole data URI has
+# to be swapped for one stroked in paper.
+BURGER = ("url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' "
+          "viewBox='0 0 30 30'%3e%3cpath stroke='%23F2ECDF' stroke-width='2' "
+          "stroke-linecap='round' d='M4 9h22M4 15h22M4 21h22'/%3e%3c/svg%3e\")")
+CLOSE = ("url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' "
+         "viewBox='0 0 16 16'%3e%3cpath stroke='%23F2ECDF' stroke-width='1.6' "
+         "stroke-linecap='round' d='M3 3l10 10M13 3L3 13'/%3e%3c/svg%3e\")")
+
 CSS = f"""{SENTINEL}
 
 /* --- (1) the citation link ---------------------------------------------
@@ -46,11 +61,8 @@ CSS = f"""{SENTINEL}
   transition:color var(--dur-base) var(--ease-out),
              border-color var(--dur-base) var(--ease-out);
 }}
-.s_jd_quotepage.o_cc1 .s_jd_quotepage_cite a,
-.s_jd_quotepage.o_cc2 .s_jd_quotepage_cite a,
-.s_jd_quotepage.o_cc3 .s_jd_quotepage_cite a{{color:var(--ink-soft);border-bottom-color:var(--line-strong);}}
-.s_jd_quotepage.o_cc4 .s_jd_quotepage_cite a,
-.s_jd_quotepage.o_cc5 .s_jd_quotepage_cite a{{color:var(--paper);border-bottom-color:rgba(242,236,223,.45);}}
+.s_jd_quotepage:is(.o_cc1,.o_cc2,.o_cc3) .s_jd_quotepage_cite a{{color:var(--ink-soft);border-bottom-color:var(--line-strong);}}
+.s_jd_quotepage:is(.o_cc4,.o_cc5) .s_jd_quotepage_cite a{{color:var(--paper);border-bottom-color:rgba(242,236,223,.45);}}
 .s_jd_quotepage .s_jd_quotepage_cite a:hover,
 .s_jd_quotepage .s_jd_quotepage_cite a:focus-visible{{color:var(--vermilion);border-color:var(--vermilion);}}
 @media (prefers-reduced-motion:reduce){{.s_jd_quotepage .s_jd_quotepage_cite a{{transition:none;}}}}
@@ -71,8 +83,13 @@ CSS = f"""{SENTINEL}
 /* keep the quote clear of both bars even on a short viewport */
 {Q} .s_jd_quotepage{{padding-top:max(clamp(6rem,18vh,12rem),calc(var(--jd-glass-h) + 2rem));
   padding-bottom:max(clamp(6rem,18vh,12rem),calc(var(--jd-glass-h) + 2rem));}}
+/* both wrappers carry an opaque theme background of their own; the glass
+   lives on the bar inside, so it needs something to actually see through */
+{Q}>header#top,
+{Q}>footer,
+{Q} #footer{{background:transparent;}}
 
-/* --- fixed, minimal bar heights --- */
+/* --- (3) fixed, minimal bar heights --- */
 {Q} .jd-nav{{height:var(--jd-glass-h);padding-top:0;padding-bottom:0;}}
 {Q} .jd-brand{{font-size:22px;}}
 {Q} header#top .o_header_mobile .o_main_nav{{height:var(--jd-glass-h);padding-top:0;padding-bottom:0;}}
@@ -83,7 +100,7 @@ CSS = f"""{SENTINEL}
 @media (max-width:900px){{{Q} .jd-footer-tagline{{display:none;}}}}
 @media (max-width:620px){{{Q} .jd-footer-copy{{display:none;}}}}
 
-/* --- the glass itself --- */
+/* --- (4) the glass itself --- */
 {Q} .jd-nav,
 {Q} header#top .o_header_mobile,
 {Q} .jd-footer-base{{
@@ -91,67 +108,51 @@ CSS = f"""{SENTINEL}
   backdrop-filter:blur(18px) saturate(150%);
   box-shadow:none;
 }}
-/* both wrappers carry an opaque theme background of their own; the glass
-   lives on the bar inside, so it needs something to actually see through */
-{Q}>header#top,
-{Q}>footer,
-{Q} #footer{{background:transparent;}}
 
-/* dark artwork (o_cc4/o_cc5): smoked glass, type reversed to paper.
-   Mirrors the scrim split the quote-page block already uses. */
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-nav,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-nav,
-{Q}:has(.s_jd_quotepage.o_cc4) header#top .o_header_mobile,
-{Q}:has(.s_jd_quotepage.o_cc5) header#top .o_header_mobile{{
-  background:rgba(16,12,8,.30);border-bottom:1px solid rgba(242,236,223,.16);
-}}
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-footer-base,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-footer-base{{
-  background:rgba(16,12,8,.30);border-top:1px solid rgba(242,236,223,.16);
-}}
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-brand,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-brand,
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-mnav-mark,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-mnav-mark,
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-nav .jd-link,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-nav .jd-link,
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-footer-mark,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-footer-mark,
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-footer-cta,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-footer-cta{{color:var(--paper);}}
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-footer-baseinner>span,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-footer-baseinner>span{{color:rgba(242,236,223,.62);}}
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-nav .jd-navcta,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-nav .jd-navcta{{
-  color:var(--paper);border-color:rgba(242,236,223,.55);padding-top:8px;padding-bottom:8px;
-}}
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-nav .jd-navcta:hover,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-nav .jd-navcta:hover,
-{Q}:has(.s_jd_quotepage.o_cc4) .jd-nav .jd-navcta:focus-visible,
-{Q}:has(.s_jd_quotepage.o_cc5) .jd-nav .jd-navcta:focus-visible{{
-  background:var(--vermilion);border-color:var(--vermilion);color:var(--paper);
-}}
-/* the burger is a background SVG, so the stroke has to be swapped wholesale -
-   same trick as the jd-mobile-nav block, paper instead of ink */
-{Q}:has(.s_jd_quotepage.o_cc4) header#top .o_header_mobile .navbar-toggler-icon,
-{Q}:has(.s_jd_quotepage.o_cc5) header#top .o_header_mobile .navbar-toggler-icon{{
-  background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23F2ECDF' stroke-width='2' stroke-linecap='round' d='M4 9h22M4 15h22M4 21h22'/%3e%3c/svg%3e");
-}}
+/* --- (5) dark artwork: smoked glass, type reversed to paper --- */
+{DARK} .jd-nav,
+{DARK} header#top .o_header_mobile{{background:rgba(16,12,8,.30);border-bottom:1px solid rgba(242,236,223,.16);}}
+{DARK} .jd-footer-base{{background:rgba(16,12,8,.30);border-top:1px solid rgba(242,236,223,.16);}}
+{DARK} .jd-brand,
+{DARK} .jd-mnav-mark,
+{DARK} .jd-nav .jd-link,
+{DARK} .jd-footer-mark,
+{DARK} .jd-footer-cta{{color:var(--paper);}}
+{DARK} .jd-footer-baseinner>span{{color:rgba(242,236,223,.62);}}
+{DARK} header#top .o_header_mobile .o_wsale_my_cart .btn{{color:var(--paper)!important;}}
+{DARK} .jd-nav .jd-navcta{{color:var(--paper);border-color:rgba(242,236,223,.55);padding-top:8px;padding-bottom:8px;}}
+{DARK} .jd-nav .jd-navcta:hover,
+{DARK} .jd-nav .jd-navcta:focus-visible{{background:var(--vermilion);border-color:var(--vermilion);color:var(--paper);}}
+{DARK} header#top .o_header_mobile .navbar-toggler-icon{{background-image:{BURGER};}}
 
-/* light artwork (o_cc1-o_cc3): frosted paper, type stays ink. Nothing uses
-   this yet - it is here so a light quote page does not come out unreadable. */
-{Q}:has(.s_jd_quotepage.o_cc1) .jd-nav,
-{Q}:has(.s_jd_quotepage.o_cc2) .jd-nav,
-{Q}:has(.s_jd_quotepage.o_cc3) .jd-nav,
-{Q}:has(.s_jd_quotepage.o_cc1) header#top .o_header_mobile,
-{Q}:has(.s_jd_quotepage.o_cc2) header#top .o_header_mobile,
-{Q}:has(.s_jd_quotepage.o_cc3) header#top .o_header_mobile{{
-  background:rgba(242,236,223,.55);border-bottom:1px solid rgba(28,23,18,.12);
+/* the drawer slides out over the artwork too, so it gets the same smoked
+   glass - heavier, because menu text has to stay readable over a photograph -
+   and every ink-coloured part of it reverses. */
+{DARK} .o_navbar_mobile{{
+  background:rgba(16,12,8,.84);
+  -webkit-backdrop-filter:blur(24px) saturate(150%);
+  backdrop-filter:blur(24px) saturate(150%);
+  border-left:1px solid rgba(242,236,223,.16);
 }}
-{Q}:has(.s_jd_quotepage.o_cc1) .jd-footer-base,
-{Q}:has(.s_jd_quotepage.o_cc2) .jd-footer-base,
-{Q}:has(.s_jd_quotepage.o_cc3) .jd-footer-base{{
-  background:rgba(242,236,223,.55);border-top:1px solid rgba(28,23,18,.12);
+{DARK} .o_navbar_mobile .btn-close{{background-image:{CLOSE};}}
+{DARK} .o_navbar_mobile .top_menu .nav-item{{border-top-color:rgba(242,236,223,.16)!important;}}
+{DARK} .o_navbar_mobile .top_menu .nav-item:last-child{{border-bottom-color:rgba(242,236,223,.16)!important;}}
+{DARK} .o_navbar_mobile .top_menu .nav-link{{color:var(--paper);}}
+{DARK} .o_navbar_mobile .top_menu .nav-link[href="/appointment"]{{border-color:rgba(242,236,223,.55);}}
+{DARK} .o_navbar_mobile .o_searchbar_form .input-group{{border-bottom-color:rgba(242,236,223,.35);}}
+{DARK} .o_navbar_mobile .o_searchbar_form .oe_search_box{{color:var(--paper)!important;}}
+{DARK} .o_navbar_mobile .o_searchbar_form .oe_search_box::placeholder{{color:rgba(242,236,223,.55);}}
+{DARK} .o_navbar_mobile .o_searchbar_form .oe_search_button{{color:rgba(242,236,223,.62);}}
+
+/* --- (6) light artwork: frosted paper, type stays ink. Nothing uses this
+   yet - it is here so a light quote page does not come out unreadable. --- */
+{LIGHT} .jd-nav,
+{LIGHT} header#top .o_header_mobile{{background:rgba(242,236,223,.55);border-bottom:1px solid rgba(28,23,18,.12);}}
+{LIGHT} .jd-footer-base{{background:rgba(242,236,223,.55);border-top:1px solid rgba(28,23,18,.12);}}
+{LIGHT} .o_navbar_mobile{{
+  background:rgba(242,236,223,.88);
+  -webkit-backdrop-filter:blur(24px) saturate(150%);
+  backdrop-filter:blur(24px) saturate(150%);
 }}
 
 {END}"""
