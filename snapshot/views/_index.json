@@ -302,5 +302,16 @@
     "inherit_id": false,
     "mode": "primary",
     "active": true
+  },
+  {
+    "id": 2751,
+    "name": "Judge Random Menu Link",
+    "key": "website.jd_random_submenu_link",
+    "inherit_id": [
+      1259,
+      "Submenu"
+    ],
+    "mode": "extension",
+    "active": true
   }
 ]

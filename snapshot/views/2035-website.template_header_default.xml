@@ -4,6 +4,12 @@
             <a href="/" class="jd-brand">Judge<span class="jd-dot">.</span></a>
             <span class="jd-links">
                 <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                    <!-- The "It's on Random" item carries the sentinel url /random.
+                         No page lives there; it is swapped for a real published
+                         /random-N here, excluding the one you are already on. -->
+                    <t t-set="jd_pool" t-value="submenu.url == '/random' and [p.url for p in request.env['website.page'].sudo().search([('url','=like','/random-%'),('is_published','=',True),('website_id','=',website.id)])] or []"/>
+                    <t t-set="jd_other" t-value="[u for u in jd_pool if u != request.httprequest.path]"/>
+                    <t t-set="jd_pick" t-value="jd_other or jd_pool"/>
                     <!-- The booking link is the nav's call to action, so it leaves the
                          numbered sequence and renders as a button. Keyed on the URL, not
                          on position: if the page is ever renamed this quietly falls back
@@ -11,7 +17,7 @@
                     <a t-if="submenu.url == '/appointment'" t-att-href="submenu.url" class="jd-navcta">
                         <span class="jd-label" t-esc="submenu.name"/>
                     </a>
-                    <a t-else="" t-att-href="submenu.url" class="jd-link">
+                    <a t-else="" t-att-href="jd_pick and jd_pick[datetime.datetime.now().microsecond % len(jd_pick)] or submenu.url" class="jd-link">
                         <span class="jd-row"><span class="jd-num"/><span class="jd-label" t-esc="submenu.name"/></span>
                         <span class="jd-underline"/>
                     </a>

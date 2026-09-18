@@ -1,0 +1,10 @@
+<data inherit_id="website.submenu" name="Judge Random Menu Link" active="True">
+    <xpath expr="//t[@t-set='show_dropdown']" position="before">
+        <t t-set="jd_pool" t-value="submenu.url == '/random' and [p.url for p in request.env['website.page'].sudo().search([('url','=like','/random-%'),('is_published','=',True),('website_id','=',website.id)])] or []"/>
+        <t t-set="jd_other" t-value="[u for u in jd_pool if u != request.httprequest.path]"/>
+        <t t-set="jd_pick" t-value="jd_other or jd_pool"/>
+    </xpath>
+    <xpath expr="//a[@t-att-href='submenu._clean_url()']" position="attributes">
+        <attribute name="t-att-href">jd_pick and jd_pick[datetime.datetime.now().microsecond % len(jd_pick)] or submenu._clean_url()</attribute>
+    </xpath>
+</data>

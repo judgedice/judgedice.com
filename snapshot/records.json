@@ -140,7 +140,7 @@
     {
       "id": 9,
       "name": "It's on Random",
-      "url": "/home",
+      "url": "/random",
       "parent_id": [
         7,
         "Top Menu for Website 2 [judgedice.com]"
