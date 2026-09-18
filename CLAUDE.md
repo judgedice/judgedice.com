@@ -53,6 +53,12 @@ over XML-RPC by `scripts/odoo.py` → `connect()` → `(uid, call)`:
 The record id is encoded in every snapshot filename — that's how `deploy.py` maps file → target.
 `records.json` and `views/_index.json` are read-only artifacts and are skipped by the deploy.
 
+A view that is **deactivated** is snapshotted as `<id>-<key>.inactive.xml`. Odoo's
+`search` hides inactive records unless `active_test` is off, so without that marker a
+switched-off view is indistinguishable from a deleted one. `deploy.py` reads the marker
+back and treats `active` as deployable state alongside the arch — toggling a view travels
+through git as a rename, and a flag changed in the builder trips the drift guard.
+
 **Token sync:** the design tokens exist in three places and must agree —
 `Judge Design System/tokens/*.css` (source of truth, never edited) → the `:root` block in
 `custom_code_head` (live) → `snapshot/custom_code_head.html` (tracked).
@@ -80,7 +86,7 @@ Odoo: they turn photos into ink-on-transparency PNGs for the paper ground. `inco
 ## Key live IDs (site 2)
 
 - Pages/views: home 2034 · header **2035** (menu-driven) · footer 2038 · work 2039 · home-life 2040 · **offerings 2041** (page 8, `/offerings`; the view key is still `website.judge_exciting` — the page was renamed, the key wasn't, so grep the id not the word) · connect 2042 (orphaned from nav) · **mobile header 2747** (`website.jd_header_mobile`, site-2 override of the *shared* `website.template_header_mobile` 1268 — edit 2747, never 1268)
-- Judge block kit: views 2266–2270 (page-header, section-label, callout, cards, rule) + 2732 quotes + 2733 swath, all registered in **2271** (palette). Separately, 2734 overrides Odoo's `website.record_cover` for blog covers.
+- Judge block kit: views 2266–2270 (page-header, section-label, callout, cards, rule) + 2732 quotes + 2733 swath, all registered in **2271** (palette). Separately, **2736** (`website_blog.jd_cover_title_overlay`) lays the entry title over the cover; the cover images themselves come from each record's `cover_properties`, not from a template override.
 - Appointment-page email hiders: 2272/2273 · checkout booking CTA: 2720 · statement-descriptor note: 2731
 - SCSS attachments: palette **1086**, values/fonts **1087** (edit base64 `datas`; insert before `// -- hook --`)
 - Blog 1 = "Entries" (site 2); tags 1 Tributes / 2 Opinions / 3 Reviews
