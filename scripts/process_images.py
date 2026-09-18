@@ -80,6 +80,41 @@ SIZES = {"entry": (1600, 900), "product": (1200, 1200),
          "offering": (1600, 1000), "social": (1200, 630)}
 READABLE = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".tif", ".tiff", ".webp"}
 
+# What gets uploaded. The effect output is the master - full quality, and for
+# halftone/duotone a PNG carrying real transparency - but a PNG of ink on
+# transparency at 1600x900 lands around 1.3 MB, and uploading that is how the
+# site ended up shipping 9.6 MB of images on /blog alone. So every master gets
+# a bounded webp beside it, and that is the file to upload.
+WEB_SUFFIX = "-web.webp"
+WEB_MAX_EDGE = 1920
+WEB_QUALITY = 78
+
+
+def web_copy(src, max_edge=WEB_MAX_EDGE, quality=WEB_QUALITY):
+    """Write an upload-ready webp next to `src`. Returns (path, bytes) or None.
+
+    Transparency is preserved wherever it is real. An alpha channel is dropped
+    only when every pixel is opaque, which cannot change a rendered pixel - it
+    is not the same as flattening the artwork onto a background colour.
+    """
+    from PIL import Image
+
+    dst = os.path.splitext(src)[0] + WEB_SUFFIX
+    with Image.open(src) as im:
+        im.load()
+        keep_alpha = False
+        if im.mode in ("RGBA", "LA", "PA"):
+            lo, _ = im.convert("RGBA").getchannel("A").getextrema()
+            keep_alpha = lo < 255
+        out = im.convert("RGBA" if keep_alpha else "RGB")
+        w, h = out.size
+        scale = min(1.0, max_edge / max(w, h))
+        if scale < 1:
+            out = out.resize((max(1, round(w * scale)), max(1, round(h * scale))),
+                             Image.LANCZOS)
+        out.save(dst, "WEBP", quality=quality, method=4 if keep_alpha else 6)
+    return dst, os.path.getsize(dst)
+
 
 def collect(paths):
     out = []
@@ -104,6 +139,8 @@ def main():
     ap.add_argument("--w", type=int); ap.add_argument("--h", type=int)
     ap.add_argument("--effects", default=",".join(EFFECTS))
     ap.add_argument("--fy", type=float, default=0.5)
+    ap.add_argument("--no-web", action="store_true",
+                    help="skip the upload-ready .webp beside each master")
     a = ap.parse_args()
 
     w, h = SIZES[a.size]
@@ -143,9 +180,20 @@ def main():
                 print(f"      {effect:9s} FAILED")
             else:
                 made += 1
-                print(f"      {effect:9s} ok")
+                note = ""
+                if not a.no_web:
+                    try:
+                        wpath, wsize = web_copy(dst)
+                        note = (f"  -> {os.path.basename(wpath)} "
+                                f"{wsize/1024:.0f} KB "
+                                f"({os.path.getsize(dst)/wsize:.0f}x smaller)")
+                    except Exception as e:      # never lose the master over this
+                        note = f"  (web copy failed: {e})"
+                print(f"      {effect:9s} ok{note}")
 
-    print(f"\n{made} file(s) written to {a.out}/")
+    print(f"\n{made} master(s) written to {a.out}/")
+    if not a.no_web:
+        print(f"upload the {WEB_SUFFIX} files, not the masters.")
     for stem, effect, msg in failed:
         print(f"  failed: {stem} [{effect}] {msg[0] if msg else ''}")
 
