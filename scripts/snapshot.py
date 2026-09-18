@@ -129,11 +129,19 @@ def main(prune_=True, force_prune=False):
     mids = call("website.menu", "search", [["website_id", "=", SITE]])
     menus = call("website.menu", "read", mids,
                  ["id", "name", "url", "parent_id", "sequence"])
+    # URL redirects are ordinary site state, not code - Odoo Online has no
+    # controller to hold them. Recorded so a retired page's 301 is visible in
+    # the repo rather than only in the database. Inactive ones count too.
+    rids = call("website.rewrite", "search", [["website_id", "=", SITE]],
+                context={"active_test": False})
+    rewrites = call("website.rewrite", "read", rids,
+                    ["id", "name", "redirect_type", "url_from", "url_to", "active"])
     write("records.json", json.dumps(
         {"website": {k: w[k] for k in ("name", "domain", "homepage_url")},
          "pages": sorted(pages, key=lambda p: p["id"]),
          "blogs": sorted(blogs, key=lambda b: b["id"]),
-         "menus": sorted(menus, key=lambda m: (str(m["parent_id"]), m["sequence"]))},
+         "menus": sorted(menus, key=lambda m: (str(m["parent_id"]), m["sequence"])),
+         "redirects": sorted(rewrites, key=lambda r: r["id"])},
         indent=2, default=str))
 
     if prune_:

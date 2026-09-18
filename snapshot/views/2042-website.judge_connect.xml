@@ -22,15 +22,14 @@
                 <span>Connect</span>
                 <span style="flex:1;height:1px;background:color-mix(in srgb, var(--paper) 30%, transparent);min-width:24px;"/>
             </div>
-            <h1 style="font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;font-size:clamp(2.75rem,8vw,6rem);line-height:var(--leading-tight);letter-spacing:-0.005em;color:var(--paper);margin:0;max-width:18ch;">Let's talk.</h1>
+            <h1 style="font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;font-size:clamp(2.75rem,8vw,6rem);line-height:var(--leading-tight);letter-spacing:-0.005em;color:var(--paper);margin:0;max-width:18ch;">I'm around</h1>
         </header>
-        <section style="padding:clamp(2rem,6vw,5rem) clamp(1.5rem,6vw,6rem) clamp(4rem,10vw,8rem);background:var(--ink);">
+        <section style="padding: clamp(2rem, 6vw, 5rem) clamp(1.5rem, 6vw, 6rem) clamp(4rem, 10vw, 8rem); background-position-x: ; background-position-y: ; background-size: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ;" class="o_colored_level">
             <div style="max-width:72rem;margin:0 auto;">
                 <div style="max-width:44rem;">
-                    <p style="font-family:var(--font-serif);font-size:clamp(1.125rem,2.4vw,1.5rem);line-height:1.5;color:color-mix(in srgb, var(--paper) 82%, transparent);margin:0;max-width:36rem;">I'm responsive on email, better on a call, and genuinely bad at LinkedIn DMs.</p>
-                    <p style="font-family:var(--font-serif);font-size:clamp(1.0625rem,2vw,1.25rem);line-height:1.6;color:color-mix(in srgb, var(--paper) 66%, transparent);margin:20px 0 0;max-width:38rem;">If you're working on something in the Adobe Experience Cloud space and need a senior architect — or just need someone to talk through a hairy integration — I'm interested. Find 30 minutes.</p>
+                    <p style="font-family:var(--font-serif);font-size:clamp(1.125rem,2.4vw,1.5rem);line-height:1.5;color:color-mix(in srgb, var(--paper) 82%, transparent);margin:0;max-width:36rem;">Want to meet up or chat on the phone? Book with me directly and indicate your preference. I'm in the Andover area and would love to get together.&amp;nbsp;</p>
                     <div style="margin-top:clamp(2.5rem,6vw,3.5rem);display:flex;align-items:center;gap:28px;flex-wrap:wrap;">
-                        <a href="mailto:judge@judgedice.com" style="display:inline-flex;align-items:center;gap:0.6em;font-family:var(--font-serif);text-transform:uppercase;letter-spacing:var(--tracking-label);font-weight:var(--weight-medium);line-height:1;border-radius:var(--radius-sm);border:1px solid var(--vermilion);background:var(--vermilion);color:var(--paper);padding:17px 34px;font-size:14px;text-decoration:none;">judge@judgedice.com <span style="font-family:var(--font-serif);">→</span></a>
+                        <a href="mailto:judge@judgedice.com" style="display: inline-flex; align-items: center; gap: 0.6em; font-family: var(--font-serif); text-transform: uppercase; letter-spacing: var(--tracking-label); font-weight: var(--weight-medium); line-height: 1; border-radius: var(--radius-sm); border: 1px solid var(--vermilion); background: var(--vermilion); padding: 17px 34px; font-size: 14px; text-decoration: none;"><font style="color: var(--paper);">judge@judgedice.com <span style="font-family:var(--font-serif);">→</span></font></a>
                     </div>
                 </div>
             </div>

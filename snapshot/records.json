@@ -174,5 +174,15 @@
       ],
       "sequence": 6
     }
+  ],
+  "redirects": [
+    {
+      "id": 1,
+      "name": "Home Life retired",
+      "redirect_type": "301",
+      "url_from": "/home",
+      "url_to": "/",
+      "active": true
+    }
   ]
 }
