@@ -5,7 +5,7 @@
 $o-user-website-values: map-merge($o-user-website-values, o-map-omit((
     'menu-gradient': null,
     'menu-secondary-gradient': null,
-    'footer-gradient': null,
+    'footer-gradient': NULL,
     'copyright-gradient': null,
     'o-cc1-bg-gradient': null,
     'o-cc2-bg-gradient': null,

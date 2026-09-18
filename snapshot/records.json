@@ -95,6 +95,19 @@
       "website_indexed": true,
       "website_meta_title": false,
       "website_meta_description": false
+    },
+    {
+      "id": 12,
+      "name": "random-3",
+      "url": "/random-3",
+      "view_id": [
+        2748,
+        "random-3"
+      ],
+      "is_published": true,
+      "website_indexed": true,
+      "website_meta_title": false,
+      "website_meta_description": false
     }
   ],
   "blogs": [
