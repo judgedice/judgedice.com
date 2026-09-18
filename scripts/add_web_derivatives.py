@@ -139,7 +139,13 @@ def main():
         return 0
 
     for kind, rid, label, a, blob in plan:
-        stem = os.path.splitext(a["name"])[0]
+        # URL-safe: the name lands verbatim in /web/image/<id>-<sum>/<name>,
+        # and an og:image carrying a raw space or apostrophe is not something
+        # every social scraper will follow.
+        stem = re.sub(r"-{2,}", "-",
+                      re.sub(r"[^A-Za-z0-9._-]", "-",
+                             os.path.splitext(a["name"])[0].replace("'", ""))
+                      ).strip("-.")
         web_name = f"{stem}{SUFFIX}.webp"
 
         # Re-runnable: if a previous run already made this derivative, reuse it
