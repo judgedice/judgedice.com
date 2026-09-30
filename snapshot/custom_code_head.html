@@ -668,6 +668,15 @@ header#top .o_header_mobile .navbar-toggler-icon{
 #wrapwrap:has(#wrap.jd-dark-page) .jd-footer-mark:hover,
 #wrapwrap:has(#wrap.jd-dark-page) .jd-footer-cta:hover{color:var(--vermilion);}
 /* ---- end jd-dark-page ---- */
+/* ---- jd-quote-long v1 ---- */
+/* a quote two or three times the usual length: keep it a big quote, but let
+   it breathe instead of filling the viewport at the stock display size */
+.s_jd_quotepage.jd-quote-long .s_jd_quotepage_block p{
+  font-size:clamp(1.25rem,2.8vw,2.125rem);max-width:36ch;line-height:1.28;
+}
+@media (max-width:575.98px){
+  .s_jd_quotepage.jd-quote-long .s_jd_quotepage_block p{max-width:none;}
+}
 </style>
 
 

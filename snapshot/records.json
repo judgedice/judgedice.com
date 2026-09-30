@@ -95,6 +95,19 @@
       "website_indexed": true,
       "website_meta_title": "We are the ones we've been waiting for \u2014 Judge DiCesaro",
       "website_meta_description": "\"We are the ones we've been waiting for.\" \u2014 June Jordan, Poem for South African Women. One of the lines kept on rotation at judgedice.com."
+    },
+    {
+      "id": 19,
+      "name": "random-4",
+      "url": "/random-4",
+      "view_id": [
+        2776,
+        "random-4"
+      ],
+      "is_published": true,
+      "website_indexed": true,
+      "website_meta_title": "You seldom, if ever, see either pure state \u2014 Judge DiCesaro",
+      "website_meta_description": "\"Of course, you seldom, if ever, see either pure state.\" \u2014 Richard Hamming, The Art of Doing Science and Engineering. One of the lines kept on rotation at judgedice.com."
     }
   ],
   "blogs": [

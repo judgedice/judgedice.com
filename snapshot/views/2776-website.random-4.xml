@@ -1,0 +1,29 @@
+<t t-name="website.random-4">
+    <t t-call="website.layout">
+        <script type="application/ld+json" data-jd-schema="v1">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "<t t-out="website.get_base_url()"/>/random-4#page",
+  "url": "<t t-out="website.get_base_url()"/>/random-4",
+  "name": "You seldom, if ever, see either pure state — Judge DiCesaro",
+  "isPartOf": {
+    "@id": "<t t-out="website.get_base_url()"/>/#website"
+  },
+  "mainEntity": {
+    "@type": "Quotation",
+    "text": "In science, if you know what you are doing, you should not be doing it. In engineering, if you do not know what you are doing, you should not be doing it. Of course, you seldom, if ever, see either pure state.",
+    "creator": {
+      "@type": "Person",
+      "name": "Richard Hamming"
+    },
+    "isBasedOn": {
+      "@type": "Book",
+      "name": "The Art of Doing Science and Engineering"
+    }
+  }
+}
+        </script>
+        <div id="wrap" class="oe_structure oe_empty"><section class="s_jd_quotepage o_cc o_colored_level oe_img_bg o_bg_img_center o_bg_img_origin_border_box o_cc4 jd-quote-long" data-snippet="s_jd_quote_page" data-name="Quote Page" data-attachment-id="1584" data-format-mimetype="image/webp" data-resize-width="1920" data-original-id="1584" data-original-src="/web/image/1584-7aeecf7e/04_twostates.webp" data-mimetype-before-conversion="image/webp" data-mimetype="image/webp" style="background-image: url('/web/image/1584-7aeecf7e/04_twostates.webp');"><div class="s_jd_quotepage_scrim o_not_editable" aria-hidden="true"/><div class="s_jd_quotepage_inner"><blockquote class="s_jd_quotepage_block"><p class="s_jd_quotepage_text">In science, if you know what you are doing, you should not be doing it. In engineering, if you do not know what you are doing, you should not be doing it. Of course, you seldom, if ever, see either pure state.</p><footer class="s_jd_quotepage_cite"><strong>Richard Hamming</strong> — <em>The Art of Doing Science and Engineering</em></footer></blockquote></div></section></div>
+    </t>
+</t>
