@@ -108,6 +108,19 @@
       "website_indexed": true,
       "website_meta_title": "You seldom, if ever, see either pure state \u2014 Judge DiCesaro",
       "website_meta_description": "\"Of course, you seldom, if ever, see either pure state.\" \u2014 Richard Hamming, The Art of Doing Science and Engineering. One of the lines kept on rotation at judgedice.com."
+    },
+    {
+      "id": 20,
+      "name": "random-5",
+      "url": "/random-5",
+      "view_id": [
+        2777,
+        "random-5"
+      ],
+      "is_published": true,
+      "website_indexed": true,
+      "website_meta_title": "Never to be posited without necessity \u2014 Judge DiCesaro",
+      "website_meta_description": "\"Plurality is never to be posited without necessity.\" \u2014 William of Ockham, Commentary on the Sentences of Peter Lombard. One of the lines kept on rotation at judgedice.com."
     }
   ],
   "blogs": [
